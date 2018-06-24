@@ -10,7 +10,7 @@ import lombok.extern.java.Log;
 
 @Log
 @Controller
-@RequestMapping({"/login"})
+@RequestMapping({"/ui"})
 public class LoginController {
 
     @GetMapping
