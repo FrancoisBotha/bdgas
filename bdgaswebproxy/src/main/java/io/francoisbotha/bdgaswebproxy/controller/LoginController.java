@@ -10,14 +10,14 @@ import lombok.extern.java.Log;
 
 @Log
 @Controller
-@RequestMapping({"/ui"})
+@RequestMapping({"/welcome"})
 public class LoginController {
 
     @GetMapping
     //@PostMapping
     public String ShowVuePage(Model model) {
         model.addAttribute("message", "A message from JAVA");
-        return "index";
+        return "welcome";
     }
 
 
