@@ -23,19 +23,17 @@
                   <div class="card-body text-dark bg-white" style="height:210px; padding: 0.25rem;">
                       <div class="input-group ml-0 mb-2">
                         <div class="btn-group dropright" >
-                          <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button type="button" class="btn btn-secondary dropdown-toggle" style="width: 140px"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Data Ingestion
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Upload File</a>
                           </div>
                         </div>
                       </div>             
                       <div class="input-group ml-0 mb-2">
                         <div class="btn-group dropright" >
-                          <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button type="button" class="btn btn-secondary dropdown-toggle" style="width: 140px"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Core Tests
                           </button>
                           <div class="dropdown-menu">
@@ -47,8 +45,8 @@
                       </div>  
                       <div class="input-group ml-0 mb-2">
                         <div class="btn-group dropright" >
-                          <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Plugin Tests
+                          <button type="button" class="btn btn-secondary dropdown-toggle" style="width: 140px"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Plugin Tests       
                           </button>
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Action</a>
@@ -59,7 +57,7 @@
                       </div> 
                       <div class="input-group ml-0">
                         <div class="btn-group dropright" >
-                          <button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <button type="button" class="btn btn-secondary dropdown-toggle" style="width: 140px"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Data Display
                           </button>
                           <div class="dropdown-menu">
