@@ -1,5 +1,6 @@
 package io.francoisbotha.bdgasadmin.api.controller;
 
+import io.francoisbotha.bdgasadmin.api.domain.S3SingedUrl;
 import io.francoisbotha.bdgasadmin.service.S3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,9 +19,11 @@ public class DataIngestionController{
     S3Service s3Service;
 
     @RequestMapping("/data")
-    public String getData() {
+    public S3SingedUrl getData() {
         try {
-            return s3Service.testS3();
+            S3SingedUrl s3SingedUrl = new S3SingedUrl();
+            s3SingedUrl = s3Service.testS3();
+            return s3SingedUrl;
         } catch (IOException e) {
             e.printStackTrace();
         }

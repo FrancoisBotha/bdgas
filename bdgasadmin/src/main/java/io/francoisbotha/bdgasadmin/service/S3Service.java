@@ -13,6 +13,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import io.francoisbotha.bdgasadmin.api.domain.S3SingedUrl;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -28,7 +29,7 @@ public class S3Service {
      * https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObjectJavaSDK.html
      */
 
-    public String testS3() throws IOException {
+    public S3SingedUrl testS3() throws IOException {
 
         String clientRegion = "eu-west-1";
         String bucketName = "bdgassandbox";
@@ -71,7 +72,11 @@ public class S3Service {
             S3Object object = s3Client.getObject(bucketName, objectKey);
             System.out.println("Object " + object.getKey() + " created in bucket " + object.getBucketName());
 
-            return url.toString();
+            S3SingedUrl s3SignedUrl = new S3SingedUrl();
+
+            s3SignedUrl.setUrl(url.toString());
+
+            return s3SignedUrl;
 
         } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process
@@ -83,7 +88,7 @@ public class S3Service {
             e.printStackTrace();
         }
 
-        return "error";
+        return null;
 
     }
 }
