@@ -2,7 +2,7 @@ import axios from 'axios'
 
 var axiosProxyS = axios.create({
   baseURL: 'http://localhost:8001/',
-  timeout: 2000,
+  timeout: 3000,
 })
 
 const state = {

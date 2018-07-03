@@ -20,11 +20,8 @@
 import Dropzone from 'dropzone'
 import '../../node_modules/dropzone/dist/dropzone.css'
 
-function getSignedS3Url() {
-  return this.$store.getters.signedS3Url;
-}
+import awsservice from '../services/awsservice'
 
-// import lambda from '../lambda'
 Dropzone.autoDiscover = false
 export default {
   name: 'dropzone', 
@@ -35,6 +32,11 @@ export default {
       url: '/',
       // Since we're going to do a `PUT` upload to S3 directly
       method: 'put',
+      //F. Botha Edit to allow files to be split up:
+      // chunking: true,
+      // retryChunks: true,
+      timeout: 3600000,
+      maxFilesize: 2000,
       // Hijack the xhr.send since Dropzone always upload file by using formData
       // ref: https://github.com/danialfarid/ng-file-upload/issues/743
       sending (file, xhr) {
@@ -48,29 +50,25 @@ export default {
       uploadMultiple: false,
       // Content-Type should be included, otherwise you'll get a signature
       // mismatch error from S3. We're going to update this for each file.
-      header: '{ Access-Control-Allow-Origin: "*", Access-Control-Allow-Methods: POST, PUT, GET}',
+      headers: "{}",
       // Customize the wording
       dictDefaultMessage: document.querySelector('#dropzone-message').innerHTML,
       // We're going to process each file manually (see `accept` below)
       autoProcessQueue: false,
       // Here we request a signed upload URL when a file being accepted
       accept (file, done) {
-        //FB Edit:
-            file.uploadURL = vm.$store.getters.signedS3Url;
+
+        /* F. Botha: Modified to use Spring Service instead of Lamda*/
+        awsservice.getSignedURL(file)
+          .then((url) => {
+            file.uploadURL = url
             done()
             // Manually process each file
             setTimeout(() => vm.dropzone.processFile(file))
-
-        // lambda.getSignedURL(file)
-        //   .then((url) => {
-        //     file.uploadURL = url
-        //     done()
-        //     // Manually process each file
-        //     setTimeout(() => vm.dropzone.processFile(file))
-        //   })
-        //   .catch((err) => {
-        //     done('Failed to get an S3 signed upload URL', err)
-        //   })
+          })
+          .catch((err) => {
+            done('Failed to get an S3 signed upload URL', err)
+          })
       }
     }
     // Instantiate Dropzone
@@ -78,6 +76,12 @@ export default {
     // Set signed upload URL for each file
     vm.dropzone.on('processing', (file) => {
       vm.dropzone.options.url = file.uploadURL
+      vm.dropzone.options.headers = {"Access-Control-Allow-Origin": "*",
+                                      "Cache-Control": "",
+                                      "Access-Control-Allow-Methods": "POST, PUT, GET",
+                                      "Access-Control-Allow-Headers": "*",
+                                      "Content-Type": file.type}
+                                      console.log(vm.dropzone.options.headers)
     })
   }
 }

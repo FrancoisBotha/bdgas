@@ -29,11 +29,10 @@ public class S3Service {
      * https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObjectJavaSDK.html
      */
 
-    public S3SingedUrl testS3() throws IOException {
+    public S3SingedUrl testS3(String objectKey, String contentType) throws IOException {
 
         String clientRegion = "eu-west-1";
         String bucketName = "bdgassandbox";
-        String objectKey = "somekey";
 
         try {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
@@ -51,11 +50,13 @@ public class S3Service {
             System.out.println("Generating pre-signed URL.");
             GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName, objectKey)
                     .withMethod(HttpMethod.PUT)
-                    .withExpiration(expiration);
+                    .withExpiration(expiration)
+                    .withContentType(contentType);
             URL url = s3Client.generatePresignedUrl(generatePresignedUrlRequest);
             System.out.println(url.toString());
 
             // Create the connection and use it to upload the new object using the pre-signed URL.
+            /*
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("PUT");
@@ -71,6 +72,8 @@ public class S3Service {
             // Check to make sure that the object was uploaded successfully.
             S3Object object = s3Client.getObject(bucketName, objectKey);
             System.out.println("Object " + object.getKey() + " created in bucket " + object.getBucketName());
+
+            */
 
             S3SingedUrl s3SignedUrl = new S3SingedUrl();
 
