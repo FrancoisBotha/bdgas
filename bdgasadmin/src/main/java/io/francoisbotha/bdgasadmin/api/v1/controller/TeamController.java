@@ -1,47 +1,58 @@
 package io.francoisbotha.bdgasadmin.api.v1.controller;
 
-
-import io.francoisbotha.bdgasadmin.domain.dao.TeamRepository;
+import io.francoisbotha.bdgasadmin.domain.dto.TeamDto;
 import io.francoisbotha.bdgasadmin.domain.model.Team;
+import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
+import io.francoisbotha.bdgasadmin.services.TeamService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
+@Slf4j
 @CrossOrigin
 @RestController
 public class TeamController {
 
     @Autowired
-    TeamRepository teamRepository;
+    TeamService teamService;
 
+    /************
+     * GET ALL  *
+     ************/
     @RequestMapping(value = "/api/v1/team", method = RequestMethod.GET)
-    public List getTeams (Model model) {
+    public List getTeams () throws EntityNotFoundException {
 
-        Iterable<Team> teamsIt = teamRepository.findAll();
+        log.info("Get Teams");
 
-        Iterator<Team> iter = teamsIt.iterator();
-        List teams = new ArrayList();
-        while (iter.hasNext()) {
-            teams.add(iter.next());
-        }
+        return teamService.getAll();
 
-        return teams;
+    }
+
+    /************
+     * GET ONE  *
+     ************/
+    @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.GET)
+    public List getTeams (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        log.info("Get Team");
+
+        return teamService.getAll(id);
 
     }
 
     /************
      * POST     *
      ************/
-    @RequestMapping(value = "/api/v1/team", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/v1/team", method = RequestMethod.POST, consumes="application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Team AddTeam(@RequestBody Team team) {
-        return teamRepository.save(team);
+    public Team AddTeam(@RequestBody @Valid TeamDto teamDto )  {
+        Team team = new Team();
+        team.setName(teamDto.getName());
+        return teamService.create(team);
     }
 
 }

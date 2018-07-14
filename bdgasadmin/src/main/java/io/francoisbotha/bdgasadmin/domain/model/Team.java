@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-@DynamoDBTable(tableName = "bdgas_Menu")
+@DynamoDBTable(tableName = "bdgas_Team")
 public class Team {
 
     private String id;
