@@ -1,8 +1,6 @@
-package io.francoisbotha.bdgasadmin.service;
+package io.francoisbotha.bdgasadmin.services;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.amazonaws.AmazonServiceException;
@@ -12,7 +10,6 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.services.s3.model.S3Object;
 import io.francoisbotha.bdgasadmin.api.domain.S3SingedUrl;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;

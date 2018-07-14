@@ -1,7 +1,7 @@
 package io.francoisbotha.bdgasadmin.api.controller;
 
 import io.francoisbotha.bdgasadmin.api.domain.S3SingedUrl;
-import io.francoisbotha.bdgasadmin.service.S3Service;
+import io.francoisbotha.bdgasadmin.services.S3Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
