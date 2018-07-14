@@ -63,6 +63,13 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
+    public void delete(String id)  throws EntityNotFoundException {
+
+        Team team = teamRepository.findOneById(id);
+
+        teamRepository.delete(team);
+    }
+
 }
 
 

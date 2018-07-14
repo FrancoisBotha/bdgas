@@ -1,6 +1,6 @@
-package io.francoisbotha.bdgasadmin.api.controller;
+package io.francoisbotha.bdgasadmin.api.v1.controller;
 
-import io.francoisbotha.bdgasadmin.api.domain.S3SingedUrl;
+import io.francoisbotha.bdgasadmin.domain.model.S3SingedUrl;
 import io.francoisbotha.bdgasadmin.services.S3Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ public class DataIngestionController{
     @Autowired
     S3Service s3Service;
 
-    @RequestMapping(path = "/data", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/v1/getsignedurl", method = RequestMethod.POST)
     public S3SingedUrl getData(@RequestParam String fileName, @RequestParam String contentType) {
         try {
             S3SingedUrl s3SingedUrl = new S3SingedUrl();
-            s3SingedUrl = s3Service.testS3(fileName, contentType);
+            s3SingedUrl = s3Service.getSignedUrl(fileName, contentType);
             log.debug(s3SingedUrl.getUrl());
             return s3SingedUrl;
         } catch (IOException e) {

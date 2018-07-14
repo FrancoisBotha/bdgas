@@ -45,7 +45,7 @@ public class TeamController {
     }
 
     /************
-     * POST     *
+     * ADD      *
      ************/
     @RequestMapping(value = "/api/v1/team", method = RequestMethod.POST, consumes="application/json")
     @ResponseStatus(HttpStatus.CREATED)
@@ -53,6 +53,15 @@ public class TeamController {
         Team team = new Team();
         team.setName(teamDto.getName());
         return teamService.create(team);
+    }
+
+    /************
+     * DELETE   *
+     ************/
+    @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.DELETE )
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteTeam(@PathVariable("id") String id) throws EntityNotFoundException  {
+        teamService.delete(id);
     }
 
 }

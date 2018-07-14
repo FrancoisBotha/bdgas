@@ -1,4 +1,4 @@
-package io.francoisbotha.bdgasadmin.api.domain;
+package io.francoisbotha.bdgasadmin.domain.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
