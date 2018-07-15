@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<tr th:fragment="helptexttablerow">
+    <td th:text="${helpText.name}">HelpText Name</td>
+    <td><a th:href="@{|/admin/helptext/${helpText.id}|}" class="btn btn-outline-dark btn-sm" role="button">View</a></td>
+    <td><a href="#" th:data-record-id="${helpText.id}" th:data-record-title="${helpText.name}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+    <!--<td><form id="delhelptextform" th:action="@{|/admin/helptext/${helpText.id}|}" th:object="${helpText}" method="POST" data-confirm="Are you sure you want to delete?">-->
+        <!--<input type="hidden" name="_method" value="DELETE"/>-->
+        <!--<input type="submit" class="btn btn-outline-danger btn-sm" value="Delete">-->
+    <!--</form></td>-->
+
+</tr>
+
+
+</body>
+
+</html>

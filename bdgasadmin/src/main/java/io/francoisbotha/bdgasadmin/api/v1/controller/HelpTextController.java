@@ -23,7 +23,7 @@ public class HelpTextController {
     /************
      * GET ALL  *
      ************/
-    @RequestMapping(value = "/api/v1/helpText", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/v1/helptext", method = RequestMethod.GET)
     public List getHelpTexts () throws EntityNotFoundException {
 
         log.info("Get HelpTexts");
@@ -35,30 +35,32 @@ public class HelpTextController {
     /************
      * GET ONE  *
      ************/
-    @RequestMapping(value = "/api/v1/helpText/{id}", method = RequestMethod.GET)
-    public List getHelpTexts (@PathVariable("id") String id) throws EntityNotFoundException {
+    @RequestMapping(value = "/api/v1/helptext/{id}", method = RequestMethod.GET)
+    public HelpText getHelpTexts (@PathVariable("id") String id) throws EntityNotFoundException {
 
         log.info("Get HelpText");
 
-        return helpTextService.getAll(id);
+        return helpTextService.getOne(id);
 
     }
 
     /************
      * ADD      *
      ************/
-    @RequestMapping(value = "/api/v1/helpText", method = RequestMethod.POST, consumes="application/json")
+    @RequestMapping(value = "/api/v1/helptext", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public HelpText AddHelpText(@RequestBody @Valid HelpTextDto helpTextDto )  {
         HelpText helpText = new HelpText();
         helpText.setName(helpTextDto.getName());
+        helpText.setLang(helpTextDto.getLang());
+        helpText.setTxt(helpTextDto.getTxt());
         return helpTextService.create(helpText);
     }
 
     /************
      * UPDATE   *
      ************/
-    @RequestMapping(value = "/api/v1/helpText/{id}", method = RequestMethod.PATCH, consumes="application/json")
+    @RequestMapping(value = "/api/v1/helptext/{id}", method = RequestMethod.PATCH, consumes="application/json")
     @ResponseStatus(HttpStatus.OK)
     public HelpText UpdateHelpText(@PathVariable("id") String id, @RequestBody @Valid HelpTextDto helpTextDto )
             throws EntityNotFoundException  {
@@ -68,7 +70,7 @@ public class HelpTextController {
     /************
      * DELETE   *
      ************/
-    @RequestMapping(value = "/api/v1/helpText/{id}", method = RequestMethod.DELETE )
+    @RequestMapping(value = "/api/v1/helptext/{id}", method = RequestMethod.DELETE )
     @ResponseStatus(HttpStatus.OK)
     public void deleteHelpText(@PathVariable("id") String id) throws EntityNotFoundException  {
         helpTextService.delete(id);
