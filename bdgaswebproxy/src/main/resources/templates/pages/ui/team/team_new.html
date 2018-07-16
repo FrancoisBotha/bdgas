@@ -2,22 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="fragments/adminheader :: adminheader"></head>
+<head th:include="fragments/mainheader :: mainheader"></head>
 
 <body>
 
 <div class="container">
 
-    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
-
+    <div th:include="fragments/mainnavbar:: mainnavbar"></div>
     <div class="row mt-2">
         <div class="col-md-7">
             <div class="well">
                 <div class="text-left">
-                    <h4 class="display-6">Create new Help Text record</h4>
-                    <form id="newhelptextform"
-                          th:action="@{/admin/helptext/mod}"
-                          th:object="${helpText}"
+                    <h4 class="display-6">Create new Team</h4>
+                    <form id="newteamform"
+                          th:action="@{/ui/team}"
+                          th:object="${team}"
                           method="POST"
                           enctype="multipart/form-data">
 
@@ -32,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
-                                    <label for="name" th:text="#{helpText.name}">HelpTextName</label>
+                                    <label for="name" th:text="#{generic.name}">Name</label>
                                     <input type="text" id="name" name="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid"/>
                                     <div class="invalid-feedback"  th:if="${#fields.hasErrors('name')}">
                                         <ul>
@@ -43,23 +42,9 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="form-group" th:class="${#fields.hasErrors('txt')} ? 'form-group has-error' : 'form-group'">
-                                    <label for="txt" th:text="#{helpText.txt}">HelpText Text</label>
-                                    <textarea class="form-control" id="txt" name="txt" rows="5" th:field="*{txt}" th:errorclass="is-invalid"></textarea>
-                                    <div class="invalid-feedback"  th:if="${#fields.hasErrors('name')}">
-                                        <ul>
-                                            <li  th:each="err : ${#fields.errors('txt')}" th:text="${err}" />
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Save</button>
-                            <a type="button" class="btn btn-primary" href="/admin/helptext">Cancel</a>
+                            <a type="button" class="btn btn-primary" href="/ui/welcome">Cancel</a>
                         </div>
 
                     </form>
@@ -71,10 +56,10 @@
         </div>
 
     </div>
-
 </div>
 
-<div th:include="fragments/adminfooter:: adminfooter"></div>
+<div th:include="fragments/mainfooter:: mainfooter"></div>
+
 
 </body>
 </html>

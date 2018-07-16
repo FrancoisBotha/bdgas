@@ -59,6 +59,15 @@ public class TeamService {
         return teams;
     }
 
+    public Team getOne(String id) throws EntityNotFoundException {
+
+
+        Team team = teamRepository.findOneById(id);
+
+        return team;
+    }
+
+
     public Team create(Team team) {
         return teamRepository.save(team);
     }

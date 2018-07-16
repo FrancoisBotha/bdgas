@@ -17,7 +17,7 @@
 
 package io.francoisbotha.bdgaswebproxy.services;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.HelpTextDto;
+import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -33,7 +33,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class HelpTextService {
+public class TeamService {
 
     @Autowired
     private EndPointService endPointService;
@@ -46,34 +46,34 @@ public class HelpTextService {
      ************/
     public List getAll() {
 
-        final String uri = endPointService.getHelpTextEP();
+        final String uri = endPointService.getTeamEP();
 
-        ResponseEntity<List<HelpTextDto>> response
+        ResponseEntity<List<TeamDto>> response
                 = restTemplate.exchange(uri,
-                            HttpMethod.GET, null,
-                            new ParameterizedTypeReference<List<HelpTextDto>>() {
-                     });
+                HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<TeamDto>>() {
+                });
 
-        List<HelpTextDto> helpTexts = response.getBody();
+        List<TeamDto> teams = response.getBody();
 
-        return helpTexts;
+        return teams;
 
     }
 
     /************
      * GET ONE  *
      ************/
-    public HelpTextDto getOne(String id) {
+    public TeamDto getOne(String id) {
 
-        final String uri = endPointService.getHelpTextEP()
+        final String uri = endPointService.getTeamEP()
                 + "/" + id;
 
         try {
 
-            HelpTextDto helpTextDto  = restTemplate
-                                       .getForObject(uri , HelpTextDto.class);
+            TeamDto teamDto  = restTemplate
+                    .getForObject(uri , TeamDto.class);
 
-            return helpTextDto;
+            return teamDto;
 
         } catch (RestClientException ex) {
 
@@ -86,9 +86,9 @@ public class HelpTextService {
     /************
      * CREATE   *
      ************/
-    public void create(HelpTextDto helpTextDto) throws RestClientException {
+    public void create(TeamDto teamDto) throws RestClientException {
 
-        final String uri = endPointService.getHelpTextEP();
+        final String uri = endPointService.getTeamEP();
 
         try {
 
@@ -97,12 +97,11 @@ public class HelpTextService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
-            helpTextDto.setLang("en");
-            log.debug(helpTextDto.toString());
+            log.debug(teamDto.toString());
 
-            HttpEntity<HelpTextDto> entity = new HttpEntity<HelpTextDto>(helpTextDto, headers);
+            HttpEntity<TeamDto> entity = new HttpEntity<TeamDto>(teamDto, headers);
 
-            ResponseEntity<HelpTextDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, HelpTextDto.class);
+            ResponseEntity<TeamDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, TeamDto.class);
 
         } catch (RestClientException ex) {
 
@@ -115,19 +114,18 @@ public class HelpTextService {
     /************
      * MODIFY   *
      ************/
-    public void modify(HelpTextDto helpTextDto) throws RestClientException {
+    public void modify(TeamDto teamDto) throws RestClientException {
 
-        final String uri = endPointService.getHelpTextEP()
-                + "/" + helpTextDto.getId();
+        final String uri = endPointService.getTeamEP()
+                + "/" + teamDto.getId();
 
         log.debug(uri.toString());
 
         try {
 
-            helpTextDto.setLang("en");
-            HttpEntity<HelpTextDto> entity = new HttpEntity<HelpTextDto>(helpTextDto, this.getDefaultHeaders());
+            HttpEntity<TeamDto> entity = new HttpEntity<TeamDto>(teamDto, this.getDefaultHeaders());
 
-            ResponseEntity<HelpTextDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, HelpTextDto.class);
+            ResponseEntity<TeamDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, TeamDto.class);
 
         } catch (RestClientException ex) {
 
@@ -142,14 +140,14 @@ public class HelpTextService {
      ************/
     public void delete(String id) throws RestClientException {
 
-        final String uri = endPointService.getHelpTextEP()
+        final String uri = endPointService.getTeamEP()
                 + "/" + id;
 
         try {
 
             HttpEntity<String> entity = new HttpEntity<String>("", this.getDefaultHeaders());
 
-            ResponseEntity<HelpTextDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, HelpTextDto.class);
+            ResponseEntity<TeamDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, TeamDto.class);
 
         } catch (RestClientException ex) {
 

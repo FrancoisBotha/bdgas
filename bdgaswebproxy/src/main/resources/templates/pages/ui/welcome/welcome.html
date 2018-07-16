@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/mainheader :: mainheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/mainnavbar:: mainnavbar"></div>
+    <div th:include="fragments/mainwelcometext:: mainwelcometext"></div>
+
+    <div th:if="${errMsg}" class="alert alert-danger">
+        <p th:text="${errMsg}">Error Message</p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <div th:if="${selectedTeam}" >
+                <h6 class="float-left">Team:</h6><h9 th:text="${selectedTeam.name}" class="float-right">Selected Team</h9></span>
+            </div>
+            <div th:unless="${selectedTeam}" >
+                <h6 class="float-left">Team:</h6><h9 class="float-right">(Please select)</h9></span>
+            </div>
+
+        </div>
+        <div class="col-sm">
+            <h6>Project: </h6>
+        </div>
+        <div class="col-sm">
+            <h6>Working Papers:</h6>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <div> <a th:href="@{/ui/team/new}" th:text="#{generic.new}">New...</a></div>
+        </div>
+        <div class="col-sm">
+            <div> <a th:href="@{/ui/project/new}" th:text="#{generic.new}">New...</a></div>
+        </div>
+        <div class="col-sm">
+            <div> <a th:href="@{/ui/wp/new}" th:text="#{generic.new}">New...</a></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+
+            <select class="custom-select mt-2" size="6">
+                <option th:each="team : ${teams}"
+                        th:value="${team.id}"
+                        th:text="${team.name}">
+                        <!--th:selected="${team.id == selectedTeam.id}">-->
+                </option>
+            </select>
+            <div class="float-right mt-2">
+                <button type="button" class="btn btn-outline-success btn-sm tm-2">Select</button>
+            </div>
+        </div>
+        <div class="col-sm">
+            <select class="custom-select mt-2" size="6">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <div class="float-right mt-2">
+                <button type="button" class="btn btn-outline-success btn-sm tm-2">Select</button>
+            </div>
+        </div>
+        <div class="col-sm">
+            <select class="custom-select mt-2" size="6">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <div class="float-right mt-2">
+                <button type="button" class="btn btn-outline-success btn-sm tm-2">Go</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:include="fragments/mainfooter:: mainfooter"></div>
+
+</body>
+</html>

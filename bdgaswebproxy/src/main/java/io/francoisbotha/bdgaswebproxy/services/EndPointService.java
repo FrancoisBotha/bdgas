@@ -15,9 +15,14 @@ public class EndPointService {
     private static final String VERSION = "v1";
 
     private static final String HELPTEXT = "helptext";
+    private static final String TEAM = "team";
 
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
+    }
+
+    public String getTeamEP() {
+        return this.merge(this.TEAM);
     }
 
     private String merge(String endpoint) {

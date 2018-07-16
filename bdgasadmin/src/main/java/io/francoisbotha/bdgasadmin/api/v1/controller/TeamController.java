@@ -36,11 +36,9 @@ public class TeamController {
      * GET ONE  *
      ************/
     @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.GET)
-    public List getTeams (@PathVariable("id") String id) throws EntityNotFoundException {
+    public Team getTeam (@PathVariable("id") String id) throws EntityNotFoundException {
 
-        log.info("Get Team");
-
-        return teamService.getAll(id);
+        return teamService.getOne(id);
 
     }
 

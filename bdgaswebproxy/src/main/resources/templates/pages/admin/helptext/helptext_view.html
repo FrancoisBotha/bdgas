@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <h4 class="display-7 text-left" th:text="'View Help Text: ' + ${helpText.name}">Vendor: </h4>
+        </div>
+    </div>
+
+    <a th:href="@{/admin/helptext}" class="btn btn-outline-dark btn-sm mt-0" role="button">Back</a>
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="name" th:text="#{helpText.name}">HelpTextName</label>
+                    <input type="text" id="name" name="name" class="form-control" th:value="${helpText.name}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mt-2">
+                    <label for="txt" th:text="#{helpText.txt}">HelpText Text</label>
+                    <textarea class="form-control" id="txt" name="txt" rows="5" th:text="${helpText.txt}" readonly></textarea>
+                </div>
+            </div>
+            <a th:href="@{|/admin/helptext/mod/${helpText.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>
