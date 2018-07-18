@@ -59,6 +59,25 @@ public class ProjectService {
 
     }
 
+    /*********************
+     * GET TEAM PROJECTS *
+     *********************/
+    public List getTeamProjects(String Id) {
+
+        final String uri = endPointService.getTeamProjectsEP() + "/" + Id;
+
+        ResponseEntity<List<ProjectDto>> response
+                = restTemplate.exchange(uri,
+                HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<ProjectDto>>() {
+                });
+
+        List<ProjectDto> projects = response.getBody();
+
+        return projects;
+
+    }
+
     /************
      * GET ONE  *
      ************/
@@ -81,6 +100,8 @@ public class ProjectService {
             throw ex;
         }
     }
+
+
 
     /************
      * CREATE   *

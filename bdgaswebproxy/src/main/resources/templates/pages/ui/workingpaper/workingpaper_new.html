@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/mainheader :: mainheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/mainnavbar:: mainnavbar"></div>
+    <div class="row mt-2">
+        <div class="col-md-7">
+            <div class="well">
+                <div class="text-left">
+                    <h4 class="display-6">Create new Working Paper</h4>
+                    <h8 class="display-6" th:text="${project.name}">Project Name</h8>
+
+                    <div class="mt-4">
+
+                        <form id="newworkingpaperform"
+                              th:action="@{|/ui/workingpaper/${team.id}/${project.id}|}"
+                              th:object="${workingPaper}"
+                              method="POST"
+                              enctype="multipart/form-data">
+
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <p th:text="#{form.newhelptext.hasErrors}">Error Message</p>
+                            </div>
+
+                            <div th:if="${errMsg}" class="alert alert-danger">
+                                <p th:text="${errMsg}">Error Message</p>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                                        <label for="name" th:text="#{generic.name}">Name</label>
+                                        <input type="text" id="name" name="name" class="form-control" th:field="*{name}" th:errorclass="is-invalid"/>
+                                        <div class="invalid-feedback"  th:if="${#fields.hasErrors('name')}">
+                                            <ul>
+                                                <li  th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="teamId" name="teamId" th:field="*{projectId}" value="3487">
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <a type="button" class="btn btn-primary" href="/ui/welcome">Cancel</a>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div th:include="fragments/mainfooter:: mainfooter"></div>
+
+
+</body>
+</html>

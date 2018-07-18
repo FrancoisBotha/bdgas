@@ -23,10 +23,14 @@
             <div th:unless="${selectedTeam}" >
                 <h6 class="float-left">Team:</h6><h9 class="float-right">(Please select)</h9></span>
             </div>
-
         </div>
         <div class="col-sm">
-            <h6>Project: </h6>
+            <div th:if="${selectedProject}" >
+                <h6 class="float-left">Project:</h6><h9 th:text="${selectedProject.name}" class="float-right">Selected Team</h9></span>
+            </div>
+            <div th:unless="${selectedProject}">
+                <h6 class="float-left">Project:</h6><h9 class="float-right">(Please select)</h9></span>
+            </div>
         </div>
         <div class="col-sm">
             <h6>Working Papers:</h6>
@@ -47,7 +51,7 @@
         </div>
         <div class="col-sm">
             <div th:if="${selectedProject}" >
-                <div> <a th:href="@{|/ui/workingpaper/new/${selectedProject.id}/|}" th:text="#{generic.new}">New...</a></div>
+                <div> <a th:href="@{|/ui/workingpaper/new/${selectedTeam.id}/${selectedProject.id}/|}" th:text="#{generic.new}">New...</a></div>
             </div>
             <div th:unless="${selectedProject}" >
                 <div>New</div>
@@ -91,17 +95,37 @@
         </div>
         <div class="col-sm">
             <div th:if="${selectedTeam}" >
-                <select id="id"
-                        name="id"
-                        class="custom-select mt-2" size="6">
-                    <option th:each="project : ${projects}"
-                            th:value="${project.id}"
-                            th:text="${project.name}">
-                    </option>
-                </select>
-                <div class="float-right mt-2">
-                    <button type="button" class="btn btn-outline-dark btn-sm tm-2">Select</button>
-                </div>
+
+                <form id="selectprojectform"
+                      th:action="@{|/ui/welcome/${selectedTeam.id}/project|}"
+                      th:object="${projectForm}"
+                      method="POST"
+                      enctype="multipart/form-data">
+
+                    <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                        <select th:value="${projectForm.id}"
+                                id="id"
+                                name="id"
+                                class="custom-select mt-2" size="6">
+                            <div th:if="${selectedProject}" >
+                                <option th:each="project : ${projects}"
+                                        th:value="${project.id}"
+                                        th:text="${project.name}"
+                                        th:selected="${project.id == selectedProject.id}">
+                                </option>
+                            </div>
+                            <div th:unless="${selectedProject}" >
+                                <option th:each="project : ${projects}"
+                                        th:value="${project.id}"
+                                        th:text="${project.name}">
+                                </option>
+                            </div>
+                        </select>
+                        <input type="hidden" id="teamId" name="teamId" th:field="*{teamId}">
+                        <button type="submit" class="btn btn-outline-dark btn-sm float-right mt-2">Select</button>
+                    </div>
+
+                </form>
             </div>
             <div th:unless="${selectedTeam}" >
                 <select class="custom-select mt-2" size="6">
@@ -110,15 +134,16 @@
                     <button type="button" class="btn btn-outline-dark btn-sm tm-2" disabled>Select</button>
                 </div>
             </div>
+
         </div>
         <div class="col-sm">
             <div th:if="${selectedProject}" >
                 <select id="id"
                         name="id"
                         class="custom-select mt-2" size="6">
-                    <option th:each="project : ${projects}"
-                            th:value="${project.id}"
-                            th:text="${project.name}">
+                    <option th:each="workingpaper : ${workingPapers}"
+                            th:value="${workingpaper.id}"
+                            th:text="${workingpaper.name}">
                     </option>
                 </select>
                 <div class="float-right mt-2">
@@ -134,7 +159,6 @@
             </div>
         </div>
     </div>
-
 
 </div>
 

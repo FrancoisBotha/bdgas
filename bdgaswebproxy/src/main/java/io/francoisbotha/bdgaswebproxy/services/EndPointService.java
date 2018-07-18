@@ -16,8 +16,10 @@ public class EndPointService {
 
     private static final String HELPTEXT = "helptext";
     private static final String TEAM = "team";
+    private static final String TEAMPROJECTS = "project/team";
     private static final String PROJECT = "project";
     private static final String WORKINGPAPER = "workingpaper";
+    private static final String PROJECTWORKINGPAPERS = "workingpaper/project";
 
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
@@ -31,8 +33,15 @@ public class EndPointService {
         return this.merge(this.PROJECT);
     }
 
+    public String getTeamProjectsEP() {
+        return this.merge(this.TEAMPROJECTS);
+    }
+
     public String getWorkingPaperEP() {
         return this.merge(this.WORKINGPAPER);
+    }
+    public String getProjectWorkingPapersEP() {
+        return this.merge(this.PROJECTWORKINGPAPERS);
     }
 
     private String merge(String endpoint) {

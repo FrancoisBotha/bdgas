@@ -39,7 +39,7 @@ public class WorkingPaperController  {
     /************
      * GET ALL  *
      ************/
-    @RequestMapping(value = "/api/v1/workingPaper", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/v1/workingpaper", method = RequestMethod.GET)
     public List getWorkingPapers () throws EntityNotFoundException {
 
         return workingPaperService.getAll();
@@ -49,17 +49,27 @@ public class WorkingPaperController  {
     /************
      * GET ONE  *
      ************/
-    @RequestMapping(value = "/api/v1/workingPaper/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/v1/workingpaper/{id}", method = RequestMethod.GET)
     public WorkingPaper getWorkingPapers (@PathVariable("id") String id) throws EntityNotFoundException {
 
         return workingPaperService.getOne(id);
 
     }
 
+    /********************
+     * GET FOR PROJECT  *
+     ********************/
+    @RequestMapping(value = "/api/v1/workingpaper/project/{id}", method = RequestMethod.GET)
+    public List getWorkingPapersForProject (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return workingPaperService.getProjectWorkingPapers(id);
+
+    }
+
     /************
      * ADD      *
      ************/
-    @RequestMapping(value = "/api/v1/workingPaper", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/v1/workingpaper", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public WorkingPaper AddWorkingPaper(@RequestBody @Valid WorkingPaperDto workingPaperDto )  {
         WorkingPaper workingPaper = new WorkingPaper();

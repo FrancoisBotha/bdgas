@@ -56,6 +56,16 @@ public class ProjectController  {
 
     }
 
+    /********************
+     * GET FOR TEAM  *
+     ********************/
+    @RequestMapping(value = "/api/v1/project/team/{id}", method = RequestMethod.GET)
+    public List getProjectsForTeam (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return projectService.getTeamProjects(id);
+
+    }
+
     /************
      * ADD      *
      ************/
