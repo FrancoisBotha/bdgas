@@ -16,10 +16,10 @@
  *****************************************************************************/
 package io.francoisbotha.bdgasadmin.api.v1.controller;
 
-import io.francoisbotha.bdgasadmin.domain.dto.TeamDto;
-import io.francoisbotha.bdgasadmin.domain.model.Team;
+import io.francoisbotha.bdgasadmin.domain.dto.ProjectDto;
+import io.francoisbotha.bdgasadmin.domain.model.Project;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
-import io.francoisbotha.bdgasadmin.services.TeamService;
+import io.francoisbotha.bdgasadmin.services.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,51 +31,60 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 @RestController
-public class TeamController {
+public class ProjectController  {
 
     @Autowired
-    TeamService teamService;
+    ProjectService projectService;
 
     /************
      * GET ALL  *
      ************/
-    @RequestMapping(value = "/api/v1/team", method = RequestMethod.GET)
-    public List getTeams () throws EntityNotFoundException {
+    @RequestMapping(value = "/api/v1/project", method = RequestMethod.GET)
+    public List getProjects () throws EntityNotFoundException {
 
-        log.info("Get Teams");
-
-        return teamService.getAll();
+        return projectService.getAll();
 
     }
 
     /************
      * GET ONE  *
      ************/
-    @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.GET)
-    public Team getTeam (@PathVariable("id") String id) throws EntityNotFoundException {
+    @RequestMapping(value = "/api/v1/project/{id}", method = RequestMethod.GET)
+    public Project getProjects (@PathVariable("id") String id) throws EntityNotFoundException {
 
-        return teamService.getOne(id);
+        return projectService.getOne(id);
 
     }
 
     /************
      * ADD      *
      ************/
-    @RequestMapping(value = "/api/v1/team", method = RequestMethod.POST, consumes="application/json")
+    @RequestMapping(value = "/api/v1/project", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Team AddTeam(@RequestBody @Valid TeamDto teamDto )  {
-        Team team = new Team();
-        team.setName(teamDto.getName());
-        return teamService.create(team);
+    public Project AddProject(@RequestBody @Valid ProjectDto projectDto )  {
+        Project project = new Project();
+        project.setName(projectDto.getName());
+        project.setTeamId(projectDto.getTeamId());
+        return projectService.create(project);
+    }
+
+    /************
+     * UPDATE   *
+     ************/
+    @RequestMapping(value = "/api/v1/project/{id}", method = RequestMethod.PATCH)
+    @ResponseStatus(HttpStatus.OK)
+    public Project UpdateProject(@PathVariable("id") String id, @RequestBody @Valid ProjectDto projectDto )
+            throws EntityNotFoundException  {
+        return projectService.update(id, projectDto);
     }
 
     /************
      * DELETE   *
      ************/
-    @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.DELETE )
+    @RequestMapping(value = "/api/v1/project/{id}", method = RequestMethod.DELETE )
     @ResponseStatus(HttpStatus.OK)
-    public void deleteTeam(@PathVariable("id") String id) throws EntityNotFoundException  {
-        teamService.delete(id);
+    public void deleteProject(@PathVariable("id") String id) throws EntityNotFoundException  {
+        projectService.delete(id);
     }
 
 }

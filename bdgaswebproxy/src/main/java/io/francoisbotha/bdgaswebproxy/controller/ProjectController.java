@@ -16,9 +16,9 @@
  *****************************************************************************/
 package io.francoisbotha.bdgaswebproxy.controller;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.HelpTextDto;
+import io.francoisbotha.bdgaswebproxy.domain.dto.ProjectDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;
-import io.francoisbotha.bdgaswebproxy.services.HelpTextService;
+import io.francoisbotha.bdgaswebproxy.services.ProjectService;
 import io.francoisbotha.bdgaswebproxy.services.TeamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestClientException;
@@ -35,56 +36,70 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
-public class TeamController {
+public class ProjectController {
 
     @Value("${restservice.error.defaultmsg}")
     private String RestServiceErrorMsg;
 
     @Autowired
+    private ProjectService projectService;
+
+    @Autowired
     private TeamService teamService;
 
-    private static final String BASE_PATH = "/pages/ui/team/";
-    private static final String NEW_TEAM_VIEW_NAME = BASE_PATH + "team_new";
+    private static final String BASE_PATH = "/pages/ui/project/";
+    private static final String NEW_PROJECT_VIEW_NAME = BASE_PATH + "project_new";
 
-//    private static final String HELPTEXT_VIEW_NAME = BASE_PATH + "helptext";
-//    private static final String VIEW_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_view";
-//    private static final String MOD_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_mod";
 
-    /* Key which identifies team payload in Model */
+    /* Key which identifies project payload in Model */
     public static final String TEAM_MODEL_KEY = "team";
-    private static final String TEAMLIST_MODEL_KEY = "teams";
+    public static final String PROJECT_MODEL_KEY = "project";
 
     /***************
      * NEW-FORM    *
      * *************/
-    @RequestMapping(value = "/ui/team/new", method = RequestMethod.GET)
-    public String ShowHelpTextNEwPage(ModelMap model) {
-        TeamDto teanDto = new TeamDto();
-        model.addAttribute(this.TEAM_MODEL_KEY, teanDto);
+    @RequestMapping(value = "/ui/project/new/{teamId}", method = RequestMethod.GET)
+    public String ShowProjectNewPage(ModelMap model, @PathVariable("teamId") String teamId) {
 
-        return this.NEW_TEAM_VIEW_NAME;
+        try {
+
+            TeamDto teamDto = teamService.getOne(teamId);
+
+            ProjectDto projectDto = new ProjectDto();
+            projectDto.setTeamId(teamDto.getId());
+            model.addAttribute(this.PROJECT_MODEL_KEY, projectDto);
+            model.addAttribute(this.TEAM_MODEL_KEY, teamDto);
+
+            return this.NEW_PROJECT_VIEW_NAME;
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+            return this.NEW_PROJECT_VIEW_NAME;
+        }
+
     }
 
     /***************
      * NEW: SAVE   *
      * *************/
-    @RequestMapping(value = "/ui/team", method = RequestMethod.POST)
-    public String HelpTextPost(@ModelAttribute(TEAM_MODEL_KEY) @Valid TeamDto teamDto
+    @RequestMapping(value = "/ui/project", method = RequestMethod.POST)
+    public String ProjectPost(@ModelAttribute(PROJECT_MODEL_KEY) @Valid ProjectDto projectDto
             , BindingResult bindingResult, ModelMap model) {
 
         if (bindingResult.hasErrors()) {
-            return this.NEW_TEAM_VIEW_NAME;
+            return this.NEW_PROJECT_VIEW_NAME;
         }
 
         try {
 
-            teamService.create(teamDto);
-            return "redirect:/ui/welcome";
+            projectService.create(projectDto);
+            return "redirect:/ui/welcome/" + projectDto.getTeamId();
 
         } catch (RestClientException ex) {
 
             model.addAttribute("errMsg", RestServiceErrorMsg);
-            return this.NEW_TEAM_VIEW_NAME;
+            return this.NEW_PROJECT_VIEW_NAME;
         }
 
     }

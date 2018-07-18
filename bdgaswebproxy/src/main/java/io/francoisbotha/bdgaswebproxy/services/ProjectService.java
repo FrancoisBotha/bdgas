@@ -14,10 +14,9 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-
 package io.francoisbotha.bdgaswebproxy.services;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;
+import io.francoisbotha.bdgaswebproxy.domain.dto.ProjectDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -33,7 +32,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class TeamService {
+public class ProjectService {
 
     @Autowired
     private EndPointService endPointService;
@@ -46,34 +45,34 @@ public class TeamService {
      ************/
     public List getAll() {
 
-        final String uri = endPointService.getTeamEP();
+        final String uri = endPointService.getProjectEP();
 
-        ResponseEntity<List<TeamDto>> response
+        ResponseEntity<List<ProjectDto>> response
                 = restTemplate.exchange(uri,
                 HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<TeamDto>>() {
+                new ParameterizedTypeReference<List<ProjectDto>>() {
                 });
 
-        List<TeamDto> teams = response.getBody();
+        List<ProjectDto> projects = response.getBody();
 
-        return teams;
+        return projects;
 
     }
 
     /************
      * GET ONE  *
      ************/
-    public TeamDto getOne(String id) {
+    public ProjectDto getOne(String id) {
 
-        final String uri = endPointService.getTeamEP()
+        final String uri = endPointService.getProjectEP()
                 + "/" + id;
 
         try {
 
-            TeamDto teamDto  = restTemplate
-                    .getForObject(uri , TeamDto.class);
+            ProjectDto projectDto  = restTemplate
+                    .getForObject(uri , ProjectDto.class);
 
-            return teamDto;
+            return projectDto;
 
         } catch (RestClientException ex) {
 
@@ -86,9 +85,9 @@ public class TeamService {
     /************
      * CREATE   *
      ************/
-    public void create(TeamDto teamDto) throws RestClientException {
+    public void create(ProjectDto projectDto) throws RestClientException {
 
-        final String uri = endPointService.getTeamEP();
+        final String uri = endPointService.getProjectEP();
 
         try {
 
@@ -97,11 +96,11 @@ public class TeamService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
-            log.debug(teamDto.toString());
+            log.debug(projectDto.toString());
 
-            HttpEntity<TeamDto> entity = new HttpEntity<TeamDto>(teamDto, headers);
+            HttpEntity<ProjectDto> entity = new HttpEntity<ProjectDto>(projectDto, headers);
 
-            ResponseEntity<TeamDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, TeamDto.class);
+            ResponseEntity<ProjectDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, ProjectDto.class);
 
         } catch (RestClientException ex) {
 
@@ -114,18 +113,18 @@ public class TeamService {
     /************
      * MODIFY   *
      ************/
-    public void modify(TeamDto teamDto) throws RestClientException {
+    public void modify(ProjectDto projectDto) throws RestClientException {
 
-        final String uri = endPointService.getTeamEP()
-                + "/" + teamDto.getId();
+        final String uri = endPointService.getProjectEP()
+                + "/" + projectDto.getId();
 
         log.debug(uri.toString());
 
         try {
 
-            HttpEntity<TeamDto> entity = new HttpEntity<TeamDto>(teamDto, this.getDefaultHeaders());
+            HttpEntity<ProjectDto> entity = new HttpEntity<ProjectDto>(projectDto, this.getDefaultHeaders());
 
-            ResponseEntity<TeamDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, TeamDto.class);
+            ResponseEntity<ProjectDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, ProjectDto.class);
 
         } catch (RestClientException ex) {
 
@@ -140,14 +139,14 @@ public class TeamService {
      ************/
     public void delete(String id) throws RestClientException {
 
-        final String uri = endPointService.getTeamEP()
+        final String uri = endPointService.getProjectEP()
                 + "/" + id;
 
         try {
 
             HttpEntity<String> entity = new HttpEntity<String>("", this.getDefaultHeaders());
 
-            ResponseEntity<TeamDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, TeamDto.class);
+            ResponseEntity<ProjectDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, ProjectDto.class);
 
         } catch (RestClientException ex) {
 

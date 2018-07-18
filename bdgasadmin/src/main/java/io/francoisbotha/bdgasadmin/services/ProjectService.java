@@ -16,9 +16,11 @@
  *****************************************************************************/
 package io.francoisbotha.bdgasadmin.services;
 
-import io.francoisbotha.bdgasadmin.domain.dao.OrganisationRepository;
+import io.francoisbotha.bdgasadmin.domain.dao.ProjectRepository;
+import io.francoisbotha.bdgasadmin.domain.dto.ProjectDto;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
-import io.francoisbotha.bdgasadmin.domain.model.Organisation;
+import io.francoisbotha.bdgasadmin.domain.model.Project;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,65 +28,79 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Slf4j
 @Service
-public class OrganisationService {
+public class ProjectService  {
 
     @Autowired
-    private OrganisationRepository organisationRepository;
+    private ProjectRepository projectRepository;
 
-    public Organisation getOrganisation(String id) throws EntityNotFoundException {
-        Organisation organisation = organisationRepository.findOneById(id);
-        if(organisation == null){
-            throw new EntityNotFoundException(Organisation.class, "id", id.toString());
+    public Project getProject(String id) throws EntityNotFoundException {
+        Project project = projectRepository.findOneById(id);
+        if(project == null){
+            throw new EntityNotFoundException(Project.class, "id", id.toString());
         }
-        return organisation;
+        return project;
     }
 
     public List getAll() {
 
-        List organisations = new ArrayList();
+        List projects = new ArrayList();
 
-        Iterable<Organisation> organisationsIt = organisationRepository.findAll();
+        Iterable<Project> projectsIt = projectRepository.findAll();
 
-        Iterator<Organisation> iter = organisationsIt.iterator();
-
-        while (iter.hasNext()) {
-            organisations.add(iter.next());
-        }
-
-        return organisations;
-    }
-
-    public List getAll(String id) throws EntityNotFoundException  {
-
-        List organisations = new ArrayList();
-
-        Iterable<Organisation> organisationsIt = organisationRepository.findAllById(id);
-
-        Iterator<Organisation> iter = organisationsIt.iterator();
+        Iterator<Project> iter = projectsIt.iterator();
 
         while (iter.hasNext()) {
-            organisations.add(iter.next());
+            projects.add(iter.next());
         }
 
-        if(organisations.isEmpty()
-                || organisations.get(0) == null){
-            throw new EntityNotFoundException(Organisation.class, "id", id.toString());
-        }
-
-        return organisations;
+        return projects;
     }
 
-    public Organisation create(Organisation organisation) {
-        return organisationRepository.save(organisation);
+    public List getTeamProjects(String teamId) {
+
+        List projects = new ArrayList();
+
+        Iterable<Project> projectsIt = projectRepository.findAllByTeamId(teamId);
+
+        Iterator<Project> iter = projectsIt.iterator();
+
+        while (iter.hasNext()) {
+            projects.add(iter.next());
+        }
+
+        return projects;
+    }
+
+    public Project getOne(String id) throws EntityNotFoundException {
+
+
+        Project project = projectRepository.findOneById(id);
+
+        return project;
+    }
+
+    //TODO: validaton for team referential integrity
+    public Project create(Project project) {
+        return projectRepository.save(project);
+    }
+
+    public Project update(String id, ProjectDto projectDto) throws EntityNotFoundException {
+
+        Project project = projectRepository.findOneById(id);
+
+        project.setName(projectDto.getName());
+        project.setTeamId(projectDto.getTeamId());
+
+        return projectRepository.save(project);
     }
 
     public void delete(String id)  throws EntityNotFoundException {
 
-        Organisation organisation = organisationRepository.findOneById(id);
+        Project project = projectRepository.findOneById(id);
 
-        organisationRepository.delete(organisation);
+        projectRepository.delete(project);
     }
 
 }
-

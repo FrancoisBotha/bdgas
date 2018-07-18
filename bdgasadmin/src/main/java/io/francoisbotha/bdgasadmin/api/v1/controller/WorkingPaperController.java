@@ -16,10 +16,10 @@
  *****************************************************************************/
 package io.francoisbotha.bdgasadmin.api.v1.controller;
 
-import io.francoisbotha.bdgasadmin.domain.dto.TeamDto;
-import io.francoisbotha.bdgasadmin.domain.model.Team;
+import io.francoisbotha.bdgasadmin.domain.dto.WorkingPaperDto;
+import io.francoisbotha.bdgasadmin.domain.model.WorkingPaper;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
-import io.francoisbotha.bdgasadmin.services.TeamService;
+import io.francoisbotha.bdgasadmin.services.WorkingPaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,51 +31,60 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 @RestController
-public class TeamController {
+public class WorkingPaperController  {
 
     @Autowired
-    TeamService teamService;
+    WorkingPaperService workingPaperService;
 
     /************
      * GET ALL  *
      ************/
-    @RequestMapping(value = "/api/v1/team", method = RequestMethod.GET)
-    public List getTeams () throws EntityNotFoundException {
+    @RequestMapping(value = "/api/v1/workingPaper", method = RequestMethod.GET)
+    public List getWorkingPapers () throws EntityNotFoundException {
 
-        log.info("Get Teams");
-
-        return teamService.getAll();
+        return workingPaperService.getAll();
 
     }
 
     /************
      * GET ONE  *
      ************/
-    @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.GET)
-    public Team getTeam (@PathVariable("id") String id) throws EntityNotFoundException {
+    @RequestMapping(value = "/api/v1/workingPaper/{id}", method = RequestMethod.GET)
+    public WorkingPaper getWorkingPapers (@PathVariable("id") String id) throws EntityNotFoundException {
 
-        return teamService.getOne(id);
+        return workingPaperService.getOne(id);
 
     }
 
     /************
      * ADD      *
      ************/
-    @RequestMapping(value = "/api/v1/team", method = RequestMethod.POST, consumes="application/json")
+    @RequestMapping(value = "/api/v1/workingPaper", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Team AddTeam(@RequestBody @Valid TeamDto teamDto )  {
-        Team team = new Team();
-        team.setName(teamDto.getName());
-        return teamService.create(team);
+    public WorkingPaper AddWorkingPaper(@RequestBody @Valid WorkingPaperDto workingPaperDto )  {
+        WorkingPaper workingPaper = new WorkingPaper();
+        workingPaper.setName(workingPaperDto.getName());
+        workingPaper.setProjectId(workingPaperDto.getProjectId());
+        return workingPaperService.create(workingPaper);
+    }
+
+    /************
+     * UPDATE   *
+     ************/
+    @RequestMapping(value = "/api/v1/workingPaper/{id}", method = RequestMethod.PATCH)
+    @ResponseStatus(HttpStatus.OK)
+    public WorkingPaper UpdateWorkingPaper(@PathVariable("id") String id, @RequestBody @Valid WorkingPaperDto workingPaperDto )
+            throws EntityNotFoundException  {
+        return workingPaperService.update(id, workingPaperDto);
     }
 
     /************
      * DELETE   *
      ************/
-    @RequestMapping(value = "/api/v1/team/{id}", method = RequestMethod.DELETE )
+    @RequestMapping(value = "/api/v1/workingPaper/{id}", method = RequestMethod.DELETE )
     @ResponseStatus(HttpStatus.OK)
-    public void deleteTeam(@PathVariable("id") String id) throws EntityNotFoundException  {
-        teamService.delete(id);
+    public void deleteWorkingPaper(@PathVariable("id") String id) throws EntityNotFoundException  {
+        workingPaperService.delete(id);
     }
 
 }

@@ -38,47 +38,99 @@
             <div> <a th:href="@{/ui/team/new}" th:text="#{generic.new}">New...</a></div>
         </div>
         <div class="col-sm">
-            <div> <a th:href="@{/ui/project/new}" th:text="#{generic.new}">New...</a></div>
+            <div th:if="${selectedTeam}" >
+                <div> <a th:href="@{|/ui/project/new/${selectedTeam.id}|}" th:text="#{generic.new}">New...</a></div>
+            </div>
+            <div th:unless="${selectedTeam}" >
+                <div>New</div>
+            </div>
         </div>
         <div class="col-sm">
-            <div> <a th:href="@{/ui/wp/new}" th:text="#{generic.new}">New...</a></div>
+            <div th:if="${selectedProject}" >
+                <div> <a th:href="@{|/ui/workingpaper/new/${selectedProject.id}/|}" th:text="#{generic.new}">New...</a></div>
+            </div>
+            <div th:unless="${selectedProject}" >
+                <div>New</div>
+            </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm">
 
-            <select class="custom-select mt-2" size="6">
-                <option th:each="team : ${teams}"
-                        th:value="${team.id}"
-                        th:text="${team.name}">
-                        <!--th:selected="${team.id == selectedTeam.id}">-->
-                </option>
-            </select>
-            <div class="float-right mt-2">
-                <button type="button" class="btn btn-outline-success btn-sm tm-2">Select</button>
+            <form id="selectteamform"
+                  th:action="@{/ui/welcome}"
+                  th:object="${teamForm}"
+                  method="POST"
+                  enctype="multipart/form-data">
+
+                <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                    <select th:value="${teamForm.id}"
+                            id="id"
+                            name="id"
+                            class="custom-select mt-2" size="6">
+                        <div th:if="${selectedTeam}" >
+                            <option th:each="team : ${teams}"
+                                    th:value="${team.id}"
+                                    th:text="${team.name}"
+                                    th:selected="${team.id == selectedTeam.id}">
+                            </option>
+                        </div>
+                        <div th:unless="${selectedTeam}" >
+                            <option th:each="team : ${teams}"
+                                    th:value="${team.id}"
+                                    th:text="${team.name}">
+                            </option>
+                        </div>
+                    </select>
+                    <button type="submit" class="btn btn-outline-dark btn-sm float-right mt-2">Select</button>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="col-sm">
+            <div th:if="${selectedTeam}" >
+                <select id="id"
+                        name="id"
+                        class="custom-select mt-2" size="6">
+                    <option th:each="project : ${projects}"
+                            th:value="${project.id}"
+                            th:text="${project.name}">
+                    </option>
+                </select>
+                <div class="float-right mt-2">
+                    <button type="button" class="btn btn-outline-dark btn-sm tm-2">Select</button>
+                </div>
+            </div>
+            <div th:unless="${selectedTeam}" >
+                <select class="custom-select mt-2" size="6">
+                </select>
+                <div class="float-right mt-2">
+                    <button type="button" class="btn btn-outline-dark btn-sm tm-2" disabled>Select</button>
+                </div>
             </div>
         </div>
         <div class="col-sm">
-            <select class="custom-select mt-2" size="6">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <div class="float-right mt-2">
-                <button type="button" class="btn btn-outline-success btn-sm tm-2">Select</button>
+            <div th:if="${selectedProject}" >
+                <select id="id"
+                        name="id"
+                        class="custom-select mt-2" size="6">
+                    <option th:each="project : ${projects}"
+                            th:value="${project.id}"
+                            th:text="${project.name}">
+                    </option>
+                </select>
+                <div class="float-right mt-2">
+                    <button type="button" class="btn btn-outline-success btn-sm tm-2">Go</button>
+                </div>
             </div>
-        </div>
-        <div class="col-sm">
-            <select class="custom-select mt-2" size="6">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <div class="float-right mt-2">
-                <button type="button" class="btn btn-outline-success btn-sm tm-2">Go</button>
+            <div th:unless="${selectedProject}" >
+                <select class="custom-select mt-2" size="6">
+                </select>
+                <div class="float-right mt-2">
+                    <button type="button" class="btn btn-outline-success btn-sm tm-2" disabled>Go</button>
+                </div>
             </div>
         </div>
     </div>

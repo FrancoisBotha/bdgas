@@ -14,21 +14,18 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package io.francoisbotha.bdgasadmin.domain.model;
+package io.francoisbotha.bdgasadmin.domain.dao;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import io.francoisbotha.bdgasadmin.domain.model.WorkingPaper;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@NoArgsConstructor
-public class S3SingedUrl {
+import java.util.List;
 
-    private String url;
-
+@EnableScan
+public interface WorkingPaperRepository extends CrudRepository<WorkingPaper, String> {
+    List<WorkingPaper> findAll();
+    List<WorkingPaper> findAllById(String Id);
+    List<WorkingPaper> findAllByProjectId(String projectId);
+    WorkingPaper findOneById(String id);
 }

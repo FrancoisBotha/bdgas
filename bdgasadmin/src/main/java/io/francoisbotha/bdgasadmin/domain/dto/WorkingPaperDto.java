@@ -14,21 +14,25 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package io.francoisbotha.bdgasadmin.domain.model;
+package io.francoisbotha.bdgasadmin.domain.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import lombok.*;
+
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class S3SingedUrl {
+public class WorkingPaperDto {
 
-    private String url;
+    private String id;
 
+    @NotBlank
+    private String projectId;
+
+    @NotBlank
+    private String name;
 }
