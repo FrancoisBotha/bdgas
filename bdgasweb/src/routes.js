@@ -5,6 +5,9 @@ import DataUploadPage from './pages/DataUploadPage.vue'
 import DataHelpPage from './pages/DataHelpPage.vue'
  
 export const routes = [
+  { path: '/',
+      redirect:  { name: 'data.list' }
+  },  
   { path: '/data', component: DataPage,
     children: [
       {

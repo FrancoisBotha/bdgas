@@ -61,6 +61,16 @@ public class WorkingPaperController {
     public static final String TEAM_MODEL_KEY = "team";
     public static final String WORKINGPAPERMODEL_KEY = "workingPaper";
 
+//    /**************
+//     * SHOW SPA   *
+//     * ************/
+//    @RequestMapping(value = "/ui/wp", method = RequestMethod.GET)
+//    public ModelAndView ShowSPA(Model model) {
+//
+//
+//
+//    }
+
     /***************
      * NEW-FORM    *
      * *************/

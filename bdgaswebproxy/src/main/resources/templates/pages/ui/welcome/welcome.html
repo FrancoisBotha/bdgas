@@ -138,17 +138,42 @@
         </div>
         <div class="col-sm">
             <div th:if="${selectedProject}" >
-                <select id="id"
-                        name="id"
-                        class="custom-select mt-2" size="6">
-                    <option th:each="workingpaper : ${workingPapers}"
-                            th:value="${workingpaper.id}"
-                            th:text="${workingpaper.name}">
-                    </option>
-                </select>
-                <div class="float-right mt-2">
-                    <button type="button" class="btn btn-outline-success btn-sm tm-2">Go</button>
-                </div>
+
+                <form id="selectwpform"
+                      th:action="@{|/ui/welcome/${selectedTeam.id}/${selectedProject.id}/wp|}"
+                      th:object="${wpForm}"
+                      method="POST"
+                      enctype="multipart/form-data">
+
+                    <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                        <select th:value="${wpForm.id}"
+                                id="id"
+                                name="id"
+                                class="custom-select mt-2" size="6">
+                                <div th:if="${selectedWp}" >
+                                    <option th:each="workingpaper : ${workingPapers}"
+                                            th:value="${workingpaper.id}"
+                                            th:text="${workingpaper.name}"
+                                            th:selected="${workingpaper.id == selectedWp.id}">
+                                    </option>
+                                </div>
+                                <div th:unless="${selectedWp}" >
+                                    <option th:each="workingpaper : ${workingPapers}"
+                                            th:value="${workingpaper.id}"
+                                            th:text="${workingpaper.name}">
+                                    </option>
+                                </div>
+
+                                <option >
+                                </option>
+                        </select>
+                        <div class="float-right mt-2">
+                            <button type="submit" class="btn btn-outline-success btn-sm tm-2">Go</button>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
             <div th:unless="${selectedProject}" >
                 <select class="custom-select mt-2" size="6">

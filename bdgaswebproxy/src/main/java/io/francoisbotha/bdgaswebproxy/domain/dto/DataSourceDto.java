@@ -17,8 +17,9 @@
 package io.francoisbotha.bdgaswebproxy.domain.dto;
 
 import javax.validation.constraints.NotBlank;
-
 import lombok.*;
+
+import java.math.BigInteger;
 
 
 @Getter
@@ -26,11 +27,25 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class TeamDto {
+public class DataSourceDto {
 
     private String id;
 
     @NotBlank
-    private String name;
+    private String teamId;
+
+    @NotBlank
+    private String fileName;
+
+    @NotBlank
+    private String objectKey;
+
+    private String contentType;
+
+    private Long contentLength;
+
+    private String userId;
+
+    private String createDt;
 
 }

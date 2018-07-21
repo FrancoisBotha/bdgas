@@ -20,6 +20,9 @@ public class EndPointService {
     private static final String PROJECT = "project";
     private static final String WORKINGPAPER = "workingpaper";
     private static final String PROJECTWORKINGPAPERS = "workingpaper/project";
+    private static final String SIGNEDURL = "s3/signedurl";
+    private static final String DATASOURCE = "datasource";
+    private static final String TEAMDATASOURCE = "datasource/team";
 
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
@@ -42,6 +45,18 @@ public class EndPointService {
     }
     public String getProjectWorkingPapersEP() {
         return this.merge(this.PROJECTWORKINGPAPERS);
+    }
+
+    public String getSignedUrlEP() {
+        return this.merge(this.SIGNEDURL);
+    }
+
+    public String getDataSourceEP() {
+        return this.merge(this.DATASOURCE);
+    }
+
+    public String getTeamDataSourcesEP() {
+        return this.merge(this.TEAMDATASOURCE);
     }
 
     private String merge(String endpoint) {

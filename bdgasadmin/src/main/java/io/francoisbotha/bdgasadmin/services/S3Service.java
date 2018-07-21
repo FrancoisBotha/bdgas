@@ -26,15 +26,14 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.amazonaws.services.s3.model.ListObjectsV2Result;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.amazonaws.services.s3.model.*;
 import io.francoisbotha.bdgasadmin.domain.model.S3SingedUrl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
-import com.amazonaws.services.s3.model.Bucket;
 
+@Slf4j
 @Component
 public class S3Service {
 
@@ -54,6 +53,24 @@ public class S3Service {
                 System.out.println("* " + os.getKey());
             }
             return objects;
+        } catch (AmazonServiceException e) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public ObjectMetadata getObjectMetaData(String objectKey) throws IOException {
+
+        try {
+            return s3Client.getObjectMetadata(bucket, objectKey);
+
         } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process
             // it, so it returned an error response.

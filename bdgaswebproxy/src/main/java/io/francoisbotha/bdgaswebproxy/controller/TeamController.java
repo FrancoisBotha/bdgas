@@ -16,9 +16,7 @@
  *****************************************************************************/
 package io.francoisbotha.bdgaswebproxy.controller;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.HelpTextDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;
-import io.francoisbotha.bdgaswebproxy.services.HelpTextService;
 import io.francoisbotha.bdgaswebproxy.services.TeamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

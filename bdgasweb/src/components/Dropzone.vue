@@ -21,6 +21,7 @@ import Dropzone from 'dropzone'
 import '../../node_modules/dropzone/dist/dropzone.css'
 
 import awsservice from '../services/awsservice'
+import datasourceservice from '../services/datasourceservice';
 
 Dropzone.autoDiscover = false
 export default {
@@ -69,6 +70,13 @@ export default {
           .catch((err) => {
             done('Failed to get an S3 signed upload URL', err)
           })
+      },
+      init: function() {
+        this.on("success", function(file) { 
+          console.dir(file);
+          console.log('Adding DataSource...')
+          datasourceservice.addDataSource(file);
+        });
       }
     }
     // Instantiate Dropzone

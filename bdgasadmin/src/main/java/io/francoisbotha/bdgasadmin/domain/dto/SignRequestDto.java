@@ -14,23 +14,33 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package io.francoisbotha.bdgaswebproxy.domain.dto;
+package io.francoisbotha.bdgasadmin.domain.dto;
+
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 
-import lombok.*;
-
-
-@Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class TeamDto {
-
-    private String id;
+public class SignRequestDto {
 
     @NotBlank
-    private String name;
+    private String fileName;
+
+    @NotBlank
+    private String contentType;
+
+    SignRequestDto(String fileName, String contentType) {
+        this.fileName = fileName;
+        this.contentType = contentType;
+    }
+
+    public String getFileName() { return this.fileName;}
+    public String getContentType() { return this.contentType;}
 
 }

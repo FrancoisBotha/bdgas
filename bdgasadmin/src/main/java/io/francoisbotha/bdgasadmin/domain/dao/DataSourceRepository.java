@@ -14,23 +14,18 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package io.francoisbotha.bdgaswebproxy.domain.dto;
+package io.francoisbotha.bdgasadmin.domain.dao;
 
-import javax.validation.constraints.NotBlank;
+import io.francoisbotha.bdgasadmin.domain.model.DataSource;
+import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
+import org.springframework.data.repository.CrudRepository;
 
-import lombok.*;
+import java.util.List;
 
-
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@NoArgsConstructor
-public class TeamDto {
-
-    private String id;
-
-    @NotBlank
-    private String name;
-
+@EnableScan
+public interface DataSourceRepository  extends CrudRepository<DataSource, String> {
+    List<DataSource> findAll();
+    List<DataSource> findAllById(String Id);
+    List<DataSource> findAllByTeamId(String teamId);
+    DataSource findOneById(String id);
 }

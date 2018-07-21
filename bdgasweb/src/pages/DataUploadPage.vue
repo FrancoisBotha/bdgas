@@ -1,6 +1,5 @@
 <template>
   <div>
-      {{ signedS3Url}}
       <div class="row">
         <div class="float-left p-3">
             <button type="button" @click="getSignedS3Url()" class="btn btn-dark">New Upload</button>

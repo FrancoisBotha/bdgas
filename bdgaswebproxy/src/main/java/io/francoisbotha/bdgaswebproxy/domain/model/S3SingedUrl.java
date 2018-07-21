@@ -14,23 +14,23 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package io.francoisbotha.bdgaswebproxy.domain.dto;
 
-import javax.validation.constraints.NotBlank;
 
-import lombok.*;
+package io.francoisbotha.bdgaswebproxy.domain.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class TeamDto {
+public class S3SingedUrl {
 
-    private String id;
-
-    @NotBlank
-    private String name;
+    private String url;
 
 }

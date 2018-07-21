@@ -6,13 +6,37 @@ var axiosProxyS = axios.create({
 })
 
 const state = {
-    signedS3Url: "aagff"
+    signedS3Url: "",
+    teamName: teamObjJava.name,
+    projectName: projectObjJava.name,
+    wpName: wpObjJava.name,
+    teamId: teamObjJava.id,
+    projectId: projectObjJava.id,
+    wpId: wpObjJava.id
 }
  
 const getters = {
     signedS3Url: state => {
         return state.signedS3Url;
-    }
+    },
+    teamName: state => {
+        return state.teamName;
+    },
+    projectName: state => {
+        return state.projectName;
+    },
+    wpName: state => {
+        return state.wpName;
+    },
+    teamId: state => {
+        return state.teamId;
+    },
+    projectId: state => {
+        return state.projectId;
+    },
+    wpId: state => {
+        return state.wpId;
+    }                   
 }
  
 const mutations = {

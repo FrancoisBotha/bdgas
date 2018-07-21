@@ -14,7 +14,6 @@ export default {
         url: endpoint,
         data: bodyFormData
       }).then((res) => {
-          console.log('a')
           console.log(res.data.url);
         return Promise.resolve(res.data.url || '/')
       })
