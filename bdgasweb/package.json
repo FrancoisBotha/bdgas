@@ -2,7 +2,7 @@
   "name": "bdgasweb",
   "description": "Web Front-end for BDGAS",
   "version": "1.0.0",
-  "author": "Francois Botha <botha.francois@gmail.com>",
+  "author": "FrancoisBotha <francois@ims.com.na>",
   "license": "Apache 2.0",
   "private": true,
   "scripts": {
@@ -11,30 +11,32 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap-vue": "^1.2.0",
     "dropzone": "^5.4.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue": "^2.5.11",
+    "popper.js": "^1.12.9",
+    "vue": "^2.5.3",
     "vue-axios": "^2.1.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
-    "file-loader": "^1.1.4",
-    "vue-loader": "^13.0.5",
-    "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "node-sass": "^4.6.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "vue-loader": "^13.5.0",
+    "vue-template-compiler": "^2.5.3",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
   }
 }
