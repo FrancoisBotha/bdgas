@@ -8,8 +8,12 @@ import "bootstrap-vue/dist/bootstrap-vue.css"
 import { routes } from './routes';
 import { store } from './store/store'
 
+const f = require('./filters/prettybytes');
+
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
+
+Vue.filter("prettyBytes", f.prettyBytes)
 
 const router = new VueRouter({
   routes
