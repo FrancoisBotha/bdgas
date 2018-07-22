@@ -9,25 +9,24 @@
       </div>
   </div>
 </template>
- 
-<script>
-  import Navbar from './components/Navbar.vue'
-  import Statusbar from './components/Statusbar.vue'
 
-  export default {
-    name: 'app',
-    components: {
+<script>
+import Navbar from './components/Navbar.vue'
+import Statusbar from './components/Statusbar.vue'
+
+export default {
+  name: 'app',
+  components: {
       appNavbar: Navbar,
       appStatusbar: Statusbar
-    },
-    data () {
-      return {
-        msg: "" /*javaObj.message*/
-      }
+  },  
+  data () {
+    return {
     }
   }
+}
 </script>
- 
+
 <style>
 #app {
  font-family: 'Avenir', Helvetica, Arial, sans-serif;

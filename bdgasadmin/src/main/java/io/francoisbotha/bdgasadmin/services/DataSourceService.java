@@ -105,11 +105,23 @@ public class DataSourceService  {
 
     }
 
+    /**************
+     *  DELETE    *
+     **************/
     public void delete(String id)  throws EntityNotFoundException {
 
-        DataSource dataSource = dataSourceRepository.findOneById(id);
+        try {
 
-        dataSourceRepository.delete(dataSource);
+            DataSource dataSource = dataSourceRepository.findOneById(id);
+
+            s3Service.deleteObject(dataSource.getObjectKey());
+
+            dataSourceRepository.delete(dataSource);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

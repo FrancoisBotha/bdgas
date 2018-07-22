@@ -5,14 +5,33 @@ var axiosProxyS = axios.create({
   timeout: 3000,
 })
 
+let teamObjTemp = {
+    name: "TEAM",
+    id: "TEAMID"
+}
+
+let projectObjTemp = {
+    name: "PROJECT",
+    id: "PROJECTID"
+}
+
+let wpObjTemp = {
+    name: "WP",
+    id: "WPID"
+}
+
+var teamObj = (typeof teamObjJava != "undefined") ? teamObjJava : teamObjTemp;
+var projectObj = (typeof projectObjJava != "undefined")  ? projectObjJava : projectObjTemp;
+var wpObj = (typeof wpObjJava!= "undefined") ? wpObjJava : wpObjTemp;
+
 const state = {
     signedS3Url: "",
-    teamName: teamObjJava.name,
-    projectName: projectObjJava.name,
-    wpName: wpObjJava.name,
-    teamId: teamObjJava.id,
-    projectId: projectObjJava.id,
-    wpId: wpObjJava.id
+    teamName: teamObj.name,
+    projectName: projectObj.name,
+    wpName: wpObj.name,
+    teamId: teamObj.id,
+    projectId: projectObj.id,
+    wpId: wpObj.id
 }
  
 const getters = {

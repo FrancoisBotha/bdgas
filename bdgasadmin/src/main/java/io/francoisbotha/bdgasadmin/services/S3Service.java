@@ -84,6 +84,17 @@ public class S3Service {
         return null;
     }
 
+    public void deleteObject(String keyName) throws IOException {
+
+        try {
+            s3Client.deleteObject(new DeleteObjectRequest(bucket, keyName));
+
+        } catch (AmazonServiceException e) {
+            e.printStackTrace();
+            e.printStackTrace();
+        }
+    }
+
     /***********
      * Courtesy of:
      * https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObjectJavaSDK.html

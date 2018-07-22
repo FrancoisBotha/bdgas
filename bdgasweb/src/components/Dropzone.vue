@@ -10,7 +10,7 @@
     <!-- Not displayed, just for Dropzone's `dictDefaultMessage` option -->
     <div id="dropzone-message" style="display: none">
       <span class="dropzone-title">Drop files here or click to select</span>
-      <span class="dropzone-info">You can upload multiple files at once</span>
+      <span class="dropzone-info"></span>
     </div>
   </form>
 </template>

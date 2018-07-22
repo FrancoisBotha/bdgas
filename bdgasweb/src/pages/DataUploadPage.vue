@@ -1,10 +1,5 @@
 <template>
-  <div>
-      <div class="row">
-        <div class="float-left p-3">
-            <button type="button" @click="getSignedS3Url()" class="btn btn-dark">New Upload</button>
-        </div>
-      </div>
+  <div class="mt-3">
       <dropzone></dropzone>
   </div>
 </template>
@@ -17,14 +12,8 @@
       Dropzone
     },
     computed: {
-        signedS3Url() {
-            return this.$store.getters.signedS3Url;
-        }
     },
     methods: {
-        getSignedS3Url() {
-            this.$store.dispatch('fetchSignedS3Url');
-        }
     }
   }
 </script>

@@ -1,6 +1,6 @@
 # bdgasweb
 
-> Web Front-end for BDGAS
+> A Vue.js project
 
 ## Build Setup
 

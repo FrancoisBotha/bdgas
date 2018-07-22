@@ -85,4 +85,25 @@ public class DataSourceController {
         return null;
     }
 
+    /***************
+     * DELETE      *
+     * *************/
+    //Used response body because ajax used to delete
+    @RequestMapping(value = "/api/v1/datasource/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody void DeleteDataSource(Model model,
+                                             @PathVariable("id") String id) {
+
+        try {
+
+            dataSourceService.delete(id);
+
+        } catch (RestClientException ex) {
+
+            //TODO: some error handling here...
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+        }
+
+    }
+
 }
