@@ -14,7 +14,7 @@ public class TaskController {
     @GetMapping
     public String ShowVuePage(Model model) {
         model.addAttribute("message", "A message from JAVA");
-        return "/pages/admin/task";
+        return "pages/admin/task";
     }
 
 }
