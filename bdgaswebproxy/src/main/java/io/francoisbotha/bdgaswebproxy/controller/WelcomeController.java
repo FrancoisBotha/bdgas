@@ -48,7 +48,7 @@ public class WelcomeController {
     @Autowired
     private WorkingPaperService workingPaperService;
 
-    private static final String BASE_PATH = "/pages/ui/welcome/";
+    private static final String BASE_PATH = "pages/ui/welcome/";
     private static final String WELCOME_VIEW_NAME = BASE_PATH + "welcome";
     private static final String SPA_VIEW_NAME = "index";
 

@@ -52,7 +52,7 @@ public class WorkingPaperController {
     @Autowired
     private ProjectService projectService;
 
-    private static final String BASE_PATH = "/pages/ui/workingpaper/";
+    private static final String BASE_PATH = "pages/ui/workingpaper/";
     private static final String NEW_WORKINGPAPERVIEW_NAME = BASE_PATH + "workingpaper_new";
 
 

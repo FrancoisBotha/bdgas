@@ -41,7 +41,7 @@ public class HelpTextController {
     @Autowired
     private HelpTextService helpTextService;
 
-    private static final String BASE_PATH = "/pages/admin/helptext/";
+    private static final String BASE_PATH = "pages/admin/helptext/";
     private static final String HELPTEXT_VIEW_NAME = BASE_PATH + "helptext";
     private static final String VIEW_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_view";
     private static final String NEW_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_new";

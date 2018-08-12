@@ -55,6 +55,7 @@
       onDelete: function(dataSrc) {
         this.selectedDataSrc = dataSrc;
         this.showConfirm=true;
+               console.dir(this.$store.getters.dataSources);
       },
       onCancelSelected: function() {
         this.selectedDataSrc = {};
@@ -70,11 +71,12 @@
     },    
     computed: {
       dataSources() {
-        return this.$store.getters. dataSources
+        return this.$store.getters.dataSources
       }
     },
     created: function () {
        this.$store.dispatch('fetchDataSources')
+
     },
   }
 </script>

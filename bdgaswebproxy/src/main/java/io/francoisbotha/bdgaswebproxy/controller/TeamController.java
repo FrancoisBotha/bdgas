@@ -41,7 +41,7 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    private static final String BASE_PATH = "/pages/ui/team/";
+    private static final String BASE_PATH = "pages/ui/team/";
     private static final String NEW_TEAM_VIEW_NAME = BASE_PATH + "team_new";
 
 //    private static final String HELPTEXT_VIEW_NAME = BASE_PATH + "helptext";

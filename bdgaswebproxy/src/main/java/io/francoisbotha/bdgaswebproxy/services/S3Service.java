@@ -56,14 +56,17 @@ public class S3Service {
             SignRequestDto signRequestDto = new SignRequestDto(fileName, contentType);
             HttpEntity<SignRequestDto> entity = new HttpEntity<SignRequestDto>(signRequestDto, headers);
 
+            log.debug("Returning signed url...1");
             S3SingedUrl s3SingedUrl = restTemplate.postForObject(uri, entity, S3SingedUrl.class);
-
+            log.debug("Returning signed url...2");
             return s3SingedUrl;
 
         } catch (RestClientException ex) {
 
             String message = "Failed to post to service: " + ex.getMessage();
             log.error(message, ex);
+
+
             throw ex;
         }
 

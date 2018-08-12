@@ -47,7 +47,7 @@ public class ProjectController {
     @Autowired
     private TeamService teamService;
 
-    private static final String BASE_PATH = "/pages/ui/project/";
+    private static final String BASE_PATH = "pages/ui/project/";
     private static final String NEW_PROJECT_VIEW_NAME = BASE_PATH + "project_new";
 
 
