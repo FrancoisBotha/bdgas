@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class SjsJobsDto {
+public class SjsJobDto {
 
     private String duration;
 

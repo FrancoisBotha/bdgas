@@ -1,8 +1,10 @@
 package io.francoisbotha.bdgasadmin.api.v1.controller;
 
 import io.francoisbotha.bdgasadmin.services.SjsService;
+import io.francoisbotha.bdgasadmin.domain.dto.SjsJobDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
@@ -20,7 +22,7 @@ public class SparkJobServiceController {
      * JOBS         *
      * **************/
     @RequestMapping(path = "/api/v1/sjs/jobs", method = RequestMethod.GET)
-    public List listS3Objects() {
+    public List listJobs() {
         try {
 
             return sjsService.listAllJobs();
@@ -29,6 +31,20 @@ public class SparkJobServiceController {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping(path = "/api/v1/sjs/jobs/{jobId}", method = RequestMethod.GET)
+    public SjsJobDto getJob(ModelMap model, @PathVariable("jobId") String jobId) {
+
+        try {
+
+            return sjsService.getJob(jobId);
+
+        } catch (RestClientException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
     }
 
 }

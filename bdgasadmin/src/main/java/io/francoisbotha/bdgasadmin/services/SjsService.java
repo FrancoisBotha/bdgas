@@ -1,6 +1,6 @@
 package io.francoisbotha.bdgasadmin.services;
 
-import io.francoisbotha.bdgasadmin.domain.dto.SjsJobsDto;
+import io.francoisbotha.bdgasadmin.domain.dto.SjsJobDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,15 +32,36 @@ public class SjsService {
 
         try {
 
-            ResponseEntity<List<SjsJobsDto>> response
+            ResponseEntity<List<SjsJobDto>> response
                     = restTemplate.exchange(uri,
                     HttpMethod.GET, null,
-                    new ParameterizedTypeReference<List<SjsJobsDto>>() {
+                    new ParameterizedTypeReference<List<SjsJobDto>>() {
                     });
 
-            List<SjsJobsDto> dataSources = response.getBody();
+            List<SjsJobDto> dataSources = response.getBody();
 
             return dataSources;
+
+        } catch (RestClientException ex) {
+
+            String message = "Failed to get service: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
+        }
+
+    }
+
+    public SjsJobDto getJob(String jobId) {
+
+        final String uri = endPointService.getSjsJobsEP()
+                            + "/" + jobId;
+
+        try {
+
+            SjsJobDto sjsJobDto  = restTemplate
+                    .getForObject(uri , SjsJobDto.class);
+
+            return sjsJobDto;
 
         } catch (RestClientException ex) {
 
