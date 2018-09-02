@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -72,4 +73,34 @@ public class SjsService {
 
     }
 
+//    public void runJob(DataSourceDto dataSourceDto) throws RestClientException {
+//
+//        final String uri = endPointService.getSjsJobsEP();
+//
+//        log.debug(uri.toString());
+//
+//        try {
+//
+//            // Query parameters
+//            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
+//                                // Add query parameter
+//                                .queryParam("firstName", "Mark")
+//                                .queryParam("lastName", "Watney");
+//
+//            HttpEntity<DataSourceDto> entity
+//                    = new HttpEntity<DataSourceDto>(dataSourceDto, this.getDefaultHeaders());
+//
+//            ResponseEntity<DataSourceDto> result
+//                    = restTemplate.exchange(uri, HttpMethod.POST, entity, DataSourceDto.class);
+//
+//        } catch (RestClientException ex) {
+//
+//            String message = "Failed to post to service: " + ex.getMessage();
+//            log.error(message, ex);
+//            throw ex;
+//        }
+//    }
+
 }
+
+//curl -d "input.string = a b c a b see" "<master node>:8090/jobs?appName=wordcount&classPath=io.francoisbotha.sjs.WordCountExampleNewApi&context=testContext&sync=true&timeout=120"
