@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<tr th:fragment="codetyperow">
+    <td th:text="${codeType.cdeTypeDesc}">Description</td>
+    <td th:text="${codeType.no}">No</td>
+    <td><a th:href="@{|/admin/codetype/${codeType.id}|}" class="btn btn-outline-dark btn-sm" role="button">View</a></td>
+    <td><a th:href="@{|/admin/codetype/codetable/${codeType.id}|}" class="btn btn-outline-dark btn-sm" role="button">Codes</a></td>
+    <td><a href="#" th:data-record-id="${codeType.id}" th:data-record-title="${codeType.cdeTypeDesc}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+</tr>
+
+
+</body>
+
+</html>

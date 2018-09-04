@@ -63,6 +63,7 @@ public class CodeTableController {
     @ResponseStatus(HttpStatus.CREATED)
     public CodeTable AddCodeTable(@RequestBody @Valid CodeTableDto codeTableDto )  {
         CodeTable codeTable = new CodeTable();
+        codeTable.setCdeTypeId(codeTableDto.getCdeTypeId());
         codeTable.setCde(codeTableDto.getCde());
         codeTable.setCdeDesc(codeTableDto.getCdeDesc());
         return codeTableService.create(codeTable);

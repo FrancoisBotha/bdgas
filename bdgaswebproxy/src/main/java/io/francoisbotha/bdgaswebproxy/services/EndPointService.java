@@ -15,6 +15,9 @@ public class EndPointService {
     private static final String VERSION = "v1";
 
     private static final String HELPTEXT = "helptext";
+    private static final String CODETYPE = "codetype";
+    private static final String CODETABLE = "codetable";
+    private static final String TASK = "task";
     private static final String TEAM = "team";
     private static final String TEAMPROJECTS = "project/team";
     private static final String PROJECT = "project";
@@ -26,6 +29,18 @@ public class EndPointService {
 
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
+    }
+
+    public String getCodeTypeEP() {
+        return this.merge(this.CODETYPE);
+    }
+
+    public String getCodeTableEP() {
+        return this.merge(this.CODETABLE);
+    }
+
+    public String getTaskEP() {
+        return this.merge(this.TASK);
     }
 
     public String getTeamEP() {

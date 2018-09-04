@@ -45,7 +45,16 @@ public class CodeTypeController {
         return codeTypeService.getAll();
 
     }
-    
+
+    /************
+     * GET ONE  *
+     ************/
+    @RequestMapping(value = "/api/v1/codetype/{id}", method = RequestMethod.GET)
+    public CodeType getCodeType (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return codeTypeService.getOne(id);
+
+    }
 
     /************
      * ADD      *

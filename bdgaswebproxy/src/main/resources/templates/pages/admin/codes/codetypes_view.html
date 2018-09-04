@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <h4 class="display-7 text-left" th:text="'View Code Type:'">Code Type</h4>
+        </div>
+    </div>
+
+    <a th:href="@{/admin/codetype}" class="btn btn-outline-dark btn-sm mt-0" role="button">Back</a>
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="no" th:text="#{codeType.no}">CodeTypeNo</label>
+                    <input type="text" id="no" name="no" class="form-control" th:value="${codeType.no}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="cdeTypeDesc" th:text="#{codeType.cdeTypeDesc}">Code Type Desc</label>
+                    <input type="text" id="cdeTypeDesc" name="cdeTypeDesc" class="form-control" th:value="${codeType.cdeTypeDesc}" readonly/>
+                </div>
+            </div>
+
+            <a th:href="@{|/admin/codetype/mod/${codeType.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

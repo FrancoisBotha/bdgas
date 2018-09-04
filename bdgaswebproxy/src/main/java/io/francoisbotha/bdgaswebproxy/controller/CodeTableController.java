@@ -14,11 +14,12 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-
 package io.francoisbotha.bdgaswebproxy.controller;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.HelpTextDto;
-import io.francoisbotha.bdgaswebproxy.services.HelpTextService;
+import io.francoisbotha.bdgaswebproxy.domain.dto.CodeTableDto;
+import io.francoisbotha.bdgaswebproxy.domain.dto.CodeTypeDto;
+import io.francoisbotha.bdgaswebproxy.services.CodeTableService;
+import io.francoisbotha.bdgaswebproxy.services.CodeTypeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,150 +42,163 @@ public class CodeTableController {
     private String RestServiceErrorMsg;
 
     @Autowired
-    private HelpTextService helpTextService;
+    private CodeTypeService codeTypeService;
+
+    @Autowired
+    private CodeTableService codeTableService;
 
     private static final String BASE_PATH = "pages/admin/codes/";
     private static final String CODETYPES_VIEW_NAME = BASE_PATH + "codetypes";
-    private static final String VIEW_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_view";
-    private static final String NEW_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_new";
-    private static final String MOD_HELPTEXT_VIEW_NAME = BASE_PATH + "helptext_mod";
+    private static final String VIEW_CODETYPE_VIEW_NAME = BASE_PATH + "codetypes_view";
+    private static final String NEW_CODETYPE_VIEW_NAME = BASE_PATH + "codetypes_new";
+    private static final String MOD_CODETYPE_VIEW_NAME = BASE_PATH + "codetypes_mod";
+
+    private static final String CODETABLES_VIEW_NAME = BASE_PATH + "codetables";
+    private static final String VIEW_CODETABLE_VIEW_NAME = BASE_PATH + "codetables_view";
+    private static final String NEW_CODETABLE_VIEW_NAME = BASE_PATH + "codetables_new";
+    private static final String MOD_CODETABLE_VIEW_NAME = BASE_PATH + "codetables_mod";
+
 
     /* Key which identifies helpText payload in Model */
-    public static final String HELPTEXT_MODEL_KEY = "helpText";
-    private static final String HELPTEXTLIST_MODEL_KEY = "helpTexts";
+    public static final String CODETYPE_MODEL_KEY = "codeType";
+    private static final String CODETYPELIST_MODEL_KEY = "codeTypes";
+
+    public static final String CODETABLE_MODEL_KEY = "codeTable";
+    private static final String CODETABLELIST_MODEL_KEY = "codeTables";
+
 
     /***********
      * LIST    *
      * *********/
-    @RequestMapping(value = "/admin/codetypes", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/codetype", method = RequestMethod.GET)
     public String ShowCodeTypesPage(Model model) {
 
         try {
 
-            List helpTexts = helpTextService.getAll();
-            model.addAttribute(HELPTEXTLIST_MODEL_KEY, helpTexts);
+            List codeTypes = codeTypeService.getAll();
+            model.addAttribute(CODETYPELIST_MODEL_KEY, codeTypes);
 
         } catch (RestClientException ex) {
 
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }
 
-        return this.HELPTEXT_VIEW_NAME;
+        return this.CODETYPES_VIEW_NAME;
 
     }
 
     /***********
      * VIEW    *
      * *********/
-    @RequestMapping(value = "/admin/helptext/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/codetype/{id}", method = RequestMethod.GET)
     public String ViewVendor(Model model,
                              @PathVariable("id") String id) {
-
         try {
 
-            HelpTextDto helpText = helpTextService.getOne(id);
-            model.addAttribute(HELPTEXT_MODEL_KEY, helpText);
+            CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
+            model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
+
 
         } catch (RestClientException ex) {
 
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }
 
-        return this.VIEW_HELPTEXT_VIEW_NAME;
+        return this.VIEW_CODETYPE_VIEW_NAME;
 
     }
 
     /***************
      * NEW-FORM    *
      * *************/
-    @RequestMapping(value = "/admin/helptext/new", method = RequestMethod.GET)
-    public String ShowHelpTextNEwPage(ModelMap model) {
-        HelpTextDto helptTextDto = new HelpTextDto();
-        model.addAttribute(this.HELPTEXT_MODEL_KEY , helptTextDto);
+    @RequestMapping(value = "/admin/codetype/new", method = RequestMethod.GET)
+    public String ShowCodeTypeNewPage(ModelMap model) {
+        CodeTypeDto codeTypeDto = new CodeTypeDto();
+        model.addAttribute(this.CODETYPE_MODEL_KEY , codeTypeDto);
 
-        return this.NEW_HELPTEXT_VIEW_NAME;
+        return this.NEW_CODETYPE_VIEW_NAME;
     }
 
     /***************
      * NEW: SAVE   *
      * *************/
-    @RequestMapping(value = "/admin/helptext", method = RequestMethod.POST)
-    public String HelpTextPost(@ModelAttribute(HELPTEXT_MODEL_KEY) @Valid HelpTextDto helpTextDto
+    @RequestMapping(value = "/admin/codetype", method = RequestMethod.POST)
+    public String HelpTextPost(@ModelAttribute(CODETYPELIST_MODEL_KEY) @Valid CodeTypeDto codeTypeDto
             , BindingResult bindingResult, ModelMap model) {
 
         if (bindingResult.hasErrors()) {
-            return HelpTextController.NEW_HELPTEXT_VIEW_NAME;
+            return this.NEW_CODETYPE_VIEW_NAME;
         }
 
         try {
 
-            helpTextService.create(helpTextDto);
+            codeTypeService.create(codeTypeDto);
 
         } catch (RestClientException ex) {
 
             model.addAttribute("errMsg", RestServiceErrorMsg);
-            return HelpTextController.NEW_HELPTEXT_VIEW_NAME;
+            return this.NEW_CODETYPE_VIEW_NAME;
         }
 
-        return "redirect:/admin/helptext";
+        return "redirect:/admin/codetype";
     }
 
     /***************
      * MOD-FORM    *
      * *************/
-    @RequestMapping(value = "/admin/helptext/mod/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/codetype/mod/{id}", method = RequestMethod.GET)
     public String modHelpText(Model model,
                               @PathVariable("id") String id) {
 
         try {
 
-            HelpTextDto helpText = helpTextService.getOne(id);
-            model.addAttribute(HELPTEXT_MODEL_KEY, helpText);
+            CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
+            model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
 
         } catch (RestClientException ex) {
 
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }
 
-        return this.MOD_HELPTEXT_VIEW_NAME;
+        return this.MOD_CODETYPE_VIEW_NAME;
 
     }
 
     /***************
      * MOD: SAVE   *
      * *************/
-    @RequestMapping(value = "/admin/helptext/mod/{id}", method = RequestMethod.POST)
-    public String HelpTextModSave(@ModelAttribute(HELPTEXT_MODEL_KEY) @Valid HelpTextDto helpTextDto
+    @RequestMapping(value = "/admin/codetype/mod/{id}", method = RequestMethod.POST)
+    public String HelpTextModSave(@ModelAttribute(CODETYPE_MODEL_KEY) @Valid CodeTypeDto codeTypeDto
             , BindingResult bindingResult, ModelMap model,
                                   @PathVariable("id") String id) {
 
         if (bindingResult.hasErrors()) {
-            return HelpTextController.MOD_HELPTEXT_VIEW_NAME;
+            return this.MOD_CODETYPE_VIEW_NAME;
         }
 
         try {
 
-            helpTextService.modify(helpTextDto);
+            codeTypeService.modify(codeTypeDto);
 
         } catch (RestClientException ex) {
 
             model.addAttribute("errMsg", RestServiceErrorMsg);
-            return HelpTextController.MOD_HELPTEXT_VIEW_NAME;
+            return this.MOD_CODETYPE_VIEW_NAME;
         }
 
-        return "redirect:/admin/helptext/" + id;
+        return "redirect:/admin/codetype/" + id;
     }
     /***************
      * DELETE      *
      * *************/
     //Used response body because ajax used to delete
-    @RequestMapping(value = "/admin/helptext/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/codetype/{id}", method = RequestMethod.DELETE)
     public @ResponseBody void DeleteHelpText(Model model,
                                              @PathVariable("id") String id) {
 
         try {
 
-            helpTextService.delete(id);
+            codeTypeService.delete(id);
 
         } catch (RestClientException ex) {
 
@@ -193,4 +207,97 @@ public class CodeTableController {
         }
 
     }
+
+    /***************
+     * CODE TABLES *
+     ***************/
+
+    /***********
+     * LIST    *
+     * *********/
+    @RequestMapping(value = "/admin/codetype/codetable/{id}", method = RequestMethod.GET)
+    public String ShowCodeTablePage(Model model,
+                                    @PathVariable("id") String id) {
+
+        try {
+
+            CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
+            model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
+
+            List codeTables = codeTableService.getAll();
+            model.addAttribute(CODETABLELIST_MODEL_KEY, codeTables);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+
+        }
+
+        return this.CODETABLES_VIEW_NAME;
+
+    }
+
+    /***************
+     * NEW-FORM    *
+     * *************/
+    @RequestMapping(value = "/admin/codetype/codetable/{id}/new", method = RequestMethod.GET)
+    public String ShowCodeTableNewPage(ModelMap model,
+                                       @PathVariable("id") String id) {
+
+        CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
+        model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
+
+        log.info(codeTypeDto.toString());
+
+        CodeTableDto codeTableDto = new CodeTableDto();
+        codeTableDto.setCdeTypeId(id);
+        model.addAttribute(this.CODETABLE_MODEL_KEY , codeTableDto);
+
+        return this.NEW_CODETABLE_VIEW_NAME;
+    }
+
+    /***************
+     * NEW: SAVE   *
+     * *************/
+    @RequestMapping(value = "/admin/codetype/codetable", method = RequestMethod.POST)
+    public String CodeTablePost(@ModelAttribute(CODETABLE_MODEL_KEY) @Valid CodeTableDto codeTableDto
+            , BindingResult bindingResult, ModelMap model) {
+
+        if (bindingResult.hasErrors()) {
+            return this.NEW_CODETABLE_VIEW_NAME;
+        }
+
+        try {
+
+            codeTableService.create(codeTableDto);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+            return this.NEW_CODETABLE_VIEW_NAME;
+        }
+
+        return "redirect:/admin/codetype/codetable/" + codeTableDto.getCdeTypeId();
+    }
+
+    /***************
+     * DELETE      *
+     * *************/
+    //Used response body because ajax used to delete
+    @RequestMapping(value = "/admin/codetable/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody void DeleteCodeTable(Model model,
+                                             @PathVariable("id") String id) {
+
+        try {
+
+            codeTableService.delete(id);
+
+        } catch (RestClientException ex) {
+
+            //TODO: some error handling here...
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+        }
+
+    }
+
 }

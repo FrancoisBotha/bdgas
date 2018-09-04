@@ -11,7 +11,7 @@
         <ul class="nav nav-tabs mt-1">
             <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/task' ? 'active':''}"><a th:href="@{/admin/task}"><span>Tasks</span></a></li>
             <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/helptext' ? 'active':''}"><a th:href="@{/admin/helptext}"><span>Help Text</span></a></li>
-            <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/codes' ? 'active':''}"><a th:href="@{/admin/codes}"><span>Codes</span></a></li>
+            <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/codetype' ? 'active':''}"><a th:href="@{/admin/codetype}"><span>Codes</span></a></li>
         </ul>
     </div>
 
@@ -20,6 +20,3 @@
 </body>
 
 </html>
-
-
-

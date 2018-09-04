@@ -50,6 +50,13 @@ public class CodeTypeService {
         return CodeTypes;
     }
 
+    public CodeType getOne(String id) throws EntityNotFoundException {
+
+        CodeType codeType = codeTypeRepository.findOneById(id);
+
+        return codeType;
+    }
+
     public CodeType create(CodeType codeType) {
         return codeTypeRepository.save(codeType);
     }

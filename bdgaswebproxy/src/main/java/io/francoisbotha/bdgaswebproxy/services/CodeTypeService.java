@@ -16,7 +16,7 @@
  *****************************************************************************/
 package io.francoisbotha.bdgaswebproxy.services;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.HelpTextDto;
+import io.francoisbotha.bdgaswebproxy.domain.dto.CodeTypeDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -29,10 +29,9 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-
 @Slf4j
 @Service
-public class HelpTextService {
+public class CodeTypeService {
 
     @Autowired
     private EndPointService endPointService;
@@ -45,34 +44,34 @@ public class HelpTextService {
      ************/
     public List getAll() {
 
-        final String uri = endPointService.getHelpTextEP();
+        final String uri = endPointService.getCodeTypeEP();
 
-        ResponseEntity<List<HelpTextDto>> response
+        ResponseEntity<List<CodeTypeDto>> response
                 = restTemplate.exchange(uri,
-                            HttpMethod.GET, null,
-                            new ParameterizedTypeReference<List<HelpTextDto>>() {
-                     });
+                HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<CodeTypeDto>>() {
+                });
 
-        List<HelpTextDto> helpTexts = response.getBody();
+        List<CodeTypeDto> codeTypes = response.getBody();
 
-        return helpTexts;
+        return codeTypes;
 
     }
 
     /************
      * GET ONE  *
      ************/
-    public HelpTextDto getOne(String id) {
+    public CodeTypeDto getOne(String id) {
 
-        final String uri = endPointService.getHelpTextEP()
+        final String uri = endPointService.getCodeTypeEP()
                 + "/" + id;
 
         try {
 
-            HelpTextDto helpTextDto  = restTemplate
-                                       .getForObject(uri , HelpTextDto.class);
+            CodeTypeDto codeTypeDto  = restTemplate
+                    .getForObject(uri , CodeTypeDto.class);
 
-            return helpTextDto;
+            return codeTypeDto;
 
         } catch (RestClientException ex) {
 
@@ -85,9 +84,9 @@ public class HelpTextService {
     /************
      * CREATE   *
      ************/
-    public void create(HelpTextDto helpTextDto) throws RestClientException {
+    public void create(CodeTypeDto codeTypeDto) throws RestClientException {
 
-        final String uri = endPointService.getHelpTextEP();
+        final String uri = endPointService.getCodeTypeEP();
 
         try {
 
@@ -96,12 +95,9 @@ public class HelpTextService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
-            helpTextDto.setLang("en");
-            log.debug(helpTextDto.toString());
+            HttpEntity<CodeTypeDto> entity = new HttpEntity<CodeTypeDto>(codeTypeDto, headers);
 
-            HttpEntity<HelpTextDto> entity = new HttpEntity<HelpTextDto>(helpTextDto, headers);
-
-            ResponseEntity<HelpTextDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, HelpTextDto.class);
+            ResponseEntity<CodeTypeDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, CodeTypeDto.class);
 
         } catch (RestClientException ex) {
 
@@ -114,19 +110,18 @@ public class HelpTextService {
     /************
      * MODIFY   *
      ************/
-    public void modify(HelpTextDto helpTextDto) throws RestClientException {
+    public void modify(CodeTypeDto codeTypeDto) throws RestClientException {
 
-        final String uri = endPointService.getHelpTextEP()
-                + "/" + helpTextDto.getId();
+        final String uri = endPointService.getCodeTypeEP()
+                + "/" + codeTypeDto.getId();
 
         log.debug(uri.toString());
 
         try {
 
-            helpTextDto.setLang("en");
-            HttpEntity<HelpTextDto> entity = new HttpEntity<HelpTextDto>(helpTextDto, this.getDefaultHeaders());
+            HttpEntity<CodeTypeDto> entity = new HttpEntity<CodeTypeDto>(codeTypeDto, this.getDefaultHeaders());
 
-            ResponseEntity<HelpTextDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, HelpTextDto.class);
+            ResponseEntity<CodeTypeDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, CodeTypeDto.class);
 
         } catch (RestClientException ex) {
 
@@ -141,14 +136,14 @@ public class HelpTextService {
      ************/
     public void delete(String id) throws RestClientException {
 
-        final String uri = endPointService.getHelpTextEP()
+        final String uri = endPointService.getCodeTypeEP()
                 + "/" + id;
 
         try {
 
             HttpEntity<String> entity = new HttpEntity<String>("", this.getDefaultHeaders());
 
-            ResponseEntity<HelpTextDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, HelpTextDto.class);
+            ResponseEntity<CodeTypeDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, CodeTypeDto.class);
 
         } catch (RestClientException ex) {
 
