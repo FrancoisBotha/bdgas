@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-8">
+            <h4 class="display-7 text-left" th:text="'View Code Table entry:'">Code Type</h4>
+        </div>
+    </div>
+
+    <a th:href="@{|/admin/codetype/codetable/${codeTable.cdeTypeId}|}" class="btn btn-outline-dark btn-sm mt-0" role="button">Back</a>
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="cde" th:text="#{codeTable.cde}">CodeTypeNo</label>
+                    <input type="text" id="cde" name="cde" class="form-control" th:value="${codeTable.cde}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="cdeTypeDesc" th:text="#{codeTable.cdeDesc}">Code Type Desc</label>
+                    <input type="text" id="cdeTypeDesc" name="cdeTypeDesc" class="form-control" th:value="${codeTable.cdeDesc}" readonly/>
+                </div>
+            </div>
+
+            <a th:href="@{|/admin/codetable/mod/${codeTable.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

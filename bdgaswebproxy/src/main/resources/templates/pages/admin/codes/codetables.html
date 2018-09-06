@@ -18,7 +18,7 @@
     </div>
 
     <div class="row mt-2">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <h4 class="display-7 text-left" th:text="'Code Type: ' + ${codeType.cdeTypeDesc}">Code Type: </h4>
         </div>
     </div>
@@ -83,8 +83,7 @@
         $('#confirm-delete').on('click', '.btn-ok', function(e) {
             var $modalDiv = $(e.delegateTarget);
             var id = $(this).data('recordId');
-            var tp = $(this).text('recordTp');
-            alert(tp)
+            var tp = $(this).data('recordTp');
             var url = '/admin/codetable/' + id
             $.ajax({
                 method: "DELETE",
@@ -100,8 +99,9 @@
         });
         $('#confirm-delete').on('show.bs.modal', function(e) {
             var data = $(e.relatedTarget).data();
-            $('.title', this).text(data.recordName);
+            $('.title', this).text(data.recordTitle);
             $('.btn-ok', this).data('recordId', data.recordId);
+            $('.btn-ok', this).data('recordTp', data.recordTp);
         });
     });
 </script>

@@ -224,7 +224,7 @@ public class CodeTableController {
             CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
             model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
 
-            List codeTables = codeTableService.getAll();
+            List codeTables = codeTableService.getCodeTablesForType(id);
             model.addAttribute(CODETABLELIST_MODEL_KEY, codeTables);
 
         } catch (RestClientException ex) {
@@ -234,6 +234,26 @@ public class CodeTableController {
         }
 
         return this.CODETABLES_VIEW_NAME;
+
+    }
+
+    /***********
+     * VIEW    *
+     * *********/
+    @RequestMapping(value = "/admin/codetable/{tableId}", method = RequestMethod.GET)
+    public String ViewCodeTable(Model model,
+                             @PathVariable("tableId") String tableId) {
+        try {
+
+            CodeTableDto codeTableDto = codeTableService.getOne(tableId);
+            model.addAttribute(CODETABLE_MODEL_KEY, codeTableDto);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+        }
+
+        return this.VIEW_CODETABLE_VIEW_NAME;
 
     }
 
@@ -278,6 +298,51 @@ public class CodeTableController {
         }
 
         return "redirect:/admin/codetype/codetable/" + codeTableDto.getCdeTypeId();
+    }
+
+    /***************
+     * MOD-FORM    *
+     * *************/
+    @RequestMapping(value = "/admin/codetable/mod/{id}", method = RequestMethod.GET)
+    public String modCodeTable(Model model,
+                              @PathVariable("id") String id) {
+        try {
+
+            CodeTableDto codeTableDto = codeTableService.getOne(id);
+            model.addAttribute(CODETABLE_MODEL_KEY, codeTableDto);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+        }
+
+        return this.MOD_CODETABLE_VIEW_NAME;
+
+    }
+
+    /***************
+     * MOD: SAVE   *
+     * *************/
+    @RequestMapping(value = "/admin/codetable/mod/{id}", method = RequestMethod.POST)
+    public String ModCodeTableSave(@ModelAttribute(CODETABLE_MODEL_KEY) @Valid CodeTableDto codeTableDto
+            , BindingResult bindingResult, ModelMap model,
+                                  @PathVariable("id") String id) {
+
+        if (bindingResult.hasErrors()) {
+            return this.MOD_CODETABLE_VIEW_NAME;
+        }
+
+        try {
+
+            codeTableService.modify(codeTableDto);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+            return this.MOD_CODETABLE_VIEW_NAME;
+        }
+
+        return "redirect:/admin/codetable/" + id;
     }
 
     /***************

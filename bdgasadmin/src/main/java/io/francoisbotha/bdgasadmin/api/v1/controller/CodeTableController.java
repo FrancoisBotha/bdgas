@@ -46,6 +46,16 @@ public class CodeTableController {
 
     }
 
+    /************
+     * GET One  *
+     ************/
+    @RequestMapping(value = "/api/v1/codetable/{id}", method = RequestMethod.GET)
+    public CodeTable getCodeTable (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return codeTableService.getOne(id);
+
+    }
+
     /********************
      * GET FOR CODE TYPE *
      ********************/

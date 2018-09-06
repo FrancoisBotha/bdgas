@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div>
+                <h4 class="display-7 text-left" th:text="'Modify Code Table: '">Code Type: </h4>
+            </div>
+            <div>
+                <h5 class="display-8">Modify</h5>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+            <div class="well">
+                <div class="text-left">
+                    <form id="updatecodetypeform"
+                          th:action="@{|/admin/codetable/mod/${codeTable.id}|}"
+                          th:object="${codeTable}"
+                          method="POST"
+                          enctype="multipart/form-data">
+
+                        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            <p th:text="#{form.updatecodetableform.hasErrors}">Error Message</p>
+                        </div>
+
+                        <div th:if="${errMsg}" class="alert alert-danger">
+                            <p th:text="${errMsg}">Error Message</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group" th:class="${#fields.hasErrors('cde')} ? 'form-group has-error' : 'form-group'">
+                                    <label for="cde" th:text="#{codeTable.cde}">CodeTypeNo</label>
+                                    <input type="text" id="cde" name="cde" class="form-control" th:value="${codeTable.cde}" readonly/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group" th:class="${#fields.hasErrors('cdeDesc')} ? 'form-group has-error' : 'form-group'">
+                                    <label for="cdeDesc" th:text="#{codeTable.cdeDesc}">Code Type Desc</label>
+                                    <input type="text" id="cdeDesc" name="cdeDesc" class="form-control" th:value="${codeTable.cdeDesc}" th:errorclass="is-invalid"/>
+                                    <div class="invalid-feedback"  th:if="${#fields.hasErrors('cdeDesc')}">
+                                        <ul>
+                                            <li  th:each="err : ${#fields.errors('cdeDesc')}" th:text="${err}" />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a type="button" class="btn btn-primary" th:href="@{|/admin/codetype/codetable/${codeTable.cdeTypeId}|}">Cancel</a>
+                        </div>
+
+                        <input type="hidden" th:value="${codeTable.cdeTypeId}" name="cdeTypeId" />
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

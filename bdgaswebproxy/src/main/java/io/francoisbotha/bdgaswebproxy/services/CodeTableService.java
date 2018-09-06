@@ -58,6 +58,26 @@ public class CodeTableService {
 
     }
 
+    /***************************
+     * GET CODE TABLE FOR TYPE *
+     ***************************/
+    public List getCodeTablesForType(String Id) {
+
+        final String uri = endPointService.getCodeTypeTablesEP() + "/" + Id;
+
+        ResponseEntity<List<CodeTableDto>> response
+                = restTemplate.exchange(uri,
+                HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<CodeTableDto>>() {
+                });
+
+        List<CodeTableDto> dataSources = response.getBody();
+
+        return dataSources;
+
+    }
+
+
     /************
      * GET ONE  *
      ************/

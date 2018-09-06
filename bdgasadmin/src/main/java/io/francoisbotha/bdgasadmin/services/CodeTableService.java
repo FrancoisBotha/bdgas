@@ -19,6 +19,7 @@ package io.francoisbotha.bdgasadmin.services;
 import io.francoisbotha.bdgasadmin.domain.dao.CodeTableRepository;
 import io.francoisbotha.bdgasadmin.domain.dto.CodeTableDto;
 import io.francoisbotha.bdgasadmin.domain.model.CodeTable;
+import io.francoisbotha.bdgasadmin.domain.model.CodeType;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,14 @@ public class CodeTableService {
 
         return CodeTables;
     }
+
+    public CodeTable getOne(String id) throws EntityNotFoundException {
+
+        CodeTable codeTable = codeTableRepository.findOneById(id);
+
+        return codeTable;
+    }
+
 
     public List  getCodesForType(String codeTypeId) {
 
