@@ -27,4 +27,5 @@ public interface HelpTextRepository extends CrudRepository<HelpText, String> {
     List<HelpText> findAll();
     List<HelpText> findAllById(String Id);
     HelpText findOneById(String id);
+    HelpText findOneByName(String id);
 }

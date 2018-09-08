@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+    <div th:include="fragments/adminwelcometext:: adminwelcometext"></div>
+    <div th:include="fragments/adminmenu:: adminmenu"></div>
+
+    <div class="mt-3 col-md-8">
+        <div class="card text-white bg-dark mb-3 " style="max-width: 100%;">
+            <div class="card-header">Help - System Administration</div>
+            <div class="card-body text-dark bg-light zeroPadding">
+                <textarea class="form-control bg-light helpTextDisplay" name="txt" rows="11" th:text="${helpText.txt}" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

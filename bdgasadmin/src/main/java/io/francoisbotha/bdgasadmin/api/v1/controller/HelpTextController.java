@@ -52,11 +52,21 @@ public class HelpTextController {
      * GET ONE  *
      ************/
     @RequestMapping(value = "/api/v1/helptext/{id}", method = RequestMethod.GET)
-    public HelpText getHelpTexts (@PathVariable("id") String id) throws EntityNotFoundException {
+    public HelpText getHelpTextByName (@PathVariable("id") String id) throws EntityNotFoundException {
 
         log.info("Get HelpText");
 
         return helpTextService.getOne(id);
+
+    }
+
+    /*******************
+     * GET ONE BY NAME *
+     *******************/
+    @RequestMapping(value = "/api/v1/helptext/name/{name}", method = RequestMethod.GET)
+    public HelpText getHelpTexts (@PathVariable("name") String name) throws EntityNotFoundException {
+
+        return helpTextService.getHelpTextByName(name);
 
     }
 

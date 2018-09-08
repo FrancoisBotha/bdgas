@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-8">
+            <h4 class="display-7 text-left" th:text="'View Task: ' + ${task.menuDesc}">Task </h4>
+        </div>
+    </div>
+
+    <a th:href="@{/admin/task}" class="btn btn-outline-dark btn-sm mt-0 mb-3" role="button">Back</a>
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="taskType" th:text="#{task.taskType}">Task Type</label>
+                    <select disabled class="form-control" id="taskType">
+                        <option th:each="tskType : ${taskTypes}"
+                                th:value="${tskType.id}"
+                                th:text="${tskType.cdeDesc}"
+                                th:selected="${tskType.id == task.taskType}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="taskCde" th:text="#{task.taskCde}">Task Code</label>
+                    <input type="text" id="taskCde" name="taskCde" class="form-control" th:value="${task.taskCde}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="menuDesc" th:text="#{task.menuDesc}">Menu Desc</label>
+                    <input type="text"  class="form-control" id="menuDesc" name="menuDesc" th:value="${task.menuDesc}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="successDesc" th:text="#{task.successDesc}">Sucess Desc</label>
+                    <input type="text" class="form-control" id="successDesc" name="successDesc" th:value="${task.successDesc}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="appName" th:text="#{task.appName}">App Name</label>
+                    <input type="text" class="form-control" id="appName" name="appName" th:value="${task.appName}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="classPath" th:text="#{task.classPath}">Class Path</label>
+                    <input type="classPath" class="form-control" id="classPath" name="classPath" th:value="${task.classPath}" readonly/>
+                </div>
+            </div>
+
+            <a th:href="@{|/admin/task/mod/${task.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

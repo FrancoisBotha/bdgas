@@ -12,7 +12,7 @@
     <div th:include="fragments/adminwelcometext:: adminwelcometext"></div>
     <div th:include="fragments/adminmenu:: adminmenu"></div>
 
-    <div class="mt-3"> <a th:href="@{/admin/codetype/new}">New Code Type Record</a></div>
+    <div class="mt-3"> <a th:href="@{/admin/task/new}">New Task</a></div>
 
     <div th:if="${errMsg}" class="alert alert-danger">
         <p th:text="${errMsg}">Error Message</p>
@@ -23,16 +23,14 @@
             <table class="table table-striped mt-2">
                 <thead class="thead-dark">
                 <tr scope="row" class="table-dark">
-                    <th scope="col" class="table-dark col-md-5">Code Types</th>
-                    <th scope="col" class="table-dark col-md-1">No</th>
-                    <th scope="col" class="table-dark col-md-1"></th>
+                    <th scope="col" class="table-dark col-md-6">Name</th>
                     <th scope="col" class="table-dark col-md-1"></th>
                     <th scope="col" class="table-dark col-md-1"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="codeType : ${codeTypes}">
-                    <td th:replace="fragments/codetyperow :: codetyperow"></td>
+                <tr th:each="task : ${tasks}">
+                    <td th:replace="fragments/tasktablerow :: tasktablerow"></td>
                 </tr>
                 </tbody>
             </table>
@@ -72,17 +70,18 @@
         $('#confirm-delete').on('click', '.btn-ok', function(e) {
             var $modalDiv = $(e.delegateTarget);
             var id = $(this).data('recordId');
-            var url = '/admin/codetype/' + id
+            var url = '/admin/task/' + id
+            // $modalDiv.addClass('loading');
             $.ajax({
                 method: "DELETE",
                 url: url
             }).then(function() {
                 $modalDiv.modal('hide');
-                window.location.href = "/admin/codetype/"
+                window.location.href = "/admin/task/"
             },(function() {
                 console.log('error')
                 $modalDiv.modal('hide');
-                window.location.href = "/admin/codetype/"
+                window.location.href = "/admin/task/"
             }));
         });
         $('#confirm-delete').on('show.bs.modal', function(e) {

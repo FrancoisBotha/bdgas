@@ -50,6 +50,13 @@ public class TaskService {
         return Tasks;
     }
 
+    public Task getOne(String id) throws EntityNotFoundException {
+
+        Task codeType = taskRepository.findOneById(id);
+
+        return codeType;
+    }
+
     public Task create(Task task) {
         return taskRepository.save(task);
     }

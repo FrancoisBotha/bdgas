@@ -48,6 +48,17 @@ public class TaskController {
 
 
     /************
+     * GET ONE  *
+     ************/
+    @RequestMapping(value = "/api/v1/task/{id}", method = RequestMethod.GET)
+    public Task  getTask (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return taskService.getOne(id);
+
+    }
+
+
+    /************
      * ADD      *
      ************/
     @RequestMapping(value = "/api/v1/task", method = RequestMethod.POST)

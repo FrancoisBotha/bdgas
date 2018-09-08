@@ -15,8 +15,10 @@ public class EndPointService {
     private static final String VERSION = "v1";
 
     private static final String HELPTEXT = "helptext";
+    private static final String HELPTEXTFORNAME = "helptext/name";
     private static final String CODETYPE = "codetype";
     private static final String CODETABLE = "codetable";
+    private static final String CODETABLESNR = "codetable/codetypenr";
     private static final String CODETYPETABLES = "codetable/codetype";
     private static final String TASK = "task";
     private static final String TEAM = "team";
@@ -31,6 +33,9 @@ public class EndPointService {
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
     }
+    public String getHelpTextForNameEP() {
+        return this.merge(this.HELPTEXTFORNAME);
+    }
 
     public String getCodeTypeEP() {
         return this.merge(this.CODETYPE);
@@ -39,9 +44,11 @@ public class EndPointService {
     public String getCodeTableEP() {
         return this.merge(this.CODETABLE);
     }
-
     public String getCodeTypeTablesEP() {
         return this.merge(this.CODETYPETABLES );
+    }
+    public String getCodeTablesByNrEP() {
+        return this.merge(this.CODETABLESNR );
     }
 
     public String getTaskEP() {

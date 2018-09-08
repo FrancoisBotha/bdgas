@@ -77,6 +77,25 @@ public class CodeTableService {
 
     }
 
+    /***************************
+     * GET CODE TABLE FOR NR   *
+     ***************************/
+    public List getCodeTablesForNr(String nr) {
+
+        final String uri = endPointService.getCodeTablesByNrEP() + "/" + nr;
+
+        ResponseEntity<List<CodeTableDto>> response
+                = restTemplate.exchange(uri,
+                HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<CodeTableDto>>() {
+                });
+
+        List<CodeTableDto> dataSources = response.getBody();
+
+        return dataSources;
+
+    }
+
 
     /************
      * GET ONE  *

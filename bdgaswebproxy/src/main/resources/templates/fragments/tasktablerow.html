@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<tr th:fragment="tasktablerow">
+    <td th:text="${task.menuDesc}">Menu Description</td>
+    <td><a th:href="@{|/admin/task/${task.id}|}" class="btn btn-outline-dark btn-sm" role="button">View</a></td>
+    <td><a href="#" th:data-record-id="${task.id}" th:data-record-title="${task.menuDesc}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+</tr>
+
+</body>
+
+</html>

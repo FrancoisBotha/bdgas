@@ -17,6 +17,7 @@
 package io.francoisbotha.bdgasadmin.services;
 
 import io.francoisbotha.bdgasadmin.domain.dao.CodeTableRepository;
+import io.francoisbotha.bdgasadmin.domain.dao.CodeTypeRepository;
 import io.francoisbotha.bdgasadmin.domain.dto.CodeTableDto;
 import io.francoisbotha.bdgasadmin.domain.model.CodeTable;
 import io.francoisbotha.bdgasadmin.domain.model.CodeType;
@@ -35,6 +36,9 @@ public class CodeTableService {
 
     @Autowired
     private CodeTableRepository codeTableRepository;
+
+    @Autowired
+    CodeTypeService codeTypeService;
 
     public List getAll() {
 
@@ -64,6 +68,23 @@ public class CodeTableService {
         List codeTables = new ArrayList();
 
         Iterable<CodeTable> codeTablesIt = codeTableRepository.findAllByCdeTypeId(codeTypeId);
+
+        Iterator<CodeTable> iter = codeTablesIt.iterator();
+
+        while (iter.hasNext()) {
+            codeTables.add(iter.next());
+        }
+
+        return codeTables;
+    }
+
+    public List  getCodesForNr(String nr) throws EntityNotFoundException {
+
+        CodeType codeType = codeTypeService.getOneByNr(nr);
+
+        List codeTables = new ArrayList();
+
+        Iterable<CodeTable> codeTablesIt = codeTableRepository.findAllByCdeTypeId(codeType.getId());
 
         Iterator<CodeTable> iter = codeTablesIt.iterator();
 

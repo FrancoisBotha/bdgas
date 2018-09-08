@@ -44,6 +44,14 @@ public class HelpTextService  {
         return helpText;
     }
 
+    public HelpText getHelpTextByName(String name) throws EntityNotFoundException {
+        HelpText helpText = helpTextRepository.findOneByName(name);
+        if(helpText == null){
+            throw new EntityNotFoundException(HelpText.class, "id", name.toString());
+        }
+        return helpText;
+    }
+
     public List getAll() {
 
         List helpTexts = new ArrayList();
@@ -66,26 +74,6 @@ public class HelpTextService  {
 
         return helpText;
     }
-
-//    public HelpText getAll(String id) throws EntityNotFoundException  {
-//
-//        List helpTexts = new ArrayList();
-//
-//        Iterable<HelpText> helpTextsIt = helpTextRepository.findById(id);
-//
-//        Iterator<HelpText> iter = helpTextsIt.iterator();
-//
-//        while (iter.hasNext()) {
-//            helpTexts.add(iter.next());
-//        }
-//
-//        if(helpTexts.isEmpty()
-//                || helpTexts.get(0) == null){
-//            throw new EntityNotFoundException(HelpText.class, "id", id.toString());
-//        }
-//
-//        return helpTexts;
-//    }
 
     public HelpText create(HelpText helpText) {
         return helpTextRepository.save(helpText);

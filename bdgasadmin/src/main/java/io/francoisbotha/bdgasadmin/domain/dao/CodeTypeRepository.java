@@ -28,4 +28,5 @@ public interface CodeTypeRepository extends CrudRepository<CodeType, String> {
     List<CodeType> findAll();
     List<CodeType> findAllById(String Id);
     CodeType findOneById(String id);
+    CodeType findOneByNo(String nr);
 }

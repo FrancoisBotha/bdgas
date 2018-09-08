@@ -4,3 +4,12 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
+
+.helpTextDisplay {
+    -webkit-box-shadow: none!important;
+    box-shadow: none;
+}
+
+.zeroPadding {
+    padding: 0; */
+}
