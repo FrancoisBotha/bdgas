@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import underscore from 'vue-underscore';
 import BootstrapVue from "bootstrap-vue"
 import App from './App.vue'
 import VueRouter from 'vue-router';
@@ -12,6 +13,7 @@ const f = require('./filters/prettybytes');
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
+Vue.use(underscore);
 
 Vue.filter("prettyBytes", f.prettyBytes)
 

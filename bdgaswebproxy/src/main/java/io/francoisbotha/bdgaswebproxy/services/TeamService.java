@@ -14,7 +14,6 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-
 package io.francoisbotha.bdgaswebproxy.services;
 
 import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;

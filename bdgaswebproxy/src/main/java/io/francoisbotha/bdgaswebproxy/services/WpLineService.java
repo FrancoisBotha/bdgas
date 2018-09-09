@@ -16,7 +16,7 @@
  *****************************************************************************/
 package io.francoisbotha.bdgaswebproxy.services;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.WorkingPaperDto;
+import io.francoisbotha.bdgaswebproxy.domain.dto.WpLineDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -32,7 +32,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class WorkingPaperService {
+public class WpLineService {
 
     @Autowired
     private EndPointService endPointService;
@@ -45,53 +45,53 @@ public class WorkingPaperService {
      ************/
     public List getAll() {
 
-        final String uri = endPointService.getWorkingPaperEP();
+        final String uri = endPointService.getWpLineEP();
 
-        ResponseEntity<List<WorkingPaperDto>> response
+        ResponseEntity<List<WpLineDto>> response
                 = restTemplate.exchange(uri,
                 HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<WorkingPaperDto>>() {
+                new ParameterizedTypeReference<List<WpLineDto>>() {
                 });
 
-        List<WorkingPaperDto> workingPapers = response.getBody();
+        List<WpLineDto> wpLines = response.getBody();
 
-        return workingPapers;
+        return wpLines;
 
     }
 
-    /******************************
-     * GET PROJECT WORKINGPAPERS  *
-     ******************************/
+    /***************************
+     * GET WORKINGPAPER Lines  *
+     ***************************/
     public List getProjectWorkingPapers(String Id) {
 
-        final String uri = endPointService.getProjectWorkingPapersEP() + "/" + Id;
+        final String uri = endPointService.getWorkingPaperLinesEP() + "/" + Id;
 
-        ResponseEntity<List<WorkingPaperDto>> response
+        ResponseEntity<List<WpLineDto>> response
                 = restTemplate.exchange(uri,
                 HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<WorkingPaperDto>>() {
+                new ParameterizedTypeReference<List<WpLineDto>>() {
                 });
 
-        List<WorkingPaperDto> workingPapers = response.getBody();
+        List<WpLineDto> wpLines = response.getBody();
 
-        return workingPapers;
+        return wpLines;
 
     }
 
     /************
      * GET ONE  *
      ************/
-    public WorkingPaperDto getOne(String id) {
+    public WpLineDto getOne(String id) {
 
-        final String uri = endPointService.getWorkingPaperEP()
+        final String uri = endPointService.getWpLineEP()
                 + "/" + id;
 
         try {
 
-            WorkingPaperDto workingPaperDto  = restTemplate
-                    .getForObject(uri , WorkingPaperDto.class);
+            WpLineDto wpLineDto  = restTemplate
+                    .getForObject(uri , WpLineDto.class);
 
-            return workingPaperDto;
+            return wpLineDto;
 
         } catch (RestClientException ex) {
 
@@ -104,9 +104,9 @@ public class WorkingPaperService {
     /************
      * CREATE   *
      ************/
-    public void create(WorkingPaperDto workingPaperDto) throws RestClientException {
+    public WpLineDto create(WpLineDto workingPaperDto) throws RestClientException {
 
-        final String uri = endPointService.getWorkingPaperEP();
+        final String uri = endPointService.getWpLineEP();
 
         try {
 
@@ -117,9 +117,10 @@ public class WorkingPaperService {
 
             log.debug(workingPaperDto.toString());
 
-            HttpEntity<WorkingPaperDto> entity = new HttpEntity<WorkingPaperDto>(workingPaperDto, headers);
+            HttpEntity<WpLineDto> entity = new HttpEntity<WpLineDto>(workingPaperDto, headers);
 
-            ResponseEntity<WorkingPaperDto> result = restTemplate.exchange(uri, HttpMethod.POST, entity, WorkingPaperDto.class);
+            WpLineDto wpLineDtoReturn = restTemplate.postForObject(uri, entity, WpLineDto.class);
+            return wpLineDtoReturn;
 
         } catch (RestClientException ex) {
 
@@ -132,18 +133,16 @@ public class WorkingPaperService {
     /************
      * MODIFY   *
      ************/
-    public void modify(WorkingPaperDto workingPaperDto) throws RestClientException {
+    public void modify(WpLineDto workingPaperDto) throws RestClientException {
 
-        final String uri = endPointService.getWorkingPaperEP()
+        final String uri = endPointService.getWpLineEP()
                 + "/" + workingPaperDto.getId();
-
-        log.debug(uri.toString());
 
         try {
 
-            HttpEntity<WorkingPaperDto> entity = new HttpEntity<WorkingPaperDto>(workingPaperDto, this.getDefaultHeaders());
+            HttpEntity<WpLineDto> entity = new HttpEntity<WpLineDto>(workingPaperDto, this.getDefaultHeaders());
 
-            ResponseEntity<WorkingPaperDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, WorkingPaperDto.class);
+            ResponseEntity<WpLineDto> result = restTemplate.exchange(uri, HttpMethod.PATCH, entity, WpLineDto.class);
 
         } catch (RestClientException ex) {
 
@@ -158,14 +157,14 @@ public class WorkingPaperService {
      ************/
     public void delete(String id) throws RestClientException {
 
-        final String uri = endPointService.getWorkingPaperEP()
+        final String uri = endPointService.getWpLineEP()
                 + "/" + id;
 
         try {
 
             HttpEntity<String> entity = new HttpEntity<String>("", this.getDefaultHeaders());
 
-            ResponseEntity<WorkingPaperDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, WorkingPaperDto.class);
+            ResponseEntity<WpLineDto> result = restTemplate.exchange(uri, HttpMethod.DELETE, entity, WpLineDto.class);
 
         } catch (RestClientException ex) {
 

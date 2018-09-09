@@ -25,6 +25,8 @@ public class EndPointService {
     private static final String TEAMPROJECTS = "project/team";
     private static final String PROJECT = "project";
     private static final String WORKINGPAPER = "workingpaper";
+    private static final String WPLINE = "wpline";
+    private static final String WORKINGPAPERLINES = "wpline/workingpaper";
     private static final String PROJECTWORKINGPAPERS = "workingpaper/project";
     private static final String SIGNEDURL = "s3/signedurl";
     private static final String DATASOURCE = "datasource";
@@ -72,6 +74,13 @@ public class EndPointService {
     }
     public String getProjectWorkingPapersEP() {
         return this.merge(this.PROJECTWORKINGPAPERS);
+    }
+
+    public String getWpLineEP() {
+        return this.merge(this.WPLINE);
+    }
+    public String getWorkingPaperLinesEP() {
+        return this.merge(this.WORKINGPAPERLINES);
     }
 
     public String getSignedUrlEP() {

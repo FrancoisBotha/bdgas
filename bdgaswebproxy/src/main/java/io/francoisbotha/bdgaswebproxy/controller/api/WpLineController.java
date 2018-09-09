@@ -16,8 +16,8 @@
  *****************************************************************************/
 package io.francoisbotha.bdgaswebproxy.controller.api;
 
-import io.francoisbotha.bdgaswebproxy.domain.dto.DataSourceDto;
-import io.francoisbotha.bdgaswebproxy.services.DataSourceService;
+import io.francoisbotha.bdgaswebproxy.domain.dto.WpLineDto;
+import io.francoisbotha.bdgaswebproxy.services.WpLineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,23 +31,23 @@ import java.util.List;
 
 @Slf4j
 @RestController
-public class DataSourceController {
+public class WpLineController {
 
     @Value("${restservice.error.defaultmsg}")
     private String RestServiceErrorMsg;
 
     @Autowired
-    private DataSourceService dataSourceService;
+    private WpLineService wpLineService;
 
     /***********
      * LIST    *
-     * *********/
-    @RequestMapping(value = "/api/v1/datasource", method = RequestMethod.GET)
+     ***********/
+    @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.GET)
     public List GetDataSources(Model model) {
 
         try {
 
-            return dataSourceService.getAll();
+            return wpLineService.getAll();
 
         } catch (RestClientException ex) {
             ex.printStackTrace();
@@ -60,22 +60,19 @@ public class DataSourceController {
 
     /***********
      * ADD    *
-     * *********/
-    @RequestMapping(value = "/api/v1/datasource", method = RequestMethod.POST)
+     **********/
+    @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public DataSourceDto getSignedUrl(@RequestParam String teamId,
+    public WpLineDto getSignedUrl(@RequestParam String teamId,
                                       @RequestParam String fileName,
                                       @RequestParam String objectKey) {
 
         try {
 
-            DataSourceDto dataSourceDto = new DataSourceDto();
-            dataSourceDto.setTeamId(teamId);
-            dataSourceDto.setFileName(fileName);
-            dataSourceDto.setObjectKey(objectKey);
+            WpLineDto wpLineDto = new WpLineDto();
 
-            DataSourceDto dataSourceDtoReturn = dataSourceService.create(dataSourceDto);
-            return dataSourceDtoReturn;
+            WpLineDto wpLineDtoReturn = wpLineService.create(wpLineDto);
+            return wpLineDtoReturn;
 
         } catch (RestClientException ex) {
             ex.printStackTrace();
@@ -88,14 +85,14 @@ public class DataSourceController {
      * DELETE      *
      * *************/
     //Used response body because ajax used to delete
-    @RequestMapping(value = "/api/v1/datasource/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/v1/wpline/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody void DeleteDataSource(Model model,
-                                             @PathVariable("id") String id) {
+                                               @PathVariable("id") String id) {
 
         try {
 
-            dataSourceService.delete(id);
+            wpLineService.delete(id);
 
         } catch (RestClientException ex) {
 
