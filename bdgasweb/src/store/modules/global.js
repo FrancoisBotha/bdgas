@@ -20,9 +20,14 @@ let wpObjTemp = {
     id: "WPID"
 }
 
+let tasksObjTemp = []
+let helpTextsObjTemp = []
+
 var teamObj = (typeof teamObjJava != "undefined") ? teamObjJava : teamObjTemp;
 var projectObj = (typeof projectObjJava != "undefined")  ? projectObjJava : projectObjTemp;
 var wpObj = (typeof wpObjJava!= "undefined") ? wpObjJava : wpObjTemp;
+var tasksObj = (typeof tasksObjJava!= "undefined") ? tasksObjJava : tasksObjTemp;
+var helpTextsObj = (typeof helpTextsObjJava!= "undefined") ? helpTextsObjJava : helpTextsObjTemp;
 
 const state = {
     signedS3Url: "",
@@ -31,7 +36,9 @@ const state = {
     wpName: wpObj.name,
     teamId: teamObj.id,
     projectId: projectObj.id,
-    wpId: wpObj.id
+    wpId: wpObj.id,
+    tasks: tasksObj,
+    helpTexts: helpTextsObj
 }
  
 const getters = {
@@ -55,7 +62,18 @@ const getters = {
     },
     wpId: state => {
         return state.wpId;
-    }                   
+    },
+    tasks: state => {
+        return state.tasks;
+    },
+    helpTexts: state => {
+        return state.helpTexts;
+    },        
+    helpText: state => {
+        return name => state.helpTexts.find(obj => {
+            return obj.name === name
+          });
+    } 
 }
  
 const mutations = {

@@ -19,9 +19,7 @@ package io.francoisbotha.bdgaswebproxy.controller;
 import io.francoisbotha.bdgaswebproxy.domain.dto.ProjectDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.WorkingPaperDto;
-import io.francoisbotha.bdgaswebproxy.services.ProjectService;
-import io.francoisbotha.bdgaswebproxy.services.TeamService;
-import io.francoisbotha.bdgaswebproxy.services.WorkingPaperService;
+import io.francoisbotha.bdgaswebproxy.services.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +46,14 @@ public class WelcomeController {
     @Autowired
     private WorkingPaperService workingPaperService;
 
+    @Autowired
+    private HelpTextService helpTextService;
+
+    @Autowired
+    private TaskService taskService;
+
+
+
     private static final String BASE_PATH = "pages/ui/welcome/";
     private static final String WELCOME_VIEW_NAME = BASE_PATH + "welcome";
     private static final String SPA_VIEW_NAME = "index";
@@ -68,6 +74,8 @@ public class WelcomeController {
     private static final String PROJECT_OBJMODEL_KEY = "projectObj";
     private static final String WP_OBJMODEL_KEY = "wpObj";
 
+    private static final String HELPTEXTLIST_MODEL_KEY = "helptextsObj";
+    private static final String TASKLIST_MODEL_KEY = "tasksObj";
 
     /***********
      * LIST    *
@@ -250,6 +258,14 @@ public class WelcomeController {
 
     }
 
+//  ######                    ###                    ##### ######    ##
+//   ##  ##                    ##                   ##   ## ##  ##  ####
+//   ##  ##   ####  #####      ##   ####  ######    #       ##  ## ##  ##
+//   #####   ##  ## ##  ##  #####  ##  ##  ##  ##    #####  #####  ##  ##
+//   ## ##   ###### ##  ## ##  ##  ######  ##            ## ##     ######
+//   ##  ##  ##     ##  ## ##  ##  ##      ##       ##   ## ##     ##  ##
+//  #### ##   ##### ##  ##  ######  ##### ####       ##### ####    ##  ##
+//
     @RequestMapping(value = "/ui/welcome/{teamId}/{projectId}/{wpId}", method = RequestMethod.POST)
     public String SelectWp(Model model,
                                         @ModelAttribute(WP_FORMMODEL_KEY) WorkingPaperDto workingPaperDto,
@@ -265,6 +281,12 @@ public class WelcomeController {
 
         WorkingPaperDto wp = workingPaperService.getOne(workingPaperDto.getId());
         model.addAttribute(WP_OBJMODEL_KEY, wp);
+
+        List helpTexts = helpTextService.getAll();
+        model.addAttribute(HELPTEXTLIST_MODEL_KEY, helpTexts);
+
+        List tasks = taskService.getAll();
+        model.addAttribute(TASKLIST_MODEL_KEY, tasks);
 
         return this.SPA_VIEW_NAME;
 

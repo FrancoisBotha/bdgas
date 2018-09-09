@@ -18,7 +18,6 @@ import axios from 'axios'
 import config from '../config'
 import { store } from '../store/store'
 
-
 export default {
   addDataSource (file) {      
     let endpoint = config.DATASOURCE_ENDPOINT;
@@ -33,7 +32,7 @@ export default {
         url: endpoint,
         data: bodyFormData
       }).then((res) => {
-          console.log("Loggin data source response:")
+          console.log("Logging data source response:")
           console.log(res.data);
         return Promise.resolve(res.data || '/')
       })

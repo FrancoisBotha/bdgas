@@ -1,18 +1,44 @@
 <template>
-<div class="mt-3">
+<div class="mt-3 col-md-8">
   <b-card header="Help"
           header-text-variant="white"
           header-tag="header"
           header-bg-variant="dark"
           style="max-width: 100%;"
+          class="zeroPadding"
   >
-    <div class="card-body text-dark bg-white" style="height:210px; overflow-y: scroll">
-      <div style="">
-        <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
-        <br>
-        <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
-      </div>
+    <div class="card-body text-dark bg-light zeroPadding">
+       <textarea class="form-control bg-light helpTextDisplay" 
+                name="txt" 
+                rows="11" 
+                readonly
+                v-model="helpTextDataSection"></textarea>
     </div>
   </b-card>
 </div>
 </template>
+
+<script>
+  export default {
+    computed: {
+      helpTextDataSection() {
+        return this.$store.getters.helpText("DataSection").txt
+      }
+    }
+  }
+</script>
+
+<style>
+  .helpTextDisplay {
+      -webkit-box-shadow: none!important;
+      box-shadow: none;
+  }
+
+  .zeroPadding {
+      padding: 0; 
+  }
+
+  .card-body {
+      padding: 0; 
+  }
+</style>

@@ -30,7 +30,7 @@
         projectName() {
             return this.$store.getters.projectName;
         }
-    },  
+    }  
   }
 
 </script>
