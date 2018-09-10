@@ -35,7 +35,7 @@
                                     <label for="taskType" th:text="#{task.taskType}">HelpTextName</label>
                                     <select class="form-control" id="taskType" th:field="*{taskType}">
                                         <option th:each="taskType : ${taskTypes}"
-                                                th:value="${taskType.id}"
+                                                th:value="${taskType.cde}"
                                                 th:utext="${taskType.cdeDesc}"/>
                                     </select>
                                     <div class="invalid-feedback"  th:if="${#fields.hasErrors('taskType')}">

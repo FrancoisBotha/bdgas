@@ -66,6 +66,11 @@ const getters = {
     tasks: state => {
         return state.tasks;
     },
+    task: state => {
+        return  type => state.tasks.filter(obj => {
+            return obj.taskType === type
+        });
+    },
     helpTexts: state => {
         return state.helpTexts;
     },        

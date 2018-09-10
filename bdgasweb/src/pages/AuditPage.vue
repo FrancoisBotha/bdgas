@@ -9,22 +9,30 @@
           <div class="card-body text-dark bg-white" style="height:210px; padding: 0.25rem;">
               <div>
                 <b-dropdown id="cbxdi" text="Data Ingestion" class="ml-0 mb-2">
-                  <b-dropdown-item>Select Data Source</b-dropdown-item>
+                  <b-dropdown-item-button  v-for="di in tasksDI" 
+                                           v-on:click="actionClicked(di.menuDesc)"
+                                          :key="di.id">{{ di.menuDesc }}</b-dropdown-item-button>
                 </b-dropdown>
               </div>
               <div>
                 <b-dropdown id="cbxct" text="Core Tests" class="ml-0 mb-2">
-                  <b-dropdown-item-button  v-for="ct in coreTests" v-on:click="test">{{ ct.menuDesc }}</b-dropdown-item-button>
+                  <b-dropdown-item-button  v-for="ct in tasksCT" 
+                                           v-on:click="actionClicked(ct.menuDesc)"
+                                          :key="ct.id">{{ ct.menuDesc }}</b-dropdown-item-button>
                 </b-dropdown>
               </div>
               <div>
                 <b-dropdown id="cbxpt" text="Plugin Tests" class="ml-0 mb-2">
-                  <b-dropdown-item-button>Word Count</b-dropdown-item-button>
+                 <b-dropdown-item  v-for="pt in tasksPT" 
+                                           v-on:click="actionClicked(pt.menuDesc)"
+                                          :key="pt.id">{{ pt.menuDesc }}</b-dropdown-item>
                 </b-dropdown>
               </div>              
               <div>
                 <b-dropdown id="cbxdd" text="Data Display" class="ml-0 mb-2">
-                  <b-dropdown-item-button>Show Data</b-dropdown-item-button>
+                 <b-dropdown-item-button  v-for="dd in tasksDD" 
+                                           v-on:click="actionClicked(dd.menuDesc)"
+                                          :key="dd.id">{{ dd.menuDesc }}</b-dropdown-item-button>
                 </b-dropdown>
               </div>   
           </div>
@@ -33,18 +41,18 @@
       <div class="col-9 ml-0 mt-1" style="padding-left: 1px;">
         <b-card no-body  class="text-white bg-dark"  style="height:264px" >
           <b-tabs card >
-            <b-tab title="Parameters" >
+            <b-tab title="Parameters" v-bind:class="{ active: !showHelp }" >
               <div class="bg-light text-dark" style="height: auto">
                   Tab Contents 1111
               </div>
             </b-tab>
-            <b-tab title="Help" active  class="bg-white text-dark">
+            <b-tab title="Help" class="bg-white text-dark"  v-bind:class="{ active: showHelp }">
               <div class="card-body text-dark bg-light zeroPadding">
-                <!-- <textarea class="form-control bg-light helpTextDisplay" 
+              <textarea class="form-control bg-light helpTextDisplay" 
                           name="txt" 
                           rows="8" 
                           readonly
-                          v-model="helpTextAuditSection"></textarea> -->
+                          v-model="helpTextAuditSection"></textarea> 
               </div>
             </b-tab>
           </b-tabs>
@@ -52,7 +60,10 @@
       </div>
     </div>
     <div>
-      <app-wpline v-for="ln in orderedWPLines" :wpline="ln"></app-wpline>
+      <app-wpline v-for="ln in orderedWPLines" 
+                  :wpline="ln"
+                  :key="ln.id"
+                  ></app-wpline>
     </div>
   </div>
 </template>
@@ -68,14 +79,9 @@
     },      
     data () {
       return {
+        showHelp: true,
         selected: null,
-        coreTests: [
-          { taskCde: '2000100', menuDesc: 'Sample' },
-          { taskCde: '2000200', menuDesc: 'Find Gaps' },
-          { taskCde: '2000300', menuDesc: 'Find Duplicates' },
-          { taskCde: '2000400', menuDesc: 'Recalc Column' }
-        ],
-        wplines: [
+           wplines: [
           {
             lnNo: 1,
             taskCde: "1000100",
@@ -104,13 +110,25 @@
       }
     },    
     methods: {
-      test: function() {
-        alert("this")
+      actionClicked: function(name) {
+        this.showHelp = false;
       }
     },
     computed: {
       helpTextAuditSection() {
         return this.$store.getters.helpText("AuditSection").txt
+      },
+      tasksDI() {
+        return this.$store.getters.task("DI")
+      },
+      tasksCT() {
+        return this.$store.getters.task("CT")
+      },
+      tasksPT() {
+        return this.$store.getters.task("PT")
+      },
+      tasksDD() {
+        return this.$store.getters.task("DD")
       },
       orderedWPLines() {
         return _.sortBy(this.wplines, 'lnNo').reverse()
