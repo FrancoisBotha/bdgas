@@ -5,6 +5,11 @@ import DataListTablePage from './pages/DataListTablePage.vue'
 import DataListViewPage from './pages/DataListViewPage.vue'
 import DataUploadPage from './pages/DataUploadPage.vue'
 import DataHelpPage from './pages/DataHelpPage.vue'
+import AuditHelpTab from './pages/AuditHelpTab.vue'
+import ParameterTab from './pages/ParameterTab.vue'
+import WordCount from './actions/plugins/WordCount.vue'
+import SelectDataSource from './actions/ingestion/SelectDataSource.vue'
+
  
 export const routes = [
   { path: '/',
@@ -49,5 +54,30 @@ export const routes = [
       }        
     ]
   },
-  { path: '/audit', component: AuditPage }
+  { path: '/audit', 
+    component: AuditPage,
+    redirect:  { name: 'audit.param' },
+    children: [
+      {
+        path: 'param',
+        component: ParameterTab,
+        name: 'audit.param',
+      },
+      {
+        path: '/audit/di_selectdata',
+        component: SelectDataSource,
+        name: 'audit.DI_selectdata',
+      },
+      {
+        path: '/audit/pt_wordcount',
+        component: WordCount,
+        name: 'audit.PT_wordcount',
+      },    
+      {
+        path: 'help',
+        component: AuditHelpTab,
+        name: 'audit.help',
+      }        
+    ]
+  }
 ]

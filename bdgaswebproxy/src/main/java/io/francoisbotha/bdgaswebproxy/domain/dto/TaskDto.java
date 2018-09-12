@@ -44,6 +44,7 @@ public class TaskDto {
     @NotBlank
     private String successDesc;
 
+    private String templatePath;
     private String appName;
     private String classPath;
 

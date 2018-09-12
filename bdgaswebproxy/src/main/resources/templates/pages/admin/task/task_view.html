@@ -69,6 +69,13 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                    <label for="templatePath" th:text="#{task.templatePath}">Class Path</label>
+                    <input type="templatePath" class="form-control" id="templatePath" name="templatePath" th:value="${task.templatePath}" readonly/>
+                </div>
+            </div>
+
             <a th:href="@{|/admin/task/mod/${task.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
 
         </div>
