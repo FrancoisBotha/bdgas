@@ -55,7 +55,6 @@
       onDelete: function(dataSrc) {
         this.selectedDataSrc = dataSrc;
         this.showConfirm=true;
-               console.dir(this.$store.getters.dataSources);
       },
       onCancelSelected: function() {
         this.selectedDataSrc = {};

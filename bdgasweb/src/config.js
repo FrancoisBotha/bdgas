@@ -17,5 +17,6 @@ export default {
     BASE_URL: getBaseUrl(),
     HOME_URL: getBaseUrl() + '/ui/welcome',
     AWS_GETSIGNEDURL_ENDPOINT: getBaseUrl() + '/api/v1/s3/signedurl',
-    DATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/datasource'
+    DATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/datasource',
+    WPLINE_ENDPOINT: getBaseUrl() + '/api/v1/wpline'
   }

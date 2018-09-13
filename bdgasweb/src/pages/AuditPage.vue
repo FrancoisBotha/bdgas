@@ -55,12 +55,10 @@
                     </li>  
                   </ul>
             </div>
-              <div class="float-right"><a href="#"  class="btn btn-success btn-sm" role="button">Go</a></div>
+              <div class="float-right"><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button">Go</a></div>
           </div>
           <div class="card-body text-dark bg-light">
             <router-view></router-view>
-            
-            <!-- @click="onSelectView(dataSource)" -->
           </div>
         </div>
       </div>
@@ -84,8 +82,8 @@
     data () {
       return {
         showHelp: true,
-        selected: null,
-           wplines: [
+        selectedAction: null,
+        wplines: [
           {
             lnNo: 1,
             taskCde: "1000100",
@@ -119,6 +117,16 @@
                     + task.taskType + "_"
                     + task.templatePath 
         this.$router.push({ name: route})
+        this.selectedAction = task
+      },
+      onGo: function() {
+        let wpLine = {
+          taskCde: this.selectedAction.taskCde,
+          taskDesc: this.selectedAction.taskDesc,
+          taskParams: "",
+          lnState: "new",
+        }
+        this.$store.dispatch('addWpLine', wpLine)        
       }
     },
     computed: {
