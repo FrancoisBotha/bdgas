@@ -62,7 +62,7 @@ public class WpLineService {
     /***************************
      * GET WORKINGPAPER Lines  *
      ***************************/
-    public List getProjectWorkingPapers(String Id) {
+    public List getWorkingPaperLines(String Id) {
 
         final String uri = endPointService.getWorkingPaperLinesEP() + "/" + Id;
 
@@ -104,7 +104,7 @@ public class WpLineService {
     /************
      * CREATE   *
      ************/
-    public WpLineDto create(WpLineDto workingPaperDto) throws RestClientException {
+    public WpLineDto create(WpLineDto wpLineDto) throws RestClientException {
 
         final String uri = endPointService.getWpLineEP();
 
@@ -115,9 +115,9 @@ public class WpLineService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
-            log.debug(workingPaperDto.toString());
+            log.debug(wpLineDto.toString());
 
-            HttpEntity<WpLineDto> entity = new HttpEntity<WpLineDto>(workingPaperDto, headers);
+            HttpEntity<WpLineDto> entity = new HttpEntity<WpLineDto>(wpLineDto, headers);
 
             WpLineDto wpLineDtoReturn = restTemplate.postForObject(uri, entity, WpLineDto.class);
             return wpLineDtoReturn;

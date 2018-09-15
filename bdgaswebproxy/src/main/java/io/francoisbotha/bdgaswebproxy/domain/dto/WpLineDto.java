@@ -31,7 +31,6 @@ public class WpLineDto {
     @NotBlank
     private String wpId;
 
-    @NotBlank
     private Integer lnNo;
 
     @NotBlank
@@ -40,14 +39,10 @@ public class WpLineDto {
     @NotBlank
     private String taskDesc;
 
-    @NotBlank
     private String taskParams;
 
-    @NotBlank
     private String lnResult;
 
-    @NotBlank
     private String lnState;
-
 }
 

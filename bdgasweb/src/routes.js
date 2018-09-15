@@ -9,8 +9,12 @@ import AuditHelpTab from './pages/AuditHelpTab.vue'
 import ParameterTab from './pages/ParameterTab.vue'
 import WordCount from './actions/plugins/WordCount.vue'
 import SelectDataSource from './actions/ingestion/SelectDataSource.vue'
+import FindDuplicates from './actions/core/FindDuplicates.vue'
+import FindGaps from './actions/core/FindGaps.vue'
+import RecalcColumn from './actions/core/RecalcColumn.vue'
+import Sample from './actions/core/Sample.vue'
+import ShowData from './actions/display/ShowData.vue'
 
- 
 export const routes = [
   { path: '/',
       redirect:  { name: 'data.list' }
@@ -69,10 +73,35 @@ export const routes = [
         name: 'audit.DI_selectdata',
       },
       {
+        path: '/audit/ct_findgaps',
+        component: FindGaps,
+        name: 'audit.CT_findgaps',
+      }, 
+      {
+        path: '/audit/ct_findduplicates',
+        component: FindDuplicates,
+        name: 'audit.CT_findduplicates',
+      }, 
+      {
+        path: '/audit/ct_recalccolumn',
+        component: RecalcColumn,
+        name: 'audit.CT_recalccolumn',
+      }, 
+      {
+        path: '/audit/ct_sample',
+        component: Sample,
+        name: 'audit.CT_sample',
+      }, 
+      {
         path: '/audit/pt_wordcount',
         component: WordCount,
         name: 'audit.PT_wordcount',
-      },    
+      },  
+      {
+        path: '/audit/dd_showdata',
+        component: ShowData,
+        name: 'audit.DD_showdata',
+      },      
       {
         path: 'help',
         component: AuditHelpTab,

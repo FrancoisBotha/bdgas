@@ -3,7 +3,7 @@
         <div class="col-md-11 ml-3">
             <div>
                 <div class="float-left">ln[ {{ wpline.lnNo }}]</div>
-                <div class="float-right">x</div>
+                <div class="float-right"><a href="#" @click="onDelete(wpline)" class="" role="button">x</a></div>
                 <div class="clearfix"></div>
             </div>
             <div class="row taskLine">
@@ -24,7 +24,12 @@
         wpline: Object
     },  
     computed: {
-    }  
+    },
+    methods: {
+      onDelete: function(wpline) {
+        this.$store.dispatch('deleteWpLine', wpline)        
+      }
+    },        
   }
 </script>
 

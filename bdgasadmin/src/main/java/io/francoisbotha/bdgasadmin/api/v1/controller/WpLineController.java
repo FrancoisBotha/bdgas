@@ -71,9 +71,17 @@ public class  WpLineController  {
      ************/
     @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public WpLine AddWpLine(@RequestBody @Valid WpLineDto workingPaperDto )  {
-        WpLine workingPaper = new WpLine();
-        return wpLineService.create(workingPaper);
+    public WpLine AddWpLine(@RequestBody @Valid WpLineDto wpLineDto )  {
+        WpLine wpLine = new WpLine();
+
+        wpLine.setLnNo(0);
+        wpLine.setWpId(wpLineDto.getWpId());
+        wpLine.setTaskCde(wpLineDto.getTaskCde());
+        wpLine.setTaskParams(wpLineDto.getTaskParams());
+        wpLine.setTaskDesc(wpLineDto.getTaskDesc());
+        wpLine.setLnState(wpLineDto.getLnState());
+
+        return wpLineService.create(wpLine);
     }
 
     /************
@@ -89,7 +97,7 @@ public class  WpLineController  {
     /************
      * DELETE   *
      ************/
-    @RequestMapping(value = "/api/v1/wpline{id}", method = RequestMethod.DELETE )
+    @RequestMapping(value = "/api/v1/wpline/{id}", method = RequestMethod.DELETE )
     @ResponseStatus(HttpStatus.OK)
     public void deleteWpLine(@PathVariable("id") String id) throws EntityNotFoundException  {
         wpLineService.delete(id);

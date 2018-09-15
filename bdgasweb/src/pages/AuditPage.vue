@@ -83,32 +83,6 @@
       return {
         showHelp: true,
         selectedAction: null,
-        wplines: [
-          {
-            lnNo: 1,
-            taskCde: "1000100",
-            taskDesc: "Select Data Source",
-            taskParams: "/airticketdata.csv",
-            lnResult: "",
-            lnState: "Complete"
-          },
-          {
-            lnNo: 2,
-            taskCde: "2000200",
-            taskDesc: "Find Gaps",
-            taskParams: "",
-            lnResult: "",
-            lnState: "Complete"
-          },
-          {
-            lnNo: 3,
-            taskCde: "4000100",
-            taskDesc: "Show Data",
-            taskParams: "",
-            lnResult: "",
-            lnState: "Complete"
-          },
-        ]
       }
     },    
     methods: {
@@ -121,15 +95,25 @@
       },
       onGo: function() {
         let wpLine = {
-          taskCde: this.selectedAction.taskCde,
-          taskDesc: this.selectedAction.taskDesc,
-          taskParams: "",
-          lnState: "new",
+            id: "",
+            wpId: this.wpId,
+            lnNo: 0,
+            taskCde: this.selectedAction.taskCde,
+            taskDesc: this.selectedAction.taskDesc,
+            taskParams: "",
+            lnResult: "",
+            lnState: "new",
         }
-        this.$store.dispatch('addWpLine', wpLine)        
+        this.$store.dispatch('addWpLine', wpLine)      
       }
     },
     computed: {
+      wpId() {
+            return this.$store.getters.wpId;
+      },
+      wpLines() {
+        return this.$store.getters.wpLines
+      },      
       tasksDI() {
         return this.$store.getters.task("DI")
       },
@@ -143,7 +127,7 @@
         return this.$store.getters.task("DD")
       },
       orderedWPLines() {
-        return _.sortBy(this.wplines, 'lnNo').reverse()
+        return _.sortBy(this.wpLines, 'lnNo').reverse()
       },
       isParamActive: function() {
           if (this.$route.fullPath.substring(0,11) !== '/audit/help') {
@@ -152,7 +136,10 @@
               return false;
           }
       }
-    }
+    },
+    created: function () {
+       this.$store.dispatch('getWpLines', this.wpId)
+    },
   }
 </script>
 
@@ -191,5 +178,9 @@
   .card-body {
       padding: 0; 
   }
+.card-header {
+    margin-bottom: -1px;
+}
+
 </style>
 
