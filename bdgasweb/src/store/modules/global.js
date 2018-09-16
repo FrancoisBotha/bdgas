@@ -38,7 +38,8 @@ const state = {
     projectId: projectObj.id,
     wpId: wpObj.id,
     tasks: tasksObj,
-    helpTexts: helpTextsObj
+    helpTexts: helpTextsObj,
+    activeHelpText: ""
 }
  
 const getters = {
@@ -78,13 +79,19 @@ const getters = {
         return name => state.helpTexts.find(obj => {
             return obj.name === name
           });
-    } 
+    }, 
+    activeHelpText: state => {
+        return state.activeHelpText;
+    },       
 }
  
 const mutations = {
     'SET_SIGNEDS3URL' (state, signedUrl) {
         state.signedS3Url = signedUrl;
-    }
+    },
+    'SET_ACTIVEHELPTEXT' (state, activeHelpText) {
+        state.activeHelpText = activeHelpText;
+    }    
 }
  
 const actions = {
@@ -97,7 +104,10 @@ const actions = {
         .catch(function (err) {
           console.log(err)
         })        
-    }
+    },
+    setActiveHelpText: ({commit}, helpText) => {
+        commit('SET_ACTIVEHELPTEXT', helpText)     
+    }    
 }
  
 export default {

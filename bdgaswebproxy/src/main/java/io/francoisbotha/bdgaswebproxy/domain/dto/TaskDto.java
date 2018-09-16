@@ -47,5 +47,7 @@ public class TaskDto {
     private String templatePath;
     private String appName;
     private String classPath;
+    private String taskHelp;
+
 
 }

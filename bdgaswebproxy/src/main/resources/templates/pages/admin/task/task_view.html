@@ -76,6 +76,13 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="taskHelp" th:text="#{task.taskHelp}">HelpText Text</label>
+                    <textarea class="form-control" id="taskHelp" name="taskHelp" rows="5" th:text="${task.taskHelp}" readonly></textarea>
+                </div>
+            </div>
+
             <a th:href="@{|/admin/task/mod/${task.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
 
         </div>

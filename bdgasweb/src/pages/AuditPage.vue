@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="col-9 ml-0 mt-1" style="padding-left: 1px;">
-        <div class="card text-center text-white bg-dark" style="height:264px">
+        <div class="card text-center text-light bg-dark" style="height:264px">
           <div class="card-header">
                 <div class="float-left">            
                   <ul class="nav nav-tabs card-header-tabs ">
@@ -55,7 +55,7 @@
                     </li>  
                   </ul>
             </div>
-              <div class="float-right"><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button">Go</a></div>
+              <div class="float-right"><a v-if="selectedAction != null" href="#" @click="onGo()" class="btn btn-success btn-sm" role="button">Go</a></div>
           </div>
           <div class="card-body text-dark bg-light">
             <router-view></router-view>
@@ -92,6 +92,7 @@
                     + task.templatePath 
         this.$router.push({ name: route})
         this.selectedAction = task
+        this.$store.dispatch('setActiveHelpText', task.taskHelp)
       },
       onGo: function() {
         let wpLine = {
@@ -104,7 +105,12 @@
             lnResult: "",
             lnState: "new",
         }
-        this.$store.dispatch('addWpLine', wpLine)      
+        this.$store.dispatch('addWpLine', wpLine)   
+        this.selectedAction = null;  
+        this.setDefaultHelp() 
+      },
+      setDefaultHelp: function() {
+         this.$store.dispatch('setActiveHelpText', this.$store.getters.helpText("AuditSection").txt)
       }
     },
     computed: {
@@ -139,6 +145,7 @@
     },
     created: function () {
        this.$store.dispatch('getWpLines', this.wpId)
+       this.setDefaultHelp()
     },
   }
 </script>

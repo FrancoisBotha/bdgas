@@ -145,6 +145,20 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group" th:class="${#fields.hasErrors('taskHelp')} ? 'form-group has-error' : 'form-group'">
+                                    <label for="taskHelp" th:text="#{task.taskHelp}">HelpText Text</label>
+                                    <textarea class="form-control" id="taskHelp" name="taskHelp" rows="5" th:field="*{taskHelp}" th:errorclass="is-invalid"></textarea>
+                                    <div class="invalid-feedback"  th:if="${#fields.hasErrors('taskHelp')}">
+                                        <ul>
+                                            <li  th:each="err : ${#fields.errors('taskHelp')}" th:text="${err}" />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Save</button>
                             <a type="button" class="btn btn-primary" href="/admin/task">Cancel</a>

@@ -35,4 +35,6 @@ public class WorkingPaperDto {
 
     @NotBlank
     private String name;
+
+    private Integer lineCount;
 }

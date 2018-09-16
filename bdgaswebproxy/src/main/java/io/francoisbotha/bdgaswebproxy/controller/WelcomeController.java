@@ -16,6 +16,7 @@
  *****************************************************************************/
 package io.francoisbotha.bdgaswebproxy.controller;
 
+import io.francoisbotha.bdgaswebproxy.domain.dto.HelpTextDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.ProjectDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.TeamDto;
 import io.francoisbotha.bdgaswebproxy.domain.dto.WorkingPaperDto;
@@ -77,6 +78,8 @@ public class WelcomeController {
     private static final String HELPTEXTLIST_MODEL_KEY = "helptextsObj";
     private static final String TASKLIST_MODEL_KEY = "tasksObj";
 
+    private static final String HELPTEXT_MODEL_KEY = "helpText";
+
     /***********
      * LIST    *
      * *********/
@@ -84,6 +87,10 @@ public class WelcomeController {
     public String ShowWelcomePage(Model model) {
 
         try {
+
+            //Get Help Text for About section
+            HelpTextDto helpTextDto = helpTextService.getOneByName("BdgasAbout");
+            model.addAttribute(HELPTEXT_MODEL_KEY, helpTextDto);
 
             List teams = teamService.getAll();
             model.addAttribute(TEAMLIST_MODEL_KEY, teams);
@@ -103,6 +110,10 @@ public class WelcomeController {
     public String ShowWelcomePageTeam(Model model, @PathVariable("teamId") String teamId) {
 
         try {
+
+            //Get Help Text for About section
+            HelpTextDto helpTextDto = helpTextService.getOneByName("BdgasAbout");
+            model.addAttribute(HELPTEXT_MODEL_KEY, helpTextDto);
 
             TeamDto team = teamService.getOne(teamId);
             model.addAttribute(TEAM_MODEL_KEY, team);
@@ -134,6 +145,10 @@ public class WelcomeController {
                                       @PathVariable("projectId") String projectId) {
 
         try {
+
+            //Get Help Text for About section
+            HelpTextDto helpTextDto = helpTextService.getOneByName("BdgasAbout");
+            model.addAttribute(HELPTEXT_MODEL_KEY, helpTextDto);
 
             TeamDto team = teamService.getOne(teamId);
             model.addAttribute(TEAM_MODEL_KEY, team);
@@ -180,6 +195,10 @@ public class WelcomeController {
                                       ) {
 
         try {
+
+            //Get Help Text for About section
+            HelpTextDto helpTextDto = helpTextService.getOneByName("BdgasAbout");
+            model.addAttribute(HELPTEXT_MODEL_KEY, helpTextDto);
 
             TeamDto team = teamService.getOne(teamId);
             model.addAttribute(TEAM_MODEL_KEY, team);

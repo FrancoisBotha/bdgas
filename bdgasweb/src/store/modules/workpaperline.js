@@ -68,6 +68,8 @@ const actions = {
             config: { headers: {'Content-Type': 'application/json' }}
             })
             .then(function (response) {
+                wpLine.id = response.data.id
+                wpLine.lnNo = response.data.lnNo
                 commit('ADD_WPLINE', wpLine)
             })
             .catch(function (err) {

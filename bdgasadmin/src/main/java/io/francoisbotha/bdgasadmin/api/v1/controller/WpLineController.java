@@ -19,6 +19,7 @@ package io.francoisbotha.bdgasadmin.api.v1.controller;
 import io.francoisbotha.bdgasadmin.domain.dto.WpLineDto;
 import io.francoisbotha.bdgasadmin.domain.model.WpLine;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
+import io.francoisbotha.bdgasadmin.services.WorkingPaperService;
 import io.francoisbotha.bdgasadmin.services.WpLineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class  WpLineController  {
 
     @Autowired
     WpLineService wpLineService;
+
+    @Autowired
+    WorkingPaperService workingPaperService;
 
     /************
      * GET ALL  *
@@ -72,16 +76,24 @@ public class  WpLineController  {
     @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public WpLine AddWpLine(@RequestBody @Valid WpLineDto wpLineDto )  {
-        WpLine wpLine = new WpLine();
 
-        wpLine.setLnNo(0);
-        wpLine.setWpId(wpLineDto.getWpId());
-        wpLine.setTaskCde(wpLineDto.getTaskCde());
-        wpLine.setTaskParams(wpLineDto.getTaskParams());
-        wpLine.setTaskDesc(wpLineDto.getTaskDesc());
-        wpLine.setLnState(wpLineDto.getLnState());
+        try {
+            WpLine wpLine = new WpLine();
 
-        return wpLineService.create(wpLine);
+            wpLine.setWpId(wpLineDto.getWpId());
+            wpLine.setTaskCde(wpLineDto.getTaskCde());
+            wpLine.setTaskParams(wpLineDto.getTaskParams());
+            wpLine.setTaskDesc(wpLineDto.getTaskDesc());
+            wpLine.setLnState(wpLineDto.getLnState());
+            wpLine.setLnNo(workingPaperService.incrLineCount(wpLineDto.getWpId()));
+
+            return wpLineService.create(wpLine);
+
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 
     /************
@@ -100,6 +112,9 @@ public class  WpLineController  {
     @RequestMapping(value = "/api/v1/wpline/{id}", method = RequestMethod.DELETE )
     @ResponseStatus(HttpStatus.OK)
     public void deleteWpLine(@PathVariable("id") String id) throws EntityNotFoundException  {
+
+        WpLine wpLine = wpLineService.getWpLine(id);
+        workingPaperService.decrLineCount(wpLine.getWpId());
         wpLineService.delete(id);
     }
 

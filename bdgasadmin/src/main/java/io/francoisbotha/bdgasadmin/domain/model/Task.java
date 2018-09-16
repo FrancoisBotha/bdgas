@@ -41,6 +41,7 @@ public class Task {
     private String templatePath;
     private String appName;
     private String classPath;
+    private String taskHelp;
 
 
     @DynamoDBHashKey
@@ -87,6 +88,11 @@ public class Task {
     @DynamoDBAttribute
     public String getSuccessDesc() {
         return successDesc;
+    }
+
+    @DynamoDBAttribute
+    public String getTaskHelp () {
+        return taskHelp;
     }
 
 }

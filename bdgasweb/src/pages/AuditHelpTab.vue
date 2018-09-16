@@ -12,7 +12,7 @@
   export default {
     computed: {
       helpTextAuditSection() {
-        return this.$store.getters.helpText("AuditSection").txt
+        return this.$store.getters.activeHelpText
       }
     }
   }

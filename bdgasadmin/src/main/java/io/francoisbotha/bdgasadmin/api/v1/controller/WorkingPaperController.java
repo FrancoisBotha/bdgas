@@ -75,6 +75,7 @@ public class WorkingPaperController  {
         WorkingPaper workingPaper = new WorkingPaper();
         workingPaper.setName(workingPaperDto.getName());
         workingPaper.setProjectId(workingPaperDto.getProjectId());
+        workingPaper.setLineCount(0);
         return workingPaperService.create(workingPaper);
     }
 

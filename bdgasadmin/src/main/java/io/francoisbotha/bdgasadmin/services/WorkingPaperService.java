@@ -93,9 +93,40 @@ public class WorkingPaperService  {
 
         workingPaper.setName(workingPaperDto.getName());
         workingPaper.setProjectId(workingPaperDto.getProjectId());
+        workingPaper.setLineCount(workingPaperDto.getLineCount());
 
         return workingPaperRepository.save(workingPaper);
     }
+
+    public Integer incrLineCount(String id) throws EntityNotFoundException {
+
+        WorkingPaper workingPaper = workingPaperRepository.findOneById(id);
+
+        Integer lnCount = workingPaper.getLineCount();
+        lnCount++;
+
+        workingPaper.setLineCount(lnCount);
+        workingPaperRepository.save(workingPaper);
+
+        return lnCount;
+
+    }
+
+
+    public Integer decrLineCount(String id) throws EntityNotFoundException {
+
+        WorkingPaper workingPaper = workingPaperRepository.findOneById(id);
+
+        Integer lnCount = workingPaper.getLineCount();
+        lnCount--;
+
+        workingPaper.setLineCount(lnCount);
+        workingPaperRepository.save(workingPaper);
+
+        return lnCount;
+
+    }
+
 
     public void delete(String id)  throws EntityNotFoundException {
 
