@@ -120,6 +120,10 @@
           <groupId>com.google.code.findbugs</groupId>
         </exclusion>
         <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
           <artifactId>jul-to-slf4j</artifactId>
           <groupId>org.slf4j</groupId>
         </exclusion>
@@ -180,6 +184,14 @@
           <groupId>org.glassfish.jersey.containers</groupId>
         </exclusion>
         <exclusion>
+          <artifactId>netty-all</artifactId>
+          <groupId>io.netty</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>netty</artifactId>
+          <groupId>io.netty</groupId>
+        </exclusion>
+        <exclusion>
           <artifactId>stream</artifactId>
           <groupId>com.clearspring.analytics</groupId>
         </exclusion>
@@ -218,6 +230,10 @@
         <exclusion>
           <artifactId>pyrolite</artifactId>
           <groupId>net.razorvine</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>py4j</artifactId>
+          <groupId>net.sf.py4j</groupId>
         </exclusion>
         <exclusion>
           <artifactId>spark-tags_2.11</artifactId>
@@ -278,6 +294,34 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>com.github.spark-jobserver</groupId>
+      <artifactId>spark-jobserver</artifactId>
+      <version>v0.8.0</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>akka-app_2.11</artifactId>
+          <groupId>com.github.spark-jobserver.spark-jobserver</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>job-server-api_2.11</artifactId>
+          <groupId>com.github.spark-jobserver.spark-jobserver</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>job-server-extras_2.11</artifactId>
+          <groupId>com.github.spark-jobserver.spark-jobserver</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>job-server-python_2.11</artifactId>
+          <groupId>com.github.spark-jobserver.spark-jobserver</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>job-server_2.11</artifactId>
+          <groupId>com.github.spark-jobserver.spark-jobserver</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
@@ -313,6 +357,14 @@
       <version>3.0.0-M15</version>
       <scope>test</scope>
       <exclusions>
+        <exclusion>
+          <artifactId>scalactic_2.11</artifactId>
+          <groupId>org.scalactic</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>scala-xml_2.11</artifactId>
+          <groupId>org.scala-lang.modules</groupId>
+        </exclusion>
         <exclusion>
           <artifactId>scala-parser-combinators_2.11</artifactId>
           <groupId>org.scala-lang.modules</groupId>

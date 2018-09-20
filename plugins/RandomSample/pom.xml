@@ -46,6 +46,7 @@
             <groupId>com.github.spark-jobserver</groupId>
             <artifactId>spark-jobserver</artifactId>
             <version>v0.8.0</version>
+            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.typesafe/config -->
         <dependency>
