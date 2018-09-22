@@ -21,6 +21,7 @@ public class EndPointService {
     private static final String CODETABLESNR = "codetable/codetypenr";
     private static final String CODETYPETABLES = "codetable/codetype";
     private static final String TASK = "task";
+    private static final String LOCALDATASOURCES = "localdatasource";
     private static final String TEAM = "team";
     private static final String TEAMPROJECTS = "project/team";
     private static final String PROJECT = "project";
@@ -55,6 +56,10 @@ public class EndPointService {
 
     public String getTaskEP() {
         return this.merge(this.TASK);
+    }
+
+    public String getLocalDataSourcesEP() {
+        return this.merge(this.LOCALDATASOURCES);
     }
 
     public String getTeamEP() {

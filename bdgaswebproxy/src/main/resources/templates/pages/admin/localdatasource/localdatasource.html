@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+    <div th:include="fragments/adminwelcometext:: adminwelcometext"></div>
+    <div th:include="fragments/adminmenu:: adminmenu"></div>
+
+    <div class="mt-3"> <a th:href="@{/admin/localdatasource/new}">New Local Data Source</a></div>
+
+    <div th:if="${errMsg}" class="alert alert-danger">
+        <p th:text="${errMsg}">Error Message</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped mt-2">
+                <thead class="thead-dark">
+                <tr scope="row" class="table-dark">
+                    <th scope="col" class="table-dark col-md-6">Name</th>
+                    <th scope="col" class="table-dark col-md-1"></th>
+                    <th scope="col" class="table-dark col-md-1"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="localdatasource : ${localdatasources}">
+                    <td th:replace="fragments/localdatasourcetablerow :: localdatasourcetablerow"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>You are about to delete <b><i class="title"></i></b>.</p>
+                    <p>Do you want to proceed?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger btn-ok">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+<script>
+    // Courtesy: Stack Overflow
+    // https://stackoverflow.com/questions/8982295/confirm-delete-modal-dialog-with-twitter-bootstrap
+    $(document).ready(function() {
+        $('#confirm-delete').on('click', '.btn-ok', function(e) {
+            var $modalDiv = $(e.delegateTarget);
+            var id = $(this).data('recordId');
+            var url = '/admin/localdatasource/' + id
+            // $modalDiv.addClass('loading');
+            $.ajax({
+                method: "DELETE",
+                url: url
+            }).then(function() {
+                $modalDiv.modal('hide');
+                window.location.href = "/admin/localdatasource/"
+            },(function() {
+                console.log('error')
+                $modalDiv.modal('hide');
+                window.location.href = "/admin/localdatasource/"
+            }));
+        });
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            var data = $(e.relatedTarget).data();
+            $('.title', this).text(data.recordTitle);
+            $('.btn-ok', this).data('recordId', data.recordId);
+        });
+    });
+</script>
+
+</body>
+</html>

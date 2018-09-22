@@ -12,6 +12,7 @@
             <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/task' ? 'active':''}"><a th:href="@{/admin/task}"><span>Tasks</span></a></li>
             <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/helptext' ? 'active':''}"><a th:href="@{/admin/helptext}"><span>Help Text</span></a></li>
             <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/codetype' ? 'active':''}"><a th:href="@{/admin/codetype}"><span>Codes</span></a></li>
+            <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/localdatasource' ? 'active':''}"><a th:href="@{/admin/localdatasource}"><span>Local Data Sources</span></a></li>
             <li class="nav-link" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/help' ? 'active':''}"><a th:href="@{/admin/help}"><span>Help</span></a></li>
         </ul>
     </div>

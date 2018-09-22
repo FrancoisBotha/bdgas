@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7fd5ead-76f7-44c4-ba32-4d28601e30e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/hydra.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/scala_compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CountRows/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Min/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Min/.idea/hydra.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Min/.idea/scala_compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Min/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Min/src/main/scala/org/bdgas/plugins/MinPlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CountRows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CountRows/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/FindDuplicates-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/FindDuplicates-1.0-SNAPSHOT.jar" afterDir="false" />
@@ -28,7 +29,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/FindDuplicatesPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/FindDuplicatesPlugin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/original-FindDuplicates-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-FindDuplicates-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WordCount/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WordCount/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -42,11 +42,11 @@
     <session id="-904208408">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.0" value="4" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="10" />
+          <entry key="project.open.time.0" value="6" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="2" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -63,14 +63,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="scala" value="225" />
+          <entry key="scala" value="411" />
           <entry key="txt" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Scala" value="225" />
+          <entry key="Scala" value="411" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.run.usages" />
@@ -93,8 +93,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" column="17" selection-start-line="1" selection-end-line="115" />
+            <state relative-caret-position="78">
+              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+              <folding>
+                <element signature="e#27#60#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -137,10 +140,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="48" />
-    <option name="y" value="45" />
-    <option name="width" value="2124" />
-    <option name="height" value="2112" />
+    <option name="x" value="-11" />
+    <option name="y" value="1" />
+    <option name="width" value="2276" />
+    <option name="height" value="2076" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -150,6 +153,7 @@
     <panes>
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,14 +196,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537619920051" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WordCount" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537624868099" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bdgaswebproxy" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -232,16 +235,19 @@
       <workItem from="1537620479274" duration="22000" />
       <workItem from="1537620556410" duration="60000" />
       <workItem from="1537620698209" duration="20000" />
+      <workItem from="1537622110841" duration="2697000" />
+      <workItem from="1537625700843" duration="1373000" />
+      <workItem from="1537627092984" duration="1249000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6939000" />
+    <option name="totallyTimeSpent" value="12258000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="32" y="30" width="1416" height="1408" extended-state="0" />
+    <frame x="-7" y="1" width="1517" height="1384" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25958702" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1640357" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -250,7 +256,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21582733" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -268,7 +274,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.19985251" />
+      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.18599863" />
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
   </component>
@@ -288,8 +294,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="17" selection-start-line="1" selection-end-line="115" />
+        <state relative-caret-position="78">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+          <folding>
+            <element signature="e#27#60#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

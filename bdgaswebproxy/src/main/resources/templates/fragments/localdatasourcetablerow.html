@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<tr th:fragment="localdatasourcetablerow">
+    <td th:text="${localdatasource.fileName}">Menu Description</td>
+    <td><a href="#" th:data-record-id="${localdatasource.id}" th:data-record-title="${localdatasource.fileName}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+</tr>
+
+</body>
+
+</html>

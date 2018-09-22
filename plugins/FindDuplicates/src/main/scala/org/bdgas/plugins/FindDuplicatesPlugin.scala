@@ -12,19 +12,22 @@ import scala.util.Try
 
 object FindDuplicatesPlugin extends SparkSessionJob {
   type JobData = Seq[String]
-  type JobOutput = Long
+  type JobOutput = Array[String]
 
   def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
 
     val df = sparkSession
       .read
-      .option(" inferSchema", "true")
-      .option(" header", "true")
+      .option("delimiter", "|")
+      .option("inferSchema", "true")
+      .option("header", "true")
       .csv("file:///mnt/data/Invoices100.txt")
 
-    df.count()
+    df.createOrReplaceTempView("dataFile")
 
-//    val a = df.selectExpr("min('Amt')")
+    val a = sparkSession.sql("desc formatted dataFile").toJSON
+
+    a.collect()
 //    showString(a)
 
   }
