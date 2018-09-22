@@ -42,9 +42,6 @@ public class LocalDataSourcesController {
     @Autowired
     private LocalDataSourceService localDataSourceService;
 
-    @Autowired
-    private CodeTableService codeTableService;
-
     private static final String BASE_PATH = "pages/admin/localdatasource/";
     private static final String LOCALDATASOURCE_VIEW_NAME = BASE_PATH + "localdatasource";
     private static final String NEW_LOCALDATASOURCE_VIEW_NAME = BASE_PATH + "localdatasource_new";

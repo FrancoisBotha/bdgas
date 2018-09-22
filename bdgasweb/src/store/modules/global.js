@@ -1,4 +1,5 @@
 import axios from 'axios'
+import config from '../../config'
 
 var axiosProxyS = axios.create({
   baseURL: 'http://localhost:8001/',
@@ -39,7 +40,8 @@ const state = {
     wpId: wpObj.id,
     tasks: tasksObj,
     helpTexts: helpTextsObj,
-    activeHelpText: ""
+    activeHelpText: "",
+    localMode: config.LOCAL_MODE //Wether or local (devl/testing) data is used
 }
  
 const getters = {
@@ -83,6 +85,9 @@ const getters = {
     activeHelpText: state => {
         return state.activeHelpText;
     },       
+    localMode: state => {
+        return state.localMode;
+    }, 
 }
  
 const mutations = {

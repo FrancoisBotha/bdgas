@@ -2,6 +2,7 @@
     <div>
         <nav class="navbar navbar-expand-sm navbar-light bg-light ">
             <a class="navbar-brand" href="#">BDGAS</a>
+            <div v-if="localMode">- Local Mode</div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -27,7 +28,11 @@
   import { store } from '../store/store'
 
   export default {
-
+    computed: {
+      localMode() {
+        return this.$store.getters.localMode
+      }
+    },
     methods: {
         onGoHome() {
             window.location.href = config.HOME_URL + "/" 

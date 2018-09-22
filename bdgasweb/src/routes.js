@@ -14,6 +14,7 @@ import FindGaps from './actions/core/FindGaps.vue'
 import RecalcColumn from './actions/core/RecalcColumn.vue'
 import Sample from './actions/core/Sample.vue'
 import ShowData from './actions/display/ShowData.vue'
+import AuditDataSourcesTab from './pages/AuditDataSourcesTab.vue'
 
 export const routes = [
   { path: '/',
@@ -68,40 +69,45 @@ export const routes = [
         name: 'audit.param',
       },
       {
-        path: '/audit/di_selectdata',
+        path: '/audit/param/di_selectdata',
         component: SelectDataSource,
         name: 'audit.DI_selectdata',
       },
       {
-        path: '/audit/ct_findgaps',
+        path: '/audit/param/ct_findgaps',
         component: FindGaps,
         name: 'audit.CT_findgaps',
       }, 
       {
-        path: '/audit/ct_findduplicates',
+        path: '/audit/param/ct_findduplicates',
         component: FindDuplicates,
         name: 'audit.CT_findduplicates',
       }, 
       {
-        path: '/audit/ct_recalccolumn',
+        path: '/audit/param/ct_recalccolumn',
         component: RecalcColumn,
         name: 'audit.CT_recalccolumn',
       }, 
       {
-        path: '/audit/ct_sample',
+        path: '/audit/param/ct_sample',
         component: Sample,
         name: 'audit.CT_sample',
       }, 
       {
-        path: '/audit/pt_wordcount',
+        path: '/audit/param/pt_wordcount',
         component: WordCount,
         name: 'audit.PT_wordcount',
       },  
       {
-        path: '/audit/dd_showdata',
+        path: '/audit/param/dd_showdata',
         component: ShowData,
         name: 'audit.DD_showdata',
       },      
+      {
+        path: 'datasource',
+        component: AuditDataSourcesTab,
+        name: 'audit.datasource',
+      }, 
       {
         path: 'help',
         component: AuditHelpTab,

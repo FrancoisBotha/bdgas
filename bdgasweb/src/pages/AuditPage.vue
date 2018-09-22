@@ -47,7 +47,12 @@
                       <router-link to="/audit/param" class="nav-item" active-class="active">
                             <a :class="[isParamActive ? 'nav-link active' : 'nav-link']">Parameters</a>
                       </router-link>
-                    </li>            
+                     </li>    
+                    <li>
+                      <router-link to="/audit/datasource" class="nav-item" active-class="active">
+                            <a :class="[isDataSourceTabActive ? 'nav-link active' : 'nav-link']">Data Sources</a>
+                      </router-link>
+                    </li>         
                     <li>
                       <router-link to="/audit/help" class="nav-item" active-class="active">
                             <a :class="[$route.fullPath ==='/audit/help' ? 'nav-link active' : 'nav-link']">Help</a>
@@ -55,10 +60,10 @@
                     </li>  
                   </ul>
             </div>
-              <div class="float-right"><a v-if="selectedAction != null" href="#" @click="onGo()" class="btn btn-success btn-sm" role="button">Go</a></div>
           </div>
           <div class="card-body text-dark bg-light">
             <router-view></router-view>
+            <div class="mr-2 float-right"><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button">Go</a></div>
           </div>
         </div>
       </div>
@@ -136,7 +141,14 @@
         return _.sortBy(this.wpLines, 'lnNo').reverse()
       },
       isParamActive: function() {
-          if (this.$route.fullPath.substring(0,11) !== '/audit/help') {
+          if (this.$route.fullPath.substring(0,12) === '/audit/param') {
+              return true;
+          } else {
+              return false;
+          }
+      },
+      isDataSourceTabActive: function() {
+          if (this.$route.fullPath.substring(0,17) === '/audit/datasource') {
               return true;
           } else {
               return false;
@@ -145,6 +157,7 @@
     },
     created: function () {
        this.$store.dispatch('getWpLines', this.wpId)
+       this.$store.dispatch('fetchLocalDataSources')
        this.setDefaultHelp()
     },
   }
