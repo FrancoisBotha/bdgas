@@ -2,10 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bda8059f-d5c3-435c-a110-0b6222c2f9ce" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../FindDuplicates/.idea/scala_compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FindDuplicates/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomSample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/hydra.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/scala_compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CountRows/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CountRows/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/FindDuplicates-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/FindDuplicates-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$2$$anonfun$apply$1$$anonfun$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$2$$anonfun$apply$1$$anonfun$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$2$$anonfun$apply$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$2$$anonfun$apply$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$1$$anonfun$apply$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$1$$anonfun$apply$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$1$$anonfun$apply$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$1$$anonfun$apply$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$3$$anonfun$apply$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$3$$anonfun$apply$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$showString$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$validate$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$validate$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$validate$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$validate$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$validate$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$$anonfun$validate$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/classes/org/bdgas/plugins/FindDuplicatesPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/target/original-FindDuplicates-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/target/original-FindDuplicates-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,12 +42,12 @@
     <session id="429323410">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -67,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+            <state relative-caret-position="460">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#27#77#0" expanded="true" />
               </folding>
@@ -114,9 +137,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="139" />
-    <option name="width" value="2156" />
+    <option name="x" value="-3" />
+    <option name="y" value="138" />
+    <option name="width" value="2157" />
     <option name="height" value="1938" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -126,6 +149,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,15 +204,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537617924893" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537618033199" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CountRows" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -217,18 +240,18 @@
       <workItem from="1537615410267" duration="79000" />
       <workItem from="1537615507559" duration="29000" />
       <workItem from="1537615556593" duration="351000" />
-      <workItem from="1537616571337" duration="1334000" />
+      <workItem from="1537616571337" duration="1575000" />
+      <workItem from="1537620719918" duration="27000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1928000" />
+    <option name="totallyTimeSpent" value="2196000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="93" width="1437" height="1292" extended-state="0" />
-    <editor active="true" />
+    <frame x="-2" y="92" width="1438" height="1292" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25998548" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26415095" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -237,7 +260,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32873166" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32873166" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -255,7 +278,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.25562817" />
+      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.25544268" />
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
   </component>
@@ -275,8 +298,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+        <state relative-caret-position="460">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#27#77#0" expanded="true" />
           </folding>
