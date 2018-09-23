@@ -108,7 +108,7 @@
             taskCde: this.selectedAction.taskCde,
             taskDesc: this.selectedAction.taskDesc,
             taskParams: "",
-            lnResult: "",
+            lnResult: [],
             lnState: "new",
         }
         this.$store.dispatch('addWpLine', wpLine)   

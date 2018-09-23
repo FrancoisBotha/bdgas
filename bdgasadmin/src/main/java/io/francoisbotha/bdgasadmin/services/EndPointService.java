@@ -1,16 +1,27 @@
 package io.francoisbotha.bdgasadmin.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class EndPointService {
 
+    @Value("${sjs.domain}")
+    private String sjsDomain;
+
+    @Value("${sjs.protocol}")
+    private String sjsProtocol;
+
+    @Value("${sjs.port}")
+    private String sjsPort;
+    
+
     //Spark Job Server
-    private static final String SJS_DOMAIN = "ec2-54-211-6-190.compute-1.amazonaws.com";
-    private static final String SJS_PROTOCOL = "http://";
-    private static final String SJS_PORT = "8090";
+    private final String SJS_DOMAIN = sjsDomain;
+    private final String SJS_PROTOCOL = sjsProtocol;
+    private final String SJS_PORT = sjsPort;
 
     private static final String SJS_BINARIES = "binaries";
     private static final String SJS_CONTEXTS = "contexts";

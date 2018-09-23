@@ -33,7 +33,7 @@ public class BdgaswebproxyApplication {
     }
 
     private ClientHttpRequestFactory getClientHttpRequestFactory() {
-        int timeout = 2000;
+        int timeout = 20000;
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(timeout)
                 .setConnectionRequestTimeout(timeout)

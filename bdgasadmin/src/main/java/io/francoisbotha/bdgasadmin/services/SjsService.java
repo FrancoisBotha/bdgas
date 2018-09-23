@@ -2,10 +2,13 @@ package io.francoisbotha.bdgasadmin.services;
 
 import io.francoisbotha.bdgasadmin.domain.dto.SjsJobDto;
 import io.francoisbotha.bdgasadmin.domain.dto.JobDto;
+import io.francoisbotha.bdgasadmin.domain.dto.SjsJobResultDto;
 import io.francoisbotha.bdgasadmin.domain.dto.SparkJobDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -83,11 +86,6 @@ public class SjsService {
 
         try {
 
-            HttpHeaders headers = new HttpHeaders();
-
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
             // Query parameters
             UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(uri)
                                 // Add query parameter
@@ -97,13 +95,23 @@ public class SjsService {
                                 .queryParam("sync", jobDto.getConfigSync())
                                 .queryParam("timeout", jobDto.getConfigTimeout());
 
-            HttpEntity<JobDto> entity
-                    = new HttpEntity<JobDto>(jobDto, headers);
+            //Form Parameters
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            map.add("fileName", "dummy file name");
 
-            ResponseEntity<SparkJobDto> result
-                    = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SparkJobDto.class);
+            //Headers
+            HttpHeaders headers = new HttpHeaders();
 
-            SparkJobDto sparkJobDto = result.getBody();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+            // Request entity
+            HttpEntity<MultiValueMap<String, String>> entity= new HttpEntity<MultiValueMap<String, String>>(map, headers);
+
+            ResponseEntity<SjsJobResultDto> result
+                    = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
+
+            SjsJobResultDto sjsJobResultDto = result.getBody();
 
             JobDto returnJobDto = new JobDto();
             returnJobDto.setConfigAppName(jobDto.getConfigAppName());
@@ -111,11 +119,12 @@ public class SjsService {
             returnJobDto.setConfigContext(jobDto.getConfigContext());
             returnJobDto.setConfigSync(jobDto.getConfigSync());
             returnJobDto.setConfigTimeout(jobDto.getConfigTimeout());
-            returnJobDto.setSparkJobId(sparkJobDto.getJobId());
-            returnJobDto.setSparkStatus(sparkJobDto.getStatus());
-            returnJobDto.setJobStart(sparkJobDto.getStartTime());
-            returnJobDto.setDuration(sparkJobDto.getDuration());
-            returnJobDto.setResult(sparkJobDto.getResult());
+            returnJobDto.setSparkJobId(sjsJobResultDto.getJobId());
+            returnJobDto.setResult(sjsJobResultDto.getResult());
+
+//            returnJobDto.setSparkStatus(sparkJobDto.getStatus());
+//            returnJobDto.setJobStart(sparkJobDto.getStartTime());
+//            returnJobDto.setDuration(sparkJobDto.getDuration());
 
             return returnJobDto;
 

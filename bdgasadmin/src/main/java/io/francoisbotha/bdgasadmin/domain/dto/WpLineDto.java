@@ -46,7 +46,7 @@ public class WpLineDto {
 
     private String taskParams;
 
-    private String[] result;
+    private String[] lnResult;
 
     private String lnState;
 
