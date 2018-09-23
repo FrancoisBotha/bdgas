@@ -72,19 +72,19 @@ public class S3Service {
 
     }
 
-    private class FormObj {
-        private String fileName;
-        private String contentType;
-
-        FormObj(String fileName, String contentType) {
-            this.fileName = fileName;
-            this.contentType = contentType;
-        }
-
-        public String getFileName() { return this.fileName;}
-        public String getContentType() { return this.contentType;}
-
-    }
+//    private class FormObj {
+//        private String fileName;
+//        private String contentType;
+//
+//        FormObj(String fileName, String contentType) {
+//            this.fileName = fileName;
+//            this.contentType = contentType;
+//        }
+//
+//        public String getFileName() { return this.fileName;}
+//        public String getContentType() { return this.contentType;}
+//
+//    }
 }
 
 

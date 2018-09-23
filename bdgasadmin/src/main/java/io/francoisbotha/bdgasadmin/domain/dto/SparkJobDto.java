@@ -16,40 +16,24 @@
  *****************************************************************************/
 package io.francoisbotha.bdgasadmin.domain.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class WpLineDto {
+public class SparkJobDto {
 
-    private String id;
-
-    @NotBlank
-    private String wpId;
-
-    @NotBlank
-    private String taskId;
-
-    private Integer lnNo;
-
-    @NotBlank
-    private String taskCde;
-
-    @NotBlank
-    private String taskDesc;
-
-    private String taskParams;
-
-    private String[] result;
-
-    private String lnState;
+    private String jobId;
+    private String context;
+    private String classPath;
+    private String startTime;
+    private String duration;
+    private String result[];
+    private String status;
 
 }
-
 

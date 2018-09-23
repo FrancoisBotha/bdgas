@@ -81,6 +81,7 @@ public class  WpLineController  {
             WpLine wpLine = new WpLine();
 
             wpLine.setWpId(wpLineDto.getWpId());
+            wpLine.setTaskId(wpLineDto.getTaskId());
             wpLine.setTaskCde(wpLineDto.getTaskCde());
             wpLine.setTaskParams(wpLineDto.getTaskParams());
             wpLine.setTaskDesc(wpLineDto.getTaskDesc());

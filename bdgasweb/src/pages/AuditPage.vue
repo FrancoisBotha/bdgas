@@ -97,13 +97,14 @@
                     + task.templatePath 
         this.$router.push({ name: route})
         this.selectedAction = task
-        this.$store.dispatch('setActiveHelpText', task.taskHelp)
+        this.$store.dispatch('setActiveHelpText', task.taskHelp) 
       },
       onGo: function() {
         let wpLine = {
             id: "",
             wpId: this.wpId,
             lnNo: 0,
+            taskId: this.selectedAction.id,
             taskCde: this.selectedAction.taskCde,
             taskDesc: this.selectedAction.taskDesc,
             taskParams: "",

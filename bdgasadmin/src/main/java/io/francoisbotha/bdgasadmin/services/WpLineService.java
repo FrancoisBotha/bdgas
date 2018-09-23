@@ -16,13 +16,19 @@
  *****************************************************************************/
 package io.francoisbotha.bdgasadmin.services;
 
+import io.francoisbotha.bdgasadmin.domain.dao.JobRepository;
 import io.francoisbotha.bdgasadmin.domain.dao.WpLineRepository;
+import io.francoisbotha.bdgasadmin.domain.dto.JobDto;
+import io.francoisbotha.bdgasadmin.domain.dto.TaskDto;
 import io.francoisbotha.bdgasadmin.domain.dto.WpLineDto;
+import io.francoisbotha.bdgasadmin.domain.model.Job;
+import io.francoisbotha.bdgasadmin.domain.model.Task;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
 import io.francoisbotha.bdgasadmin.domain.model.WpLine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +40,15 @@ public class WpLineService  {
 
     @Autowired
     private WpLineRepository wpLineRepository;
+
+    @Autowired
+    private JobService jobService;
+
+    @Autowired
+    private SjsService sjsService;
+
+    @Autowired
+    private TaskService taskService;
 
     public WpLine getWpLine(String id) throws EntityNotFoundException {
         WpLine wpLine = wpLineRepository.findOneById(id);
@@ -81,18 +96,65 @@ public class WpLineService  {
         return wpLine;
     }
 
-
-    // TODO: Validation for project referential integrity
     public WpLine create(WpLine wpLine) {
 
-        //Step 1. Create Job from Working Paper Line
+        try {
 
-        //Step 2. Submit Job to Spark Job Server
+            //Step 1. Get Task from Working Paper Line
+            Task task = taskService.getOne(wpLine.getTaskId());
 
-        //Step 3. Update Job Details
+            //Step 2. Create Job from Working Paper Line
+            JobDto jobDto = new JobDto();
 
-        //Step 4. Save Working Paper Line
-        return wpLineRepository.save(wpLine);
+            jobDto.setWpId(wpLine.getWpId());
+            jobDto.setWpLineId(wpLine.getId());
+            jobDto.setTaskId(wpLine.getTaskId());
+
+            //Default configs
+            jobDto.setConfigContext("sql-context-1");
+            jobDto.setConfigSync("true");
+            jobDto.setConfigTimeout("600");
+
+            jobDto.setConfigAppName(task.getAppName());
+            jobDto.setConfigClassPath(task.getClassPath());
+
+            //Step 3. Submit Job to Spark Job Server
+            JobDto returnJobDto = new JobDto();
+            returnJobDto = sjsService.runJob(jobDto);
+
+            //Step 4. Update Job Details
+            Job job = new Job();
+            job.setWpId(jobDto.getWpId());
+            job.setWpLineId(jobDto.getWpLineId());
+            job.setTaskId(jobDto.getTaskId());
+            job.setConfigContext(jobDto.getConfigContext());
+            job.setConfigSync(jobDto.getConfigSync());
+            job.setConfigTimeout(jobDto.getConfigTimeout());
+            job.setConfigAppName(jobDto.getConfigAppName());
+            job.setConfigClassPath(jobDto.getConfigClassPath());
+
+            job.setDuration(returnJobDto.getDuration());
+            job.setJobStart(returnJobDto.getJobStart());
+            job.setSparkContext(returnJobDto.getSparkContext());
+            job.setSparkJobId(returnJobDto.getSparkJobId());
+            job.setResult(returnJobDto.getResult());
+
+            final Job job1 = jobService.create(job);
+
+            //Step 5. Save Working Paper Line
+            wpLine.setLnResult(job.getResult());
+            return wpLineRepository.save(wpLine);
+
+        } catch (RestClientException ex) {
+
+            String message = "Failed to get service: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
+        } catch (EntityNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public WpLine update(String id, WpLineDto wpLineDto) throws EntityNotFoundException {

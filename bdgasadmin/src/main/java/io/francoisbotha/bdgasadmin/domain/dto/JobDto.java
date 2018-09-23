@@ -38,11 +38,17 @@ public class JobDto {
     @NotBlank
     private String taskId;
 
+    private String configAppName;
+    private String configClassPath;
+    private String configSync;
+    private String configContext;
+    private String configTimeout;
+
     private String sparkJobId;
     private String sparkStatus;
     private String sparkContext;
     private String jobStart;
     private String duration;
-    private String result;
+    private String[] result;
 
 }

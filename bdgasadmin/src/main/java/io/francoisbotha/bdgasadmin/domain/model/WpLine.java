@@ -25,6 +25,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Arrays;
+
 @Setter
 @ToString
 @EqualsAndHashCode
@@ -34,11 +36,12 @@ public class WpLine  {
 
     private String id;
     private String wpId;
+    private String taskId;
     private Integer lnNo;
     private String taskCde;
     private String taskDesc;
     private String taskParams;
-    private String lnResult;
+    private String[] lnResult;
     private String lnState;
 
     @DynamoDBHashKey
@@ -50,6 +53,11 @@ public class WpLine  {
     @DynamoDBAttribute
     public String getWpId() {
         return wpId;
+    }
+
+    @DynamoDBAttribute
+    public String getTaskId() {
+        return taskId;
     }
 
     @DynamoDBAttribute
@@ -73,8 +81,8 @@ public class WpLine  {
     }
 
     @DynamoDBAttribute
-    public String getLnResult() {
-        return lnResult;
+    public String[] getLnResult() {
+        return Arrays.copyOf(lnResult, lnResult.length);
     }
 
     @DynamoDBAttribute
