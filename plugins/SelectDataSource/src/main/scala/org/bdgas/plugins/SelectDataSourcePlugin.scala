@@ -46,7 +46,9 @@ object SelectDataSourcePlugin extends SparkSessionJob {
 
   def validate(sparkSession: SparkSession, runtime: JobEnvironment, config: Config):
   JobData Or Every[ValidationProblem] = {
-    Good(config.getString("fileFullPath"))
+    val a = config.getString("fileFullPath")
+    Good("TEST")
+//    Good(config.getString("fileFullPath"))
   }
 }
 

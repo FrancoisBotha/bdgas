@@ -16,13 +16,9 @@ public class EndPointService {
 
     @Value("${sjs.port}")
     private String sjsPort;
-    
+
 
     //Spark Job Server
-    private final String SJS_DOMAIN = sjsDomain;
-    private final String SJS_PROTOCOL = sjsProtocol;
-    private final String SJS_PORT = sjsPort;
-
     private static final String SJS_BINARIES = "binaries";
     private static final String SJS_CONTEXTS = "contexts";
     private static final String SJS_JOBS = "jobs";
@@ -41,9 +37,9 @@ public class EndPointService {
     }
 
     private String SjsMerge(String endpoint) {
-        return this.SJS_PROTOCOL
-                + this.SJS_DOMAIN + ":"
-                + this.SJS_PORT + "/"
+        return this.sjsProtocol
+                + this.sjsDomain + ":"
+                + this.sjsPort + "/"
                 + endpoint;
     }
 

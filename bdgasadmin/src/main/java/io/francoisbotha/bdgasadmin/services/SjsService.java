@@ -97,7 +97,7 @@ public class SjsService {
 
             //Form Parameters
             MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-            map.add("fileName", "dummy file name");
+            map.add("fileFullPath", "dummy file name");
 
             //Headers
             HttpHeaders headers = new HttpHeaders();
@@ -108,10 +108,15 @@ public class SjsService {
             // Request entity
             HttpEntity<MultiValueMap<String, String>> entity= new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
-            ResponseEntity<SjsJobResultDto> result
+
+            log.info("++++++++++++++++++++++++++++++BEFORE CALL...");
+            ResponseEntity<SjsJobResultDto> restResult
                     = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
 
-            SjsJobResultDto sjsJobResultDto = result.getBody();
+            log.info("++++++++++++++++++++++++++++++++++++AFTER CALL...");
+            log.info(restResult.toString());
+
+            SjsJobResultDto sjsJobResultDto = restResult.getBody();
 
             JobDto returnJobDto = new JobDto();
             returnJobDto.setConfigAppName(jobDto.getConfigAppName());
@@ -120,7 +125,7 @@ public class SjsService {
             returnJobDto.setConfigSync(jobDto.getConfigSync());
             returnJobDto.setConfigTimeout(jobDto.getConfigTimeout());
             returnJobDto.setSparkJobId(sjsJobResultDto.getJobId());
-            returnJobDto.setResult(sjsJobResultDto.getResult());
+//            returnJobDto.setResult(sjsJobResultDto.getResult());
 
 //            returnJobDto.setSparkStatus(sparkJobDto.getStatus());
 //            returnJobDto.setJobStart(sparkJobDto.getStartTime());
