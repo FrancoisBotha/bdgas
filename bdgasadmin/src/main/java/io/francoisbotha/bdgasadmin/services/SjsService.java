@@ -73,33 +73,33 @@ public class SjsService {
 
     }
 
-//    public void runJob(DataSourceDto dataSourceDto) throws RestClientException {
-//
-//        final String uri = endPointService.getSjsJobsEP();
-//
-//        log.debug(uri.toString());
-//
-//        try {
-//
-//            // Query parameters
-//            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
-//                                // Add query parameter
-//                                .queryParam("firstName", "Mark")
-//                                .queryParam("lastName", "Watney");
-//
-//            HttpEntity<DataSourceDto> entity
-//                    = new HttpEntity<DataSourceDto>(dataSourceDto, this.getDefaultHeaders());
-//
-//            ResponseEntity<DataSourceDto> result
-//                    = restTemplate.exchange(uri, HttpMethod.POST, entity, DataSourceDto.class);
-//
-//        } catch (RestClientException ex) {
-//
-//            String message = "Failed to post to service: " + ex.getMessage();
-//            log.error(message, ex);
-//            throw ex;
-//        }
-//    }
+    public void runJob(DataSourceDto dataSourceDto) throws RestClientException {
+
+        final String uri = endPointService.getSjsJobsEP();
+
+        log.debug(uri.toString());
+
+        try {
+
+            // Query parameters
+            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
+                                // Add query parameter
+                                .queryParam("firstName", "Mark")
+                                .queryParam("lastName", "Watney");
+
+            HttpEntity<DataSourceDto> entity
+                    = new HttpEntity<DataSourceDto>(dataSourceDto, this.getDefaultHeaders());
+
+            ResponseEntity<DataSourceDto> result
+                    = restTemplate.exchange(uri, HttpMethod.POST, entity, DataSourceDto.class);
+
+        } catch (RestClientException ex) {
+
+            String message = "Failed to post to service: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
+        }
+    }
 
 }
 

@@ -84,6 +84,14 @@ public class WpLineService  {
 
     // TODO: Validation for project referential integrity
     public WpLine create(WpLine wpLine) {
+
+        //Step 1. Create Job from Working Paper Line
+
+        //Step 2. Submit Job to Spark Job Server
+
+        //Step 3. Update Job Details
+
+        //Step 4. Save Working Paper Line
         return wpLineRepository.save(wpLine);
     }
 
