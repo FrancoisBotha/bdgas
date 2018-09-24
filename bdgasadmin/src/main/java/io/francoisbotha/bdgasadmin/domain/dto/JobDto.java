@@ -49,6 +49,6 @@ public class JobDto {
     private String sparkContext;
     private String jobStart;
     private String duration;
-    private String[] result;
+    private String result;
 
 }

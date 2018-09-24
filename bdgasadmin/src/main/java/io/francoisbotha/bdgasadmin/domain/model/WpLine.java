@@ -41,7 +41,7 @@ public class WpLine  {
     private String taskCde;
     private String taskDesc;
     private String taskParams;
-    private String[] lnResult;
+    private String lnResult;
     private String lnState;
 
     @DynamoDBHashKey
@@ -81,9 +81,12 @@ public class WpLine  {
     }
 
     @DynamoDBAttribute
-    public String[] getLnResult() {
-        return Arrays.copyOf(lnResult, lnResult.length);
+    public String getLnResult() {
+        return lnResult;
     }
+//    public String getLnResult() {
+//        return Arrays.copyOf(lnResult, lnResult.length);
+//    }
 
     @DynamoDBAttribute
     public String getLnState() {

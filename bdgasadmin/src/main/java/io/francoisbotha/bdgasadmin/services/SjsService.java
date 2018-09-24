@@ -17,7 +17,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -96,36 +98,68 @@ public class SjsService {
                                 .queryParam("timeout", jobDto.getConfigTimeout());
 
             //Form Parameters
-            MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-            map.add("fileFullPath", "dummy file name");
+//          MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
+            Map<String,String> map = new HashMap<String,String>();
+            map.put("fileFullPath", "dummy file name");
 
             //Headers
             HttpHeaders headers = new HttpHeaders();
 
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//            headers.setContentType(MediaType.APPLICATION_JSON);
+//            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+            headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+//            headers.setAccept(Arrays.asList(MediaType.TEXT_PLAIN));
 
             // Request entity
-            HttpEntity<MultiValueMap<String, String>> entity= new HttpEntity<MultiValueMap<String, String>>(map, headers);
+            HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);
 
 
             log.info("++++++++++++++++++++++++++++++BEFORE CALL...");
+
             ResponseEntity<SjsJobResultDto> restResult
                     = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
 
+
+//            ParameterizedTypeReference<List<String>> listOfStrings
+//                    = new ParameterizedTypeReference<List<String>>() {};
+//
+//            ResponseEntity<List<String>> restResult
+//                    = restTemplate.exchange(builder.toUriString(),HttpMethod.POST, entity, listOfStrings);
+
+
+
+//            ParameterizedTypeReference<List<String>> listOfStrings = new ParameterizedTypeReference<List<String>>() {};
+//
+//            ResponseEntity<List<String>> response
+//                    = restTemplate.exchange(builder.toUriString(),
+//                    HttpMethod.GET,entity,listOfStrings);
+//            log.info(response.getBody().toString());
+
+//            ResponseEntity<MultiValueMap<String, String>> restResult
+//                    = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, MultiValueMap.class);
+
+//
+//
+//            String a = restTemplate.postForObject(builder.toUriString(),
+//                    entity, String.class);
+
+            log.info(restResult.getBody().toString());
             log.info("++++++++++++++++++++++++++++++++++++AFTER CALL...");
-            log.info(restResult.toString());
+
 
             SjsJobResultDto sjsJobResultDto = restResult.getBody();
 
             JobDto returnJobDto = new JobDto();
+
             returnJobDto.setConfigAppName(jobDto.getConfigAppName());
             returnJobDto.setConfigClassPath(jobDto.getConfigClassPath());
             returnJobDto.setConfigContext(jobDto.getConfigContext());
             returnJobDto.setConfigSync(jobDto.getConfigSync());
             returnJobDto.setConfigTimeout(jobDto.getConfigTimeout());
             returnJobDto.setSparkJobId(sjsJobResultDto.getJobId());
-//            returnJobDto.setResult(sjsJobResultDto.getResult());
+
+            returnJobDto.setResult(sjsJobResultDto.getResult().toString());
 
 //            returnJobDto.setSparkStatus(sparkJobDto.getStatus());
 //            returnJobDto.setJobStart(sparkJobDto.getStartTime());
