@@ -10,12 +10,16 @@ var axiosProxyS = axios.create({
 
 const state = {
     wpLines: [],
+    loadingStatus: false
 }
 
 const getters = {
     wpLines: state => {
         return state.wpLines;
-    },         
+    },    
+    loadingStatus: state => {
+        return state.loadingStatus;
+    },      
 }
 
 const mutations = {
@@ -29,7 +33,10 @@ const mutations = {
     'ADD_WPLINE' (state, wpLine) {
         var wplines = state.wpLines;
         wplines.push(wpLine)
-    }
+    },
+    'SET_LOADINGSTATUS' (state, loadingStatus) {
+        state.loadingStatus = loadingStatus;
+    }, 
 }
  
 const actions = {
@@ -61,6 +68,7 @@ const actions = {
     },
     addWpLine: ({commit}, wpLine) => {
         let data = new FormData();
+        commit('SET_LOADINGSTATUS', true)
         axios({
             method: 'post',
             url: baseURL,
@@ -70,12 +78,22 @@ const actions = {
             .then(function (response) {
                 wpLine.id = response.data.id
                 wpLine.lnNo = response.data.lnNo
+                wpLine.taskCde = response.data.taskCde
+                wpLine.taskDesc = response.data.taskDesc
+                wpLine.taskParams = response.data.taskParams
+                wpLine.lnResult = response.data.lnResult
+                wpLine.lnState = response.data.lnState
                 commit('ADD_WPLINE', wpLine)
+                commit('SET_LOADINGSTATUS', false)
             })
             .catch(function (err) {
                 console.log(err)
+                commit('SET_LOADINGSTATUS', false)
         });      
-    }
+    },
+    setLoadingStatus: ({commit}, loadingStatus) => {
+        commit('SET_LOADINGSTATUS', loadingStatus)     
+    } 
 }
  
 export default {

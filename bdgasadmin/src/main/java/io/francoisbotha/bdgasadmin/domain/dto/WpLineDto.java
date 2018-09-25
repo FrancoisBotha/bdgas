@@ -20,6 +20,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -44,7 +46,7 @@ public class WpLineDto {
     @NotBlank
     private String taskDesc;
 
-    private String taskParams;
+    private List<String> taskParams;
 
     private String lnResult;
 

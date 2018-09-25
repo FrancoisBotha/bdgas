@@ -120,7 +120,7 @@ public class WpLineService  {
 
             //Step 3. Submit Job to Spark Job Server
             JobDto returnJobDto = new JobDto();
-            returnJobDto = sjsService.runJob(jobDto);
+            returnJobDto = sjsService.runJob(jobDto, wpLine.getTaskParams());
 
             //Step 4. Update Job Details
             Job job = new Job();

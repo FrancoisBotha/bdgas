@@ -91,9 +91,12 @@ public class WpLineController {
     public WpLineDto wpLinePost( @RequestBody String wpLine) {
 
         try {
+            /*Map input parameter to DTO*/
             WpLineDto wpLineDto = new WpLineDto();
             ObjectMapper mapper = new ObjectMapper();
             wpLineDto = mapper.readValue(wpLine, WpLineDto.class);
+
+            log.info("AAAAAAAAAAAAA" + wpLineDto.getTaskParams());
 
             WpLineDto wpLineDtoReturn = wpLineService.create(wpLineDto);
             return wpLineDtoReturn;

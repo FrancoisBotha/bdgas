@@ -26,6 +26,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Setter
 @ToString
@@ -40,7 +41,7 @@ public class WpLine  {
     private Integer lnNo;
     private String taskCde;
     private String taskDesc;
-    private String taskParams;
+    private List<String> taskParams;
     private String lnResult;
     private String lnState;
 
@@ -76,7 +77,7 @@ public class WpLine  {
     }
 
     @DynamoDBAttribute
-    public String getTaskParams() {
+    public List<String> getTaskParams() {
         return taskParams;
     }
 

@@ -61,9 +61,9 @@
                   </ul>
             </div>
           </div>
-          <div class="card-body text-dark bg-light">
+          <div class="card-body text-dark bg-white">
             <router-view></router-view>
-            <div class="mr-2 float-right"><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button">Go</a></div>
+            <div class="mr-2 float-right"><span v-if="loadingStatus">Running...  </span><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button" v-bind:class="{disabled: loadingStatus}">Go</a></div>
           </div>
         </div>
       </div>
@@ -98,6 +98,7 @@
         this.$router.push({ name: route})
         this.selectedAction = task
         this.$store.dispatch('setActiveHelpText', task.taskHelp) 
+        this.$store.dispatch('clearParameters') 
       },
       onGo: function() {
         let wpLine = {
@@ -107,7 +108,7 @@
             taskId: this.selectedAction.id,
             taskCde: this.selectedAction.taskCde,
             taskDesc: this.selectedAction.taskDesc,
-            taskParams: "",
+            taskParams: this.$store.getters.enteredParameters,
             lnResult: "",
             lnState: "new",
         }
@@ -140,6 +141,9 @@
       },
       orderedWPLines() {
         return _.sortBy(this.wpLines, 'lnNo').reverse()
+      },
+      loadingStatus() {
+        return this.$store.getters.loadingStatus
       },
       isParamActive: function() {
           if (this.$route.fullPath.substring(0,12) === '/audit/param') {

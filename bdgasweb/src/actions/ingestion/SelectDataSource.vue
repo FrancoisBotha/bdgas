@@ -8,8 +8,9 @@
                 <label class="mr-sm-2" for="selectDataSource">Data Source:</label>
                 <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
                                 required
-                                v-model="form.datasources"
-                                id="selectDataSource">
+                                v-model="datasource"
+                                id="selectDataSource"
+                                 @input="selectOption()">
                                 <option slot="first" :value="null">Choose...</option>
                                 <option v-for="ads in auditDataSources" 
                                         :key="ads.id"
@@ -25,9 +26,7 @@
 export default {
   data () {
     return {
-      form: {
-        datasource: null
-      },
+      datasource: null
     }
   },
   computed: {
@@ -36,6 +35,13 @@ export default {
     }
   },  
   methods: {
+    selectOption() {
+      let payload = {
+        i: 0,
+        parameter: this.datasource
+      }
+      this.$store.dispatch('setParameter', payload)
+    } 
   },
   created: function () {
     if (this.$store.getters.localMode) {

@@ -42,7 +42,7 @@ public class WpLineDto {
     @NotBlank
     private String taskDesc;
 
-    private String taskParams;
+    private String[] taskParams;
 
     private String lnResult;
 

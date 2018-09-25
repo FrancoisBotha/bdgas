@@ -41,7 +41,7 @@ const state = {
     tasks: tasksObj,
     helpTexts: helpTextsObj,
     activeHelpText: "",
-    localMode: config.LOCAL_MODE //Wether or local (devl/testing) data is used
+    localMode: config.LOCAL_MODE, //Wether or local (devl/testing) data is used
 }
  
 const getters = {
@@ -88,6 +88,7 @@ const getters = {
     localMode: state => {
         return state.localMode;
     }, 
+
 }
  
 const mutations = {
@@ -96,7 +97,8 @@ const mutations = {
     },
     'SET_ACTIVEHELPTEXT' (state, activeHelpText) {
         state.activeHelpText = activeHelpText;
-    }    
+    },
+   
 }
  
 const actions = {
@@ -112,7 +114,8 @@ const actions = {
     },
     setActiveHelpText: ({commit}, helpText) => {
         commit('SET_ACTIVEHELPTEXT', helpText)     
-    }    
+    },
+    
 }
  
 export default {

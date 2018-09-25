@@ -34,7 +34,8 @@ object SelectDataSourcePlugin extends SparkSessionJob {
       .option("delimiter", "|")
       .option("inferSchema", "true")
       .option("header", "true")
-      .csv("file:///mnt/data/Invoices100.txt")
+      .csv(data.toString)
+//      .csv("file:///mnt/data/Invoices100.txt")
 
     df.createOrReplaceTempView("dataFile")
 
@@ -46,8 +47,8 @@ object SelectDataSourcePlugin extends SparkSessionJob {
 
   def validate(sparkSession: SparkSession, runtime: JobEnvironment, config: Config):
   JobData Or Every[ValidationProblem] = {
-    val a = config.getString("fileFullPath")
-    Good("TEST")
+    val path = config.getString("fileFullPath")
+    Good(path)
 //    Good(config.getString("fileFullPath"))
   }
 }

@@ -80,11 +80,9 @@ public class SjsService {
 
     }
 
-    public JobDto runJob(JobDto jobDto) throws RestClientException {
+    public JobDto runJob(JobDto jobDto, List<String> taskParams) throws RestClientException {
 
         final String uri = endPointService.getSjsJobsEP();
-
-        log.debug(uri.toString());
 
         try {
 
@@ -100,49 +98,22 @@ public class SjsService {
             //Form Parameters
 //          MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
             Map<String,String> map = new HashMap<String,String>();
-            map.put("fileFullPath", "dummy file name");
+            map.put("fileFullPath", taskParams.get(0));
 
             //Headers
             HttpHeaders headers = new HttpHeaders();
 
-//            headers.setContentType(MediaType.APPLICATION_JSON);
-//            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
             headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-//            headers.setAccept(Arrays.asList(MediaType.TEXT_PLAIN));
 
             // Request entity
             HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);
 
 
             log.info("++++++++++++++++++++++++++++++BEFORE CALL...");
+            log.info(taskParams.toString());
 
             ResponseEntity<SjsJobResultDto> restResult
                     = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
-
-
-//            ParameterizedTypeReference<List<String>> listOfStrings
-//                    = new ParameterizedTypeReference<List<String>>() {};
-//
-//            ResponseEntity<List<String>> restResult
-//                    = restTemplate.exchange(builder.toUriString(),HttpMethod.POST, entity, listOfStrings);
-
-
-
-//            ParameterizedTypeReference<List<String>> listOfStrings = new ParameterizedTypeReference<List<String>>() {};
-//
-//            ResponseEntity<List<String>> response
-//                    = restTemplate.exchange(builder.toUriString(),
-//                    HttpMethod.GET,entity,listOfStrings);
-//            log.info(response.getBody().toString());
-
-//            ResponseEntity<MultiValueMap<String, String>> restResult
-//                    = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, MultiValueMap.class);
-
-//
-//
-//            String a = restTemplate.postForObject(builder.toUriString(),
-//                    entity, String.class);
 
             log.info(restResult.getBody().toString());
             log.info("++++++++++++++++++++++++++++++++++++AFTER CALL...");

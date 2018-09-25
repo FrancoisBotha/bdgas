@@ -7,11 +7,11 @@
                 <div class="clearfix"></div>
             </div>
             <div class="row taskLine">
-                <div v-if="wpline.taskParams===''" class="ml-2">[{{ wpline.taskCde }}] {{ wpline.taskDesc }}</div>
-                <div v-if="wpline.taskParams!==''" class="ml-2">[{{ wpline.taskCde }}] {{ wpline.taskDesc }} [{{wpline.taskParams}}]</div>
+                <div v-if="wpline.taskParams ===''" class="ml-2">[{{ wpline.taskCde }}] {{ wpline.taskDesc }}</div>
+                <div v-if="wpline.taskParams !==''" class="ml-2">[{{ wpline.taskCde }}] {{ wpline.taskDesc }} {{wpline.taskParams}}</div>
             </div>
             <div class="row resultLine">
-                <div class="">ssssss</div>
+                <div class="">{{ wpline.lnResult }}</div>
                 <hr>
             </div>
         </div>
