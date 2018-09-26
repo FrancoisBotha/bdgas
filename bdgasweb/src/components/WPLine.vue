@@ -11,7 +11,7 @@
                 <div v-if="wpline.taskParams !==''" class="ml-2">[{{ wpline.taskCde }}] {{ wpline.taskDesc }} {{wpline.taskParams}}</div>
             </div>
             <div class="row resultLine">
-                <div class="">{{ wpline.lnResult }}</div>
+                <app-resulttable :wpline="wpline"></app-resulttable>
                 <hr>
             </div>
         </div>
@@ -19,7 +19,12 @@
 </template>
 
 <script>
-  export default {
+  import ResultTable from '../components/ResultTable.vue'
+
+  export default {         
+    components: {
+        appResulttable: ResultTable
+    },      
     props: {
         wpline: Object
     },  

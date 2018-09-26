@@ -82,7 +82,7 @@
 
   export default {
     components: {
-        appWpline: WPLine,
+        appWpline: WPLine
     },      
     data () {
       return {
