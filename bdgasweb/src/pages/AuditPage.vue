@@ -44,7 +44,7 @@
                 <div class="float-left">            
                   <ul class="nav nav-tabs card-header-tabs ">
                     <li>
-                      <router-link to="/audit/param" class="nav-item" active-class="active">
+                      <router-link :to="dynamicTo" class="nav-item" active-class="active">
                             <a :class="[isParamActive ? 'nav-link active' : 'nav-link']">Parameters</a>
                       </router-link>
                      </li>    
@@ -63,7 +63,7 @@
           </div>
           <div class="card-body text-dark bg-white">
             <router-view></router-view>
-            <div class="mr-2 float-right"><span v-if="loadingStatus">Running...  </span><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button" v-bind:class="{disabled: loadingStatus}">Go</a></div>
+            <div class="mr-2 float-right" v-if="isParamActive"><span v-if="loadingStatus">Running...  </span><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button" v-bind:class="{disabled: loadingStatus}">Go</a></div>
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@
     data () {
       return {
         showHelp: true,
-        selectedAction: null,
+        selectedAction: "none"
       }
     },    
     methods: {
@@ -113,7 +113,7 @@
             lnState: "new",
         }
         this.$store.dispatch('addWpLine', wpLine)   
-        this.selectedAction = null;  
+        this.selectedAction = "none";  
         this.setDefaultHelp() 
       },
       setDefaultHelp: function() {
@@ -121,6 +121,15 @@
       }
     },
     computed: {
+      dynamicTo() {
+        if (this.selectedAction == "none") {
+          return "/audit/param"
+        } else {
+          return "/audit/param/" 
+                   + this.selectedAction.taskType.toLowerCase() + "_"
+                   + this.selectedAction.templatePath
+        }
+      },
       wpId() {
             return this.$store.getters.wpId;
       },
