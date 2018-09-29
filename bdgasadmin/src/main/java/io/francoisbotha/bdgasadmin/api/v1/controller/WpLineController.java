@@ -88,10 +88,12 @@ public class  WpLineController  {
         wpLine.setTaskParams(wpLineDto.getTaskParams());
         wpLine.setTaskDesc(wpLineDto.getTaskDesc());
         wpLine.setLnState(wpLineDto.getLnState());
+
+        WpLine returnWpLine = wpLineService.create(wpLine);
+
         wpLine.setLnNo(workingPaperService.incrLineCount(wpLineDto.getWpId()));
 
-        return wpLineService.create(wpLine);
-
+        return returnWpLine;
     }
 
     /************
