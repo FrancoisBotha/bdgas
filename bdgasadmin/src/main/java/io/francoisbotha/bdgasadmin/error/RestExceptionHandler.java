@@ -8,6 +8,8 @@ package io.francoisbotha.bdgasadmin.error;
  *  https://github.com/brunocleite/spring-boot-exception-handling/blob/master/src/main/java/com/example/springbootexceptionhandling/ApiError.java
  */
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
@@ -32,6 +35,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 //import org.hibernate.exception.ConstraintViolationException;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -141,6 +146,27 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         String error = ex.getMessage();
         return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
+
+    }
+
+    @ExceptionHandler(HttpStatusCodeException.class)
+    protected ResponseEntity<Object> handleHttpStatusCodeException(
+            HttpStatusCodeException ex) throws IOException {
+
+        JsonNode apiErrorNode = new ObjectMapper().readTree(ex.getResponseBodyAsString());
+
+        ApiError apiError = new ApiError(ex.getStatusCode());
+
+        if (apiErrorNode.get("status").toString().equals("\"VALIDATION FAILED\"")) {
+            apiError.setMessage(apiErrorNode.path("result").get("message").textValue());
+            apiError.setDebugMessage(apiErrorNode.path("result").get("stack").toString());
+        } else {
+            apiError.setMessage("Error executing task on cluster.aaa");
+            apiError.setDebugMessage(apiErrorNode.path("result").get("stack").toString());
+            log.error(apiError.getDebugMessage());
+        }
+
+        return buildResponseEntity(apiError);
 
     }
 

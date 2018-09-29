@@ -150,11 +150,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpStatusCodeException(
             HttpStatusCodeException ex) throws IOException {
 
+        log.info("in exception handler");
+        log.info(ex.getResponseBodyAsString());
         JsonNode apiErrorNode = new ObjectMapper().readTree(ex.getResponseBodyAsString());
 
         ApiError apiError = new ApiError((HttpStatus.valueOf(apiErrorNode.path("apierror").get("status").textValue())));
-        apiError.setMessage(apiErrorNode.path("apierror").get("message").textValue());
-        apiError.setMessage(apiErrorNode.path("apierror").get("debugMessage").textValue());
+        apiError.setMessage(apiErrorNode.path("apierror").get("message").toString());
+        apiError.setDebugMessage(apiErrorNode.path("apierror").get("debugMessage").toString());
 
         return buildResponseEntity(apiError);
 

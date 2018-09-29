@@ -22,6 +22,8 @@ import org.scalactic._
 import spark.jobserver.SparkSessionJob
 import spark.jobserver.api._
 
+import scala.util.Try
+
 
 object SelectDataSourcePlugin extends SparkSessionJob {
   type JobData = String
@@ -47,8 +49,11 @@ object SelectDataSourcePlugin extends SparkSessionJob {
 
   def validate(sparkSession: SparkSession, runtime: JobEnvironment, config: Config):
   JobData Or Every[ValidationProblem] = {
-    val path = config.getString("fileFullPath")
-    Good(path)
+    Try(config.getString("fileFullPath"))
+      .map(path => Good(path))
+      .getOrElse(Bad(One(SingleProblem("No File Full Path Specified"))))
+//    val path = config.getString("fileFullPath")
+//    Good(path)
 //    Good(config.getString("fileFullPath"))
   }
 }

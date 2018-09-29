@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -81,7 +82,7 @@ public class SjsService {
 
     }
 
-    public JobDto runJob(JobDto jobDto, List<String> taskParams) throws RestClientException, SjsException {
+    public JobDto runJob(JobDto jobDto, List<String> taskParams) throws HttpStatusCodeException, RestClientException, SjsException {
 
         final String uri = endPointService.getSjsJobsEP();
 
@@ -96,6 +97,9 @@ public class SjsService {
                                 .queryParam("sync", jobDto.getConfigSync())
                                 .queryParam("timeout", jobDto.getConfigTimeout());
 
+            //*****************************
+            //* VALIDATE INPUT PARAMETERS *
+            //*****************************
             if (taskParams.isEmpty()) {
                 String message = "Invalid task parameters supplied.";
                 log.error(message);
@@ -122,13 +126,20 @@ public class SjsService {
             ResponseEntity<SjsJobResultDto> restResult
                     = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
 
+            log.info("status Code...");
             log.info(restResult.getStatusCode().toString());
 
+            log.info("Body..");
             log.info(restResult.getBody().toString());
             log.info("++++++++++++++++++++++++++++++++++++AFTER CALL...");
 
 
             SjsJobResultDto sjsJobResultDto = restResult.getBody();
+
+            if (sjsJobResultDto.getStatus() != null
+                 && sjsJobResultDto.getStatus().equals("ERROR")) {
+                throw new SjsException("Error executing job on cluster");
+            }
 
             JobDto returnJobDto = new JobDto();
 
@@ -147,12 +158,21 @@ public class SjsService {
 
             return returnJobDto;
 
-        } catch (RestClientException ex) {
-            String message = ex.getMessage();
-            log.error(message, ex);
+        }
+        catch (HttpStatusCodeException ex) {
+            int statusCode = ex.getStatusCode().value();
+            log.error("aaa");
+            log.error(ex.getResponseBodyAsString());
             throw ex;
+        }
+        catch (RestClientException ex) {
+            String message = ex.getMessage();
+            log.error("SjsService RestClientException");
+            log.error(message, ex);
+            throw new SjsException(message);
         } catch (Exception ex) {
             String message = ex.getMessage();
+            log.error("SjsService Exception");
             log.error(message, ex);
             throw new SjsException(message);
         }

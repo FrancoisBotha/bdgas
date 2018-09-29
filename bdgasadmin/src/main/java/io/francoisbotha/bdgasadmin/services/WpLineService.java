@@ -29,6 +29,7 @@ import io.francoisbotha.bdgasadmin.error.SjsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
 import java.util.ArrayList;
@@ -97,7 +98,8 @@ public class WpLineService  {
         return wpLine;
     }
 
-    public WpLine create(WpLine wpLine) throws EntityNotFoundException, SjsException {
+    public WpLine create(WpLine wpLine)
+            throws HttpStatusCodeException, EntityNotFoundException, SjsException {
 
         try {
 
@@ -146,18 +148,25 @@ public class WpLineService  {
             wpLine.setLnResult(job.getResult());
             return wpLineRepository.save(wpLine);
 
-        } catch (RestClientException ex) {
+        }
+        catch (HttpStatusCodeException ex) {
+            throw ex;
+        }
+        catch (RestClientException ex) {
 
             String message = "Failed to get service: " + ex.getMessage();
             log.error(message, ex);
             throw ex;
-        } catch (EntityNotFoundException ex) {
+        }
+        catch (EntityNotFoundException ex) {
             ex.printStackTrace();
             throw ex;
-        } catch (SjsException ex) {
+        }
+        catch (SjsException ex) {
             ex.printStackTrace();
             throw ex;
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             String message = "General Exception while trying to run SJS Service: " + ex.getMessage();
             log.error(message, ex);
         }

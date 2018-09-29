@@ -11,16 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public class SjsJobResultDto {
 
-//    {
-//        "jobId": "8d5c4aab-5bdf-4cc3-a8fa-6ab9868378a7",
-//       "result": [
-//                  "{\"col_name\":\"InvNo\",\"data_type\":\"int\"}",
-//                  "{\"col_name\":\"ClientName\",\"data_type\":\"string\"}",
-//                  "{\"col_name\":\"Amt\",\"data_type\":\"int\"}"
-//                 ]
-//    }
-
     private String jobId;
+
+    private String status;
 
     @JsonDeserialize(using = StringListDeserializer.class)
     private List<String> result;

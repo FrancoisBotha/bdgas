@@ -76,11 +76,6 @@
                 @dismissed="dismissCountDown=0"
                 @dismiss-count-down="countDownChanged">
           <p>{{ alertText }}</p>
-          <b-progress variant="warning"
-                      :max="dismissSecs"
-                      :value="dismissCountDown"
-                      height="4px">
-          </b-progress>
       </b-alert>
     </div>
     <app-wpline v-for="ln in orderedWPLines" 
@@ -144,7 +139,7 @@
           // this.alertText = JSON.stringify(error, null, 4)
           // this.alertText = config.GENERAL_SERVER_ERR_MSG
           console.dir(error)
-          this.alertText = error
+          this.alertText = error.response.data.apierror.message
           this.showAlert()
         })   
       },

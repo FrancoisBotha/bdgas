@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -77,7 +78,7 @@ public class  WpLineController  {
     @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public WpLine AddWpLine(@RequestBody @Valid WpLineDto wpLineDto )
-            throws EntityNotFoundException, SjsException  {
+            throws HttpStatusCodeException, EntityNotFoundException, SjsException  {
 
         WpLine wpLine = new WpLine();
 
