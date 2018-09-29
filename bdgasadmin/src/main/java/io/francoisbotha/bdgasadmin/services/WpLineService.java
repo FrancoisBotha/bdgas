@@ -25,6 +25,7 @@ import io.francoisbotha.bdgasadmin.domain.model.Job;
 import io.francoisbotha.bdgasadmin.domain.model.Task;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
 import io.francoisbotha.bdgasadmin.domain.model.WpLine;
+import io.francoisbotha.bdgasadmin.error.SjsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,7 +97,7 @@ public class WpLineService  {
         return wpLine;
     }
 
-    public WpLine create(WpLine wpLine) {
+    public WpLine create(WpLine wpLine) throws EntityNotFoundException, SjsException {
 
         try {
 
@@ -150,8 +151,15 @@ public class WpLineService  {
             String message = "Failed to get service: " + ex.getMessage();
             log.error(message, ex);
             throw ex;
-        } catch (EntityNotFoundException e) {
-            e.printStackTrace();
+        } catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } catch (SjsException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } catch (Exception ex) {
+            String message = "General Exception while trying to run SJS Service: " + ex.getMessage();
+            log.error(message, ex);
         }
 
         return null;

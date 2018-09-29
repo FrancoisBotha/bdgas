@@ -7,11 +7,11 @@
         <table id="secondTable" class="mb-2 ml-2 mt-2">
         <thead>
             <tr>
-            <th v-for="col in columns" :key="col" >{{col}}</th>
+            <th v-for="col in columns" :key="col.index" >{{col}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="row in rows" :key="row">
+            <tr v-for="row in rows" :key="row.index">
             <td v-for="col in columns" :key="col">{{row[col]}}</td>
             </tr>
         </tbody>

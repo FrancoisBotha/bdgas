@@ -23,12 +23,14 @@ let wpObjTemp = {
 
 let tasksObjTemp = []
 let helpTextsObjTemp = []
+let delimitersObjTemp = []
 
 var teamObj = (typeof teamObjJava != "undefined") ? teamObjJava : teamObjTemp;
 var projectObj = (typeof projectObjJava != "undefined")  ? projectObjJava : projectObjTemp;
-var wpObj = (typeof wpObjJava!= "undefined") ? wpObjJava : wpObjTemp;
-var tasksObj = (typeof tasksObjJava!= "undefined") ? tasksObjJava : tasksObjTemp;
-var helpTextsObj = (typeof helpTextsObjJava!= "undefined") ? helpTextsObjJava : helpTextsObjTemp;
+var wpObj = (typeof wpObjJava != "undefined") ? wpObjJava : wpObjTemp;
+var tasksObj = (typeof tasksObjJava != "undefined") ? tasksObjJava : tasksObjTemp;
+var delimitersObj = (typeof delimitersObjJava != "undefined") ? delimitersObjJava : delimitersObjTemp;
+var helpTextsObj = (typeof helpTextsObjJava != "undefined") ? helpTextsObjJava : helpTextsObjTemp;
 
 const state = {
     signedS3Url: "",
@@ -40,6 +42,7 @@ const state = {
     wpId: wpObj.id,
     tasks: tasksObj,
     helpTexts: helpTextsObj,
+    delimiters: delimitersObj,
     activeHelpText: "",
     localMode: config.LOCAL_MODE, //Wether or local (devl/testing) data is used
 }
@@ -68,6 +71,9 @@ const getters = {
     },
     tasks: state => {
         return state.tasks;
+    },
+    delimiters: state => {
+        return state.delimiters;
     },
     task: state => {
         return  type => state.tasks.filter(obj => {

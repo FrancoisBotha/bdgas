@@ -4,13 +4,13 @@
           <h5>Select Data Source:</h5>
         </div>
           <div class="form-group row">
-            <label for="selectDataSource" class="col-sm-3 col-form-label">Data Source:</label>
+            <label for="selectDataSource" class="col-sm-3 col-form-label text-right">Data Source:</label>
             <div class="col-sm-5">
                 <b-form-select class=""
                               required
                               v-model="datasource"
                               id="selectDataSource"
-                              @input="selectOption()">
+                              @input="selectOption0()">
                               <option slot="first" :value="null">Choose...</option>
                               <option v-for="ads in auditDataSources" 
                                       :key="ads.id"
@@ -19,22 +19,22 @@
             </div>
           </div>
           <div class="form-group row mt-0">
-            <label for="selectDelimiter" class="col-sm-3 col-form-label">Delimiter:</label>
+            <label for="selectDelimiter" class="col-sm-3 col-form-label text-right">Delimiter:</label>
             <div class="col-sm-5">
               <b-form-select class=""
                             required
-                            v-model="datasource"
+                            v-model="delimiter"
                             id="selectDelimiter"
-                            @input="selectOption()">
-                            <option slot="first" :value="null">Choose...</option>
-                            <option v-for="ads in auditDataSources" 
-                                    :key="ads.id"
-                                    :value="ads.fileName">{{ ads.fileName }}</option>
+                            @input="selectOption1()">
+                            <option :value="null">Choose...</option>
+                            <option v-for="delim in delimiters" 
+                                    :key="delim.id"
+                                    :value="delim.cde">{{ delim.cdeDesc }}</option>
             </b-form-select>            
             </div>
           </div>
           <div class="form-group row mt-0">
-            <label for="inputAlias" class="col-sm-3 col-form-label">Alias:</label>
+            <label for="inputAlias" class="col-sm-3 col-form-label text-right">Alias:</label>
             <div class="col-sm-5">
                 <b-form-input v-model="text1"
                     type="text"
@@ -55,16 +55,26 @@ export default {
   computed: {
     auditDataSources() {
         return this.$store.getters.auditDataSources
+    },
+    delimiters() {
+      return this.$store.getters.delimiters
     }
   },  
   methods: {
-    selectOption() {
+    selectOption0() {
       let payload = {
         i: 0,
         parameter: this.datasource
       }
       this.$store.dispatch('setParameter', payload)
-    } 
+    },
+    selectOption1() {
+      let payload = {
+        i: 1,
+        parameter: this.delimiter
+      }
+      this.$store.dispatch('setParameter', payload)
+    }  
   },
   created: function () {
     if (this.$store.getters.localMode) {
@@ -77,3 +87,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.form-group {
+    margin-bottom: 0.3rem;
+}
+</style>
+
+
+

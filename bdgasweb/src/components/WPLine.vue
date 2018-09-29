@@ -3,7 +3,7 @@
         <div class="col-md-11 ml-3">
             <div>
                 <div class="float-left">ln[ {{ wpline.lnNo }} ]</div>
-                <div class="float-right"><a href="#" @click="onDelete(wpline)" class="" role="button">x</a></div>
+                <div class="float-right" v-if="wpline.lnNo === wpLineCount"><a href="#" @click="onDelete(wpline)" class="" v-b-popover.hover.top="'Delete this Working Paper Line'" role="button">x</a></div>
                 <div class="clearfix"></div>
             </div>
             <div class="row taskLine">
@@ -29,6 +29,9 @@
         wpline: Object
     },  
     computed: {
+       wpLineCount() {
+            return this.$store.getters.wpLineCount;
+      },
     },
     methods: {
       onDelete: function(wpline) {

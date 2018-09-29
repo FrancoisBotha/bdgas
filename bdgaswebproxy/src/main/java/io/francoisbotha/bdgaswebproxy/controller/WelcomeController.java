@@ -53,7 +53,8 @@ public class WelcomeController {
     @Autowired
     private TaskService taskService;
 
-
+    @Autowired
+    private CodeTableService codeTableService;
 
     private static final String BASE_PATH = "pages/ui/welcome/";
     private static final String WELCOME_VIEW_NAME = BASE_PATH + "welcome";
@@ -79,6 +80,10 @@ public class WelcomeController {
     private static final String TASKLIST_MODEL_KEY = "tasksObj";
 
     private static final String HELPTEXT_MODEL_KEY = "helpText";
+
+    private static final String CODETABLE_DELIMETERS = "02";
+    private static final String DELIMTERS_MODEL_KEY = "delimitersObj";
+
 
     /***********
      * LIST    *
@@ -306,6 +311,9 @@ public class WelcomeController {
 
         List tasks = taskService.getAll();
         model.addAttribute(TASKLIST_MODEL_KEY, tasks);
+
+        List delimiters = codeTableService.getCodeTablesForNr(CODETABLE_DELIMETERS);
+        model.addAttribute(DELIMTERS_MODEL_KEY, delimiters);
 
         return this.SPA_VIEW_NAME;
 

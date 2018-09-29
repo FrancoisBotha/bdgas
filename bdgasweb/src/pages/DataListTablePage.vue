@@ -30,7 +30,7 @@
                  body-bg-variant='light'
                  ok-title='Delete'
                  ok-variant='danger'
-                 no-close-on-backdrop='true'
+                 :no-close-on-backdrop='true'
                  @ok="onDeleteSelected()"
                  @cancel="onCancelSelected()"
                  >

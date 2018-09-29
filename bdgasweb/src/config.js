@@ -20,5 +20,7 @@ export default {
     AWS_GETSIGNEDURL_ENDPOINT: getBaseUrl() + '/api/v1/s3/signedurl',
     DATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/datasource',
     LOCALDATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/localdatasource',
-    WPLINE_ENDPOINT: getBaseUrl() + '/api/v1/wpline'
+    WPLINE_ENDPOINT: getBaseUrl() + '/api/v1/wpline',
+
+    GENERAL_SERVER_ERR_MSG: "An error occurred while processing your request on the server"
   }

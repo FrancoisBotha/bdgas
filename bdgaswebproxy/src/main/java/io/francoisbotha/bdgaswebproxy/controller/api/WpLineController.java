@@ -20,6 +20,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.francoisbotha.bdgaswebproxy.domain.dto.WpLineDto;
+import io.francoisbotha.bdgaswebproxy.error.EntityNotFoundException;
+import io.francoisbotha.bdgaswebproxy.error.SjsException;
 import io.francoisbotha.bdgaswebproxy.services.WpLineService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
@@ -88,30 +91,22 @@ public class WpLineController {
      **********/
     @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.POST, consumes="application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public WpLineDto wpLinePost( @RequestBody String wpLine) {
+    public WpLineDto wpLinePost( @RequestBody String wpLine)
+            throws EntityNotFoundException, SjsException, IOException, HttpServerErrorException {
 
-        try {
-            /*Map input parameter to DTO*/
-            WpLineDto wpLineDto = new WpLineDto();
-            ObjectMapper mapper = new ObjectMapper();
-            wpLineDto = mapper.readValue(wpLine, WpLineDto.class);
+        /*Map input parameter to DTO*/
+        WpLineDto wpLineDto = new WpLineDto();
+        ObjectMapper mapper = new ObjectMapper();
+        wpLineDto = mapper.readValue(wpLine, WpLineDto.class);
 
-            log.info("AAAAAAAAAAAAA" + wpLineDto.getTaskParams());
+        log.info("AAAAAAAAAAAAA" + wpLineDto.getTaskParams());
 
-            WpLineDto wpLineDtoReturn = wpLineService.create(wpLineDto);
-            return wpLineDtoReturn;
+        WpLineDto wpLineDtoReturn = wpLineService.create(wpLineDto);
+        return wpLineDtoReturn;
 
-        } catch (RestClientException ex) {
-            ex.printStackTrace();
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        log.info("ADMIN SERVICE RESULT ");
+//        log.info(wpLineDtoReturn.toString());
 
-        return null;
     }
 
     /***************

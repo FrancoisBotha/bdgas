@@ -19,6 +19,7 @@ package io.francoisbotha.bdgasadmin.api.v1.controller;
 import io.francoisbotha.bdgasadmin.domain.dto.WpLineDto;
 import io.francoisbotha.bdgasadmin.domain.model.WpLine;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
+import io.francoisbotha.bdgasadmin.error.SjsException;
 import io.francoisbotha.bdgasadmin.services.WorkingPaperService;
 import io.francoisbotha.bdgasadmin.services.WpLineService;
 import lombok.extern.slf4j.Slf4j;
@@ -75,26 +76,21 @@ public class  WpLineController  {
      ************/
     @RequestMapping(value = "/api/v1/wpline", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public WpLine AddWpLine(@RequestBody @Valid WpLineDto wpLineDto )  {
+    public WpLine AddWpLine(@RequestBody @Valid WpLineDto wpLineDto )
+            throws EntityNotFoundException, SjsException  {
 
-        try {
-            WpLine wpLine = new WpLine();
+        WpLine wpLine = new WpLine();
 
-            wpLine.setWpId(wpLineDto.getWpId());
-            wpLine.setTaskId(wpLineDto.getTaskId());
-            wpLine.setTaskCde(wpLineDto.getTaskCde());
-            wpLine.setTaskParams(wpLineDto.getTaskParams());
-            wpLine.setTaskDesc(wpLineDto.getTaskDesc());
-            wpLine.setLnState(wpLineDto.getLnState());
-            wpLine.setLnNo(workingPaperService.incrLineCount(wpLineDto.getWpId()));
+        wpLine.setWpId(wpLineDto.getWpId());
+        wpLine.setTaskId(wpLineDto.getTaskId());
+        wpLine.setTaskCde(wpLineDto.getTaskCde());
+        wpLine.setTaskParams(wpLineDto.getTaskParams());
+        wpLine.setTaskDesc(wpLineDto.getTaskDesc());
+        wpLine.setLnState(wpLineDto.getLnState());
+        wpLine.setLnNo(workingPaperService.incrLineCount(wpLineDto.getWpId()));
 
-            return wpLineService.create(wpLine);
+        return wpLineService.create(wpLine);
 
-        } catch (EntityNotFoundException ex) {
-            ex.printStackTrace();
-        }
-
-        return null;
     }
 
     /************

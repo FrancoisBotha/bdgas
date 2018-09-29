@@ -4,6 +4,7 @@ import io.francoisbotha.bdgasadmin.domain.dto.SjsJobDto;
 import io.francoisbotha.bdgasadmin.domain.dto.JobDto;
 import io.francoisbotha.bdgasadmin.domain.dto.SjsJobResultDto;
 import io.francoisbotha.bdgasadmin.domain.dto.SparkJobDto;
+import io.francoisbotha.bdgasadmin.error.SjsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,7 +81,7 @@ public class SjsService {
 
     }
 
-    public JobDto runJob(JobDto jobDto, List<String> taskParams) throws RestClientException {
+    public JobDto runJob(JobDto jobDto, List<String> taskParams) throws RestClientException, SjsException {
 
         final String uri = endPointService.getSjsJobsEP();
 
@@ -94,6 +95,12 @@ public class SjsService {
                                 .queryParam("context", jobDto.getConfigContext())
                                 .queryParam("sync", jobDto.getConfigSync())
                                 .queryParam("timeout", jobDto.getConfigTimeout());
+
+
+            if (taskParams == null
+                || taskParams.isEmpty()) {
+                log.info("TASK PARAMS IS EMPTY");
+            }
 
             //Form Parameters
 //          MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
@@ -114,6 +121,8 @@ public class SjsService {
 
             ResponseEntity<SjsJobResultDto> restResult
                     = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
+
+            log.info(restResult.getStatusCode().toString());
 
             log.info(restResult.getBody().toString());
             log.info("++++++++++++++++++++++++++++++++++++AFTER CALL...");
@@ -139,10 +148,13 @@ public class SjsService {
             return returnJobDto;
 
         } catch (RestClientException ex) {
-
-            String message = "Failed to post to service: " + ex.getMessage();
+            String message = "Rest Exception in SJS Service: " + ex.getMessage();
             log.error(message, ex);
             throw ex;
+        } catch (Exception ex) {
+            String message = "General Exception in SJS Service (Run Job): " + ex.getMessage();
+            log.error(message, ex);
+            throw new SjsException(message);
         }
     }
 

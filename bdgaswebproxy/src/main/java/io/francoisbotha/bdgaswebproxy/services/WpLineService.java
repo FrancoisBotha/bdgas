@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -119,10 +120,22 @@ public class WpLineService {
 
             HttpEntity<WpLineDto> entity = new HttpEntity<WpLineDto>(wpLineDto, headers);
 
-            WpLineDto wpLineDtoReturn = restTemplate.postForObject(uri, entity, WpLineDto.class);
+            ResponseEntity<WpLineDto> restResult
+                    = restTemplate.exchange(uri, HttpMethod.POST, entity, WpLineDto.class);
+
+            log.info("AFTER entity call in proxy wpline service");
+            log.info(restResult.getStatusCode().toString());
+
+            WpLineDto wpLineDtoReturn = restResult.getBody();
             return wpLineDtoReturn;
 
-        } catch (RestClientException ex) {
+        } catch (HttpStatusCodeException ex) {
+            int statusCode = ex.getStatusCode().value();
+            log.error("aaa");
+            log.error(ex.getResponseBodyAsString());
+            throw ex;
+        }
+        catch (RestClientException ex) {
 
             String message = "Failed to post to service: " + ex.getMessage();
             log.error(message, ex);

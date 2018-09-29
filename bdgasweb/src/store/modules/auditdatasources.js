@@ -15,10 +15,7 @@ const state = {
 const getters = {
     auditDataSources: state => {
         return state.auditDataSources;
-    },
-    viewLocalDataSource: state => {
-        return state.viewLocalDataSource;
-    }            
+    },        
 }
  
 const mutations = {

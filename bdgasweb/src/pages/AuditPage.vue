@@ -63,14 +63,29 @@
           </div>
           <div class="card-body text-dark bg-white">
             <router-view></router-view>
-            <div class="mr-2 float-right" v-if="isParamActive"><span v-if="loadingStatus">Running...  </span><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button" v-bind:class="{disabled: loadingStatus}">Go</a></div>
+            <div class="mr-2 float-left ml-2" v-if="isParamActive && selectedAction != 'none'"><a href="#" @click="onCancel()" class="btn btn-outline-dark btn-sm" role="button" v-bind:class="{disabled: loadingStatus}">Cancel</a></div>
+            <div class="mr-2 float-right" v-if="isParamActive && selectedAction != 'none'"><span v-if="loadingStatus">Running...  </span><a href="#" @click="onGo()" class="btn btn-success btn-sm" role="button" v-bind:class="{disabled: loadingStatus}">Go</a></div>
           </div>
         </div>
       </div>
     </div>
+    <div>
+      <b-alert :show="dismissCountDown"
+                dismissible
+                variant="warning"
+                @dismissed="dismissCountDown=0"
+                @dismiss-count-down="countDownChanged">
+          <p>{{ alertText }}</p>
+          <b-progress variant="warning"
+                      :max="dismissSecs"
+                      :value="dismissCountDown"
+                      height="4px">
+          </b-progress>
+      </b-alert>
+    </div>
     <app-wpline v-for="ln in orderedWPLines" 
                   :wpline="ln"
-                  :key="ln.id"
+                  :key="ln.lnNo"
                   ></app-wpline>
     </div>
 </template>
@@ -79,6 +94,7 @@
 
   import WPLine from '../components/WPLine.vue'
   import {_} from 'vue-underscore';
+  import config from '../config'
 
   export default {
     components: {
@@ -87,10 +103,20 @@
     data () {
       return {
         showHelp: true,
-        selectedAction: "none"
+        selectedAction: "none",
+        dismissSecs: 10,
+        dismissCountDown: 0,
+        showDismissibleAlert: false,
+        alertText: ""
       }
     },    
     methods: {
+    countDownChanged (dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert () {
+        this.dismissCountDown = this.dismissSecs
+      },     
       actionClicked: function(task) {
         let route = "audit."
                     + task.taskType + "_"
@@ -112,10 +138,21 @@
             lnResult: "",
             lnState: "new",
         }
-        this.$store.dispatch('addWpLine', wpLine)   
-        this.selectedAction = "none";  
-        this.setDefaultHelp() 
+        this.$store.dispatch('addWpLine', wpLine).then(response => {
+          this.onCancel()
+        }, error => {
+          // this.alertText = JSON.stringify(error, null, 4)
+          this.alertText = config.GENERAL_SERVER_ERR_MSG
+          this.showAlert()
+        })   
       },
+      onCancel: function() {
+        let route = "audit.param"
+        this.$router.push({ name: route})
+        this.selectedAction = "none"
+        this.$store.dispatch('clearParameters') 
+        this.setDefaultHelp()
+      },      
       setDefaultHelp: function() {
          this.$store.dispatch('setActiveHelpText', this.$store.getters.helpText("AuditSection").txt)
       }
