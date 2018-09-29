@@ -142,7 +142,9 @@
           this.onCancel()
         }, error => {
           // this.alertText = JSON.stringify(error, null, 4)
-          this.alertText = config.GENERAL_SERVER_ERR_MSG
+          // this.alertText = config.GENERAL_SERVER_ERR_MSG
+          console.dir(error)
+          this.alertText = error
           this.showAlert()
         })   
       },

@@ -8,6 +8,19 @@ package io.francoisbotha.bdgaswebproxy.error;
  *  https://github.com/brunocleite/spring-boot-exception-handling/blob/master/src/main/java/com/example/springbootexceptionhandling/ApiError.java
  */
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
+import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
+import lombok.*;
+import org.hibernate.validator.internal.engine.path.PathImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+
+import javax.validation.ConstraintViolation;
+import java.time.LocalDateTime;
+import java.util.*;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
@@ -21,24 +34,6 @@ import org.springframework.validation.ObjectError;
 import javax.validation.ConstraintViolation;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
-import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
-import lombok.*;
-import org.hibernate.validator.internal.engine.path.PathImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-
-import javax.validation.ConstraintViolation;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 

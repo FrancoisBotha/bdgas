@@ -8,6 +8,7 @@ package io.francoisbotha.bdgaswebproxy.error;
  *  https://github.com/brunocleite/spring-boot-exception-handling/blob/master/src/main/java/com/example/springbootexceptionhandling/ApiError.java
  */
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -142,12 +143,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+
+    // See Blog for more details on wrangling JSON:
+    // https://www.baeldung.com/jackson-nested-values
     @ExceptionHandler(HttpStatusCodeException.class)
     protected ResponseEntity<Object> handleHttpStatusCodeException(
             HttpStatusCodeException ex) throws IOException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        ApiError apiError = objectMapper.readValue(ex.getResponseBodyAsString(), ApiError.class);
+        JsonNode apiErrorNode = new ObjectMapper().readTree(ex.getResponseBodyAsString());
+
+        ApiError apiError = new ApiError((HttpStatus.valueOf(apiErrorNode.path("apierror").get("status").textValue())));
+        apiError.setMessage(apiErrorNode.path("apierror").get("message").textValue());
+        apiError.setMessage(apiErrorNode.path("apierror").get("debugMessage").textValue());
+
         return buildResponseEntity(apiError);
 
     }
