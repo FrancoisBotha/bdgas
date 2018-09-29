@@ -96,10 +96,10 @@ public class SjsService {
                                 .queryParam("sync", jobDto.getConfigSync())
                                 .queryParam("timeout", jobDto.getConfigTimeout());
 
-
-            if (taskParams == null
-                || taskParams.isEmpty()) {
-                log.info("TASK PARAMS IS EMPTY");
+            if (taskParams.isEmpty()) {
+                String message = "Invalid task parameters supplied.";
+                log.error(message);
+                throw new SjsException(message);
             }
 
             //Form Parameters
@@ -148,11 +148,11 @@ public class SjsService {
             return returnJobDto;
 
         } catch (RestClientException ex) {
-            String message = "Rest Exception in SJS Service: " + ex.getMessage();
+            String message = ex.getMessage();
             log.error(message, ex);
             throw ex;
         } catch (Exception ex) {
-            String message = "General Exception in SJS Service (Run Job): " + ex.getMessage();
+            String message = ex.getMessage();
             log.error(message, ex);
             throw new SjsException(message);
         }

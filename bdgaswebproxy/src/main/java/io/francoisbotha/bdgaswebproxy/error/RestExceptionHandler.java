@@ -8,6 +8,7 @@ package io.francoisbotha.bdgaswebproxy.error;
  *  https://github.com/brunocleite/spring-boot-exception-handling/blob/master/src/main/java/com/example/springbootexceptionhandling/ApiError.java
  */
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -21,11 +22,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.io.IOException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -137,6 +141,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
 
     }
+
+    @ExceptionHandler(HttpStatusCodeException.class)
+    protected ResponseEntity<Object> handleHttpStatusCodeException(
+            HttpStatusCodeException ex) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ApiError apiError = objectMapper.readValue(ex.getResponseBodyAsString(), ApiError.class);
+        return buildResponseEntity(apiError);
+
+    }
+
 
     /**
      * Handle HttpMessageNotReadableException. Happens when request JSON is malformed.

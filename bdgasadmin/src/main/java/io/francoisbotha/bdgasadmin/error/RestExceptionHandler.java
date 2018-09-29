@@ -139,7 +139,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleSjsException(
             SjsException ex) {
 
-        String error = "Error executing task on Spark Job Server";
+        String error = ex.getMessage();
         return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
 
     }

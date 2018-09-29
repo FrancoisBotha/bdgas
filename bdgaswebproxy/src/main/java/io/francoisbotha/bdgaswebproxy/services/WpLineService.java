@@ -123,9 +123,6 @@ public class WpLineService {
             ResponseEntity<WpLineDto> restResult
                     = restTemplate.exchange(uri, HttpMethod.POST, entity, WpLineDto.class);
 
-            log.info("AFTER entity call in proxy wpline service");
-            log.info(restResult.getStatusCode().toString());
-
             WpLineDto wpLineDtoReturn = restResult.getBody();
             return wpLineDtoReturn;
 
