@@ -109,7 +109,9 @@ public class SjsService {
             //Form Parameters
 //          MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
             Map<String,String> map = new HashMap<String,String>();
-            map.put("fileFullPath", taskParams.get(0));
+            map.put("param0", taskParams.get(0));
+            map.put("param1", taskParams.get(1));
+            map.put("param2", taskParams.get(2));
 
             //Headers
             HttpHeaders headers = new HttpHeaders();
