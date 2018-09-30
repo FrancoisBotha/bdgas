@@ -32,11 +32,23 @@ object DisplayRowsPlugin extends SparkSessionJob with NamedObjectSupport {
 
   def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
 
-    val a = sparkSession.sql("SELECT * FROM dataFile LIMIT 9").toJSON
+    //**************
+    //* PARAMETERS *
+    //**************/
+    val dummy1     = data(0) //Not used: File name
+    val fileAlias  = data(1)
+    val limitRow   = data(2)
+
+
+    val a = sparkSession.sql(s"SELECT * FROM $fileAlias LIMIT $limitRow").toJSON
 
     a.collect()
 
   }
+
+  //**************
+  //* VALIDATION *
+  //**************/
 
   // Documentation on Scalactic Or
   // http://doc.scalactic.org/3.0.1/#org.scalactic.Or

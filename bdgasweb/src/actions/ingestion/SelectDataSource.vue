@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="ml-1 mt-2 text-left">
-          <h5>Select Data Source:</h5>
+          <h5>{{activeActionTitle}}:</h5>
         </div>
           <div class="form-group row">
             <label for="selectDataSource" class="col-sm-3 col-form-label text-right">Data Source:</label>
@@ -30,7 +30,7 @@
                             <option v-for="delim in delimiters" 
                                     :key="delim.id"
                                     :value="delim.cde">{{ delim.cdeDesc }}</option>
-            </b-form-select>            
+              </b-form-select>            
             </div>
           </div>
           <div class="form-group row mt-0">
@@ -68,6 +68,9 @@ export default {
     },
     delimiters() {
       return this.$store.getters.delimiters
+    },
+    activeActionTitle() {
+      return this.$store.getters.activeActionTitle
     }
   },  
   methods: {
@@ -103,6 +106,7 @@ export default {
       //...use cloud data sources
       this.$store.dispatch('setAuditDataSources', this.$store.getters.dataSources)
     }
+
   },
 }
 </script>

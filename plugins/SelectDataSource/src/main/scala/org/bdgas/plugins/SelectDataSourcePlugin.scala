@@ -18,22 +18,25 @@ package org.bdgas.plugins
 
 import com.typesafe.config.Config
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.storage.StorageLevel
 import org.scalactic._
 import spark.jobserver._
 import spark.jobserver.api._
-
 import scala.util.{Failure, Success, Try}
 
 
 object SelectDataSourcePlugin extends SparkSessionJob with NamedObjectSupport {
 
-  implicit val dataFramePersister = new DataFramePersister
-
   type JobData = Array[String]
   type JobOutput = Array[String]
 
   def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
+
+    //**************
+    //* PARAMETERS *
+    //**************/
+    val filePath  = data(0)
+    val fileDelim = data(1)
+    val fileAlias = data(2)
 
 
     //Resolve delimiter based on code supplied
@@ -46,18 +49,22 @@ object SelectDataSourcePlugin extends SparkSessionJob with NamedObjectSupport {
 
     val df = sparkSession
       .read
-      .option("delimiter", matchDelimiter(data(1)))     // E.g. "|"
+      .option("delimiter", matchDelimiter(fileDelim))     // E.g. "|"
       .option("inferSchema", "true")
       .option("header", "true")
-      .csv(data(0))                     //  E.g. .csv("file:///mnt/data/Invoices100.txt")
+      .csv(filePath)                     //  E.g. .csv("file:///mnt/data/Invoices100.txt")
 
-    df.createOrReplaceTempView("dataFile")
+    df.createOrReplaceTempView(fileAlias)
 
-    val a = sparkSession.sql("desc formatted dataFile").toJSON
+    val a = sparkSession.sql("desc formatted " + fileAlias).toJSON
 
     a.collect()
 
   }
+
+  //**************
+  //* VALIDATION *
+  //**************/
 
   // Documentation on Scalactic Or
   // http://doc.scalactic.org/3.0.1/#org.scalactic.Or

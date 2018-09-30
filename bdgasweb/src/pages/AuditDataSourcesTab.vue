@@ -7,7 +7,7 @@
           <div class="form-group row">
             <label for="primaryDataSource" class="col-sm-3 col-form-label">Primary Data Source:</label>
             <div class="col-sm-9">
-              <input type="text" readonly class="form-control-plaintext" id="primaryDataSource" value="asfadsf.txt">
+              <input type="text" readonly class="form-control-plaintext" id="primaryDataSource" :value="dataSource">
             </div>
           </div>
       </form>
@@ -19,6 +19,18 @@
     computed: {
       helpTextAuditSection() {
         return this.$store.getters.activeHelpText
+      },
+      dataSource() {
+        return this.$store.getters.selectedPrimaryDataSource
+               + "  ("
+               + this.$store.getters.selectedPrimaryDataAlias
+               + ")"
+      },
+      selectedPrimaryDataSource() {
+        return this.$store.getters.selectedPrimaryDataSource
+      },
+      selectedPrimaryDataAlias() {
+        return this.$store.getters.selectedPrimaryDataAlias
       }
     }
   }

@@ -45,6 +45,9 @@ const state = {
     delimiters: delimitersObj,
     activeHelpText: "",
     localMode: config.LOCAL_MODE, //Wether or local (devl/testing) data is used
+    selectedPrimaryDataSource: "<Please Select Data Source>",
+    selectedPrimaryDataAlias: "<None selected>",
+    activeActionTitle: ""
 }
  
 const getters = {
@@ -94,15 +97,32 @@ const getters = {
     localMode: state => {
         return state.localMode;
     }, 
-
+    selectedPrimaryDataSource: state => {
+        return state.selectedPrimaryDataSource;
+    }, 
+    selectedPrimaryDataAlias: state => {
+        return state.selectedPrimaryDataAlias;
+    },    
+    activeActionTitle: state => {
+        return state.activeActionTitle;
+    }, 
 }
  
 const mutations = {
     'SET_SIGNEDS3URL' (state, signedUrl) {
         state.signedS3Url = signedUrl;
+    },   
+    'SET_SELECTEDPRIMARYDATASOURCE' (state, dataSource) {
+        state.selectedPrimaryDataSource = dataSource;
+    },
+    'SET_SELECTEDPRIMARYDATAALIAS' (state, Alias) {
+        state.selectedPrimaryDataAlias = Alias;
     },
     'SET_ACTIVEHELPTEXT' (state, activeHelpText) {
         state.activeHelpText = activeHelpText;
+    },
+    'SET_ACTIVEACTIONTITLE' (state, title) {
+        state.activeActionTitle = title;
     },
    
 }
@@ -120,6 +140,15 @@ const actions = {
     },
     setActiveHelpText: ({commit}, helpText) => {
         commit('SET_ACTIVEHELPTEXT', helpText)     
+    },
+    setSelectedPrimaryDataSource: ({commit}, dataSource) => {
+        commit('SET_SELECTEDPRIMARYDATASOURCE', dataSource)     
+    },
+    setSelectedPrimaryDataAlias: ({commit}, alias) => {
+        commit('SET_SELECTEDPRIMARYDATAALIAS', alias)     
+    },
+    setActiveActionTitle: ({commit}, title) => {
+        commit('SET_ACTIVEACTIONTITLE', title)     
     },
     
 }

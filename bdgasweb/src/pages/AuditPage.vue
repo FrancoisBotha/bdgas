@@ -119,6 +119,7 @@
         this.$router.push({ name: route})
         this.selectedAction = task
         this.$store.dispatch('setActiveHelpText', task.taskHelp) 
+        this.$store.dispatch('setActiveActionTitle', task.menuDesc) 
         this.$store.dispatch('clearParameters') 
       },
       onGo: function() {
@@ -133,8 +134,13 @@
             lnResult: "",
             lnState: "new",
         }
-        console.log(this.$store.getters.enteredParameters)
+ console.log(this.$store.getters.enteredParameters)
         this.$store.dispatch('addWpLine', wpLine).then(response => {
+          //If this was a data store action, update state
+          if (wpLine.taskCde === "2001001") {
+            this.$store.dispatch('setSelectedPrimaryDataSource', wpLine.taskParams[0])
+            this.$store.dispatch('setSelectedPrimaryDataAlias', wpLine.taskParams[2])
+          }
           this.onCancel()
         }, error => {
           // this.alertText = JSON.stringify(error, null, 4)
