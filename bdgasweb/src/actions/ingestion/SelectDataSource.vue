@@ -8,7 +8,7 @@
             <div class="col-sm-5">
                 <b-form-select class=""
                               required
-                              v-model="datasource"
+                              v-model="parameter0"
                               id="selectDataSource"
                               @input="selectOption0()">
                               <option slot="first" :value="null">Choose...</option>
@@ -23,7 +23,7 @@
             <div class="col-sm-5">
               <b-form-select class=""
                             required
-                            v-model="delimiter"
+                            v-model="parameter1"
                             id="selectDelimiter"
                             @input="selectOption1()">
                             <option :value="null">Choose...</option>
@@ -36,7 +36,7 @@
           <div class="form-group row mt-0">
             <label for="inputAlias" class="col-sm-3 col-form-label text-right">Alias:</label>
             <div class="col-sm-5">
-                <b-form-input v-model="text1"
+                <b-form-input v-model="parameter2"
                     type="text"
                     id="inputAlias"
                     placeholder="Alias for selected file">
@@ -46,12 +46,22 @@
     </div>
 </template>
 <script>
+import {_} from 'vue-underscore';
+
 export default {
   data () {
     return {
-      datasource: null
+      parameter0: null,
+      parameter1: null,
+      parameter2: null
     }
   },
+  watch: {
+    // Watch, in a debounced manner, changes to parameter 2
+   parameter2: function() {
+     this.debouncedParam2()
+   } 
+  },  
   computed: {
     auditDataSources() {
         return this.$store.getters.auditDataSources
@@ -64,19 +74,28 @@ export default {
     selectOption0() {
       let payload = {
         i: 0,
-        parameter: this.datasource
+        parameter: this.parameter0
       }
       this.$store.dispatch('setParameter', payload)
     },
     selectOption1() {
       let payload = {
         i: 1,
-        parameter: this.delimiter
+        parameter: this.parameter1
       }
       this.$store.dispatch('setParameter', payload)
-    }  
+    },
+    selectOption2() {
+      let payload = {
+        i: 2,
+        parameter: this.parameter2
+      }
+      this.$store.dispatch('setParameter', payload)
+    }        
   },
   created: function () {
+    this.debouncedParam2 = _.debounce(this.selectOption2, 500)
+
     if (this.$store.getters.localMode) {
       //Local mode is enabled, use local data sources
       this.$store.dispatch('setAuditDataSources', this.$store.getters.localDataSources)
