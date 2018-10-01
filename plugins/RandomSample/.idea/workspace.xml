@@ -2,8 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737fae0a-0028-4abd-bb7b-4fd65d6139a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../FindDuplicates/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/services/SjsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/services/SjsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/Sample.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/Sample.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CountRows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CountRows/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DescribeData/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DescribeData/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/RandomSamplePlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/RandomSamplePlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/RandomSample-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/RandomSample-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$2$$anonfun$apply$1$$anonfun$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$2$$anonfun$apply$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$1$$anonfun$apply$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$1$$anonfun$apply$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$3$$anonfun$apply$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$validate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$validate$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$validate$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/RandomSamplePlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-RandomSample-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-RandomSample-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -17,12 +43,12 @@
     <session id="1112732830">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.1" value="4" />
-          <entry key="project.open.time.2" value="1" />
+          <entry key="project.closed" value="20" />
+          <entry key="project.open.time.0" value="9" />
+          <entry key="project.open.time.1" value="8" />
+          <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.22" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -41,7 +67,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="scala" value="404" />
+          <entry key="scala" value="774" />
           <entry key="txt" value="13" />
           <entry key="xml" value="9" />
         </counts>
@@ -49,7 +75,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="13" />
-          <entry key="Scala" value="404" />
+          <entry key="Scala" value="774" />
           <entry key="XML" value="9" />
         </counts>
       </usages-collector>
@@ -73,10 +99,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/RandomSamplePlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="1" lean-forward="true" selection-end-line="117" />
+            <state relative-caret-position="613">
+              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
               <folding>
-                <element signature="e#27#60#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#1308#1341#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,7 +166,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-12" />
-    <option name="width" value="2025" />
+    <option name="width" value="2436" />
     <option name="height" value="2112" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -148,6 +175,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -206,15 +235,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537607925157" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FindDuplicates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bdgaswebproxy" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -247,16 +274,29 @@
       <workItem from="1537607752164" duration="256000" />
       <workItem from="1537608106106" duration="11000" />
       <workItem from="1537608200976" duration="16000" />
+      <workItem from="1538417444961" duration="74000" />
+      <workItem from="1538417542687" duration="665000" />
+      <workItem from="1538418683659" duration="125000" />
+      <workItem from="1538419641015" duration="195000" />
+      <workItem from="1538419938144" duration="97000" />
+      <workItem from="1538420157859" duration="63000" />
+      <workItem from="1538423279517" duration="128000" />
+      <workItem from="1538423544917" duration="46000" />
+      <workItem from="1538423912635" duration="205000" />
+      <workItem from="1538424295368" duration="250000" />
+      <workItem from="1538424642226" duration="116000" />
+      <workItem from="1538426451480" duration="178000" />
+      <workItem from="1538426851689" duration="41000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20741000" />
+    <option name="totallyTimeSpent" value="22924000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1350" height="1408" extended-state="0" />
+    <frame x="-8" y="0" width="1624" height="1408" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2511628" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22186701" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -265,7 +305,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26550078" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26509804" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -284,7 +324,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Bean Validation" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Maven Projects" order="9" visible="true" weight="0.19224806" />
+      <window_info anchor="right" id="Maven Projects" order="9" visible="true" weight="0.15856777" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,10 +350,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/RandomSamplePlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" lean-forward="true" selection-end-line="117" />
+        <state relative-caret-position="613">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
           <folding>
-            <element signature="e#27#60#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1308#1341#0" expanded="true" />
           </folding>
         </state>
       </provider>

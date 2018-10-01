@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="242e7331-01d3-421a-93dc-e017b1aaadb5" name="Default Changelist" comment="" />
+    <list default="true" id="242e7331-01d3-421a-93dc-e017b1aaadb5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/services/SjsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/services/SjsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/Sample.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/Sample.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DescribeData/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DescribeData/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/src/main/scala/org/bdgas/plugins/RandomSamplePlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/src/main/scala/org/bdgas/plugins/RandomSamplePlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/RandomSample-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/target/RandomSample-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$2$$anonfun$apply$1$$anonfun$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$2$$anonfun$apply$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$1$$anonfun$apply$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$1$$anonfun$apply$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$3$$anonfun$apply$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$showString$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$validate$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$validate$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$$anonfun$validate$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/target/classes/org/bdgas/plugins/RandomSamplePlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/target/original-RandomSample-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/target/original-RandomSample-1.0-SNAPSHOT.jar" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,10 +41,10 @@
     <session id="-223673710">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -48,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="767">
+            <state relative-caret-position="1840">
               <caret line="92" selection-start-line="92" selection-end-line="92" />
             </state>
           </provider>
@@ -57,11 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/CountRowsPlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="24" column="3" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-              <folding>
-                <element signature="e#28#61#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="320">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -119,6 +144,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -162,14 +188,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537621879950" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FindDuplicates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RandomSample" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -197,11 +222,12 @@
       <updated>1537620616338</updated>
       <workItem from="1537620617985" duration="79000" />
       <workItem from="1537620748186" duration="1360000" />
+      <workItem from="1538423870633" duration="41000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1439000" />
+    <option name="totallyTimeSpent" value="1480000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="30" width="1416" height="1408" extended-state="0" />
@@ -246,18 +272,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
+        <state relative-caret-position="1840">
           <caret line="92" selection-start-line="92" selection-end-line="92" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/CountRowsPlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="3" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-          <folding>
-            <element signature="e#28#61#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="320">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
         </state>
       </provider>
     </entry>

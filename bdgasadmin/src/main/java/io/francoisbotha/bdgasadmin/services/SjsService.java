@@ -18,10 +18,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -117,6 +114,7 @@ public class SjsService {
             HttpHeaders headers = new HttpHeaders();
 
             headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
             // Request entity
             HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);

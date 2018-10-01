@@ -1,117 +1,113 @@
+/*****************************************************************************
+  * Copyright 2018 Francois Botha                                             *
+  *                                                                           *
+  * Licensed under the Apache License, Version 2.0 (the "License");           *
+  * you may not use this file except in compliance with the License.          *
+  * You may obtain a copy of the License at                                   *
+  *                                                                           *
+  * http://www.apache.org/licenses/LICENSE-2.0                                *
+  *                                                                           *
+  * Unless required by applicable law or agreed to in writing, software       *
+  * distributed under the License is distributed on an "AS IS" BASIS,         *
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  *
+  * See the License for the specific language governing permissions and       *
+  * limitations under the License.                                            *
+  *                                                                           *
+  * ****************************************************************************/
 package org.bdgas.plugins
 
 import com.typesafe.config.Config
-import org.apache.commons.lang.StringUtils
-import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
+import org.apache.spark.sql.{Row, SparkSession}
 import org.scalactic._
-import spark.jobserver.SparkSessionJob
-import spark.jobserver.api.{JobEnvironment, SingleProblem, ValidationProblem}
+import spark.jobserver._
+import spark.jobserver.api._
 
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 
-object RandomSamplePlugin extends SparkSessionJob {
-  type JobData = Seq[String]
-  type JobOutput = String
+
+object RandomSamplePlugin extends SparkSessionJob with NamedObjectSupport {
+
+  type JobData = Array[String]
+  type JobOutput = Array[String]
 
   def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
 
-      val df = sparkSession
-          .read
-          .option(" inferSchema", "true")
-          .option(" header", "true")
-          .csv("file:///mnt/data/Invoices10K.txt")
+    //**************
+    //* PARAMETERS *
+    //**************/
+    val dummy1     = data(0) //Not used: File name
+    val fileAlias  = data(1)
+    val fraction   = data(2).toInt
 
-       val a = df.selectExpr("min('Amt'), max('Amt')")
-       showString(a)
+    val frc = fraction.toDouble / 100.toDouble
 
-//      val seed = 5
-//      val withReplacement = false
-//      val fraction = 0.1
-//      df.sample( withReplacement, fraction, seed)
+    val a = sparkSession.sql(s"SELECT * FROM $fileAlias")
+    val b = a.sample(false, frc)
+    val c = b.toJSON
+
+    c.collect()
 
   }
 
+  //**************
+  //* VALIDATION *
+  //**************/
+
+  // Documentation on Scalactic Or
+  // http://doc.scalactic.org/3.0.1/#org.scalactic.Or
   def validate(sparkSession: SparkSession, runtime: JobEnvironment, config: Config):
   JobData Or Every[ValidationProblem] = {
-    Try(config.getString("input.string").split(" ").toSeq)
-      .map(words => Good(words))
-      .getOrElse(Bad(One(SingleProblem("No input.string param"))))
-  }
 
-  def showString(df:DataFrame,_numRows: Int = 20, truncate: Int = 20): String = {
-    val numRows = _numRows.max(0)
-    val takeResult = df.take(numRows + 1)
-    val hasMoreData = takeResult.length > numRows
-    val data = takeResult.take(numRows)
+    var returnVal:Array[String] = new Array[String](3)
 
-    // For array values, replace Seq and Array with square brackets
-    // For cells that are beyond `truncate` characters, replace it with the
-    // first `truncate-3` and "..."
-    val rows: Seq[Seq[String]] = df.schema.fieldNames.toSeq +: data.map { row =>
-      row.toSeq.map { cell =>
-        val str = cell match {
-          case null => "null"
-          case binary: Array[Byte] => binary.map("%02X".format(_)).mkString("[", " ", "]")
-          case array: Array[_] => array.mkString("[", ", ", "]")
-          case seq: Seq[_] => seq.mkString("[", ", ", "]")
-          case _ => cell.toString
-        }
-        if (truncate > 0 && str.length > truncate) {
-          // do not show ellipses for strings shorter than 4 characters.
-          if (truncate < 4) str.substring(0, truncate)
-          else str.substring(0, truncate - 3) + "..."
-        } else {
-          str
-        }
-      }: Seq[String]
+    var validationProblem = false
+
+    var errMsg = ""
+
+    val input0 = "param0"
+    val input1 = "param1"
+    val input2 = "param2"
+
+    def getParam(name: String): Try[String] = {
+      Try(config.getString(name))
     }
 
-    val sb = new StringBuilder
-    val numCols = df.schema.fieldNames.length
-
-    // Initialise the width of each column to a minimum value of '3'
-    val colWidths = Array.fill(numCols)(3)
-
-    // Compute the width of each column
-    for (row <- rows) {
-      for ((cell, i) <- row.zipWithIndex) {
-        colWidths(i) = math.max(colWidths(i), cell.length)
+    getParam(input0) match {
+      case Success(value1) => {
+        returnVal(0) = value1
+      }
+      case Failure(f) => {
+        validationProblem = true
+        errMsg = errMsg.concat("Input paramter 1 not supplied | ")
       }
     }
 
-    // Create SeparateLine
-    val sep: String = colWidths.map("-" * _).addString(sb, "+", "+", "+\n").toString()
-
-    // column names
-    rows.head.zipWithIndex.map { case (cell, i) =>
-      if (truncate > 0) {
-        StringUtils.leftPad(cell, colWidths(i))
-      } else {
-        StringUtils.rightPad(cell, colWidths(i))
+    getParam(input1) match {
+      case Success(value2) => {
+        returnVal(1) = value2
       }
-    }.addString(sb, "|", "|", "|\n")
-
-    sb.append(sep)
-
-    // data
-    rows.tail.map {
-      _.zipWithIndex.map { case (cell, i) =>
-        if (truncate > 0) {
-          StringUtils.leftPad(cell.toString, colWidths(i))
-        } else {
-          StringUtils.rightPad(cell.toString, colWidths(i))
-        }
-      }.addString(sb, "|", "|", "|\n")
+      case Failure(f) => {
+        validationProblem = true
+        errMsg = errMsg.concat("Input paramter 2 not supplied | ")
+      }
     }
 
-    sb.append(sep)
-
-    // For Data that has more than "numRows" records
-    if (hasMoreData) {
-      val rowsString = if (numRows == 1) "row" else "rows"
-      sb.append(s"only showing top $numRows $rowsString\n")
+    getParam(input2) match {
+      case Success(value3) => {
+        returnVal(2) = value3
+      }
+      case Failure(f) => {
+        validationProblem = true
+        errMsg = errMsg.concat("Input paramter 3 not supplied | ")
+      }
     }
 
-    sb.toString()
+    if (!validationProblem) {
+      Good(returnVal)
+    } else {
+      Bad(One(SingleProblem(errMsg)))
+    }
+
   }
+
 }

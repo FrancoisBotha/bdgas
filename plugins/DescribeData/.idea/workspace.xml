@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c9d55132-369b-4f8e-8644-ee66a98ee675" name="Default Changelist" comment="" />
+    <list default="true" id="c9d55132-369b-4f8e-8644-ee66a98ee675" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RandomSample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RandomSample/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,10 +19,11 @@
     <session id="454989241">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -58,10 +64,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/DescribeDataPlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="42" column="75" selection-start-line="42" selection-start-column="75" selection-end-line="42" selection-end-column="75" />
+            <state relative-caret-position="160">
+              <caret line="8" column="42" lean-forward="true" selection-end-line="110" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1308#1341#0" expanded="true" />
               </folding>
             </state>
@@ -108,7 +113,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-12" />
     <option name="y" value="3" />
-    <option name="width" value="2328" />
+    <option name="width" value="2702" />
     <option name="height" value="2001" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -119,7 +124,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,15 +172,16 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538412034589" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bdgaswebproxy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RandomSample" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -204,16 +209,17 @@
       <updated>1538411974050</updated>
       <workItem from="1538411975898" duration="101000" />
       <workItem from="1538412095176" duration="316000" />
+      <workItem from="1538417520915" duration="20000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="417000" />
+    <option name="totallyTimeSpent" value="437000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="2" width="1552" height="1334" extended-state="0" />
+    <frame x="-8" y="2" width="1801" height="1334" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24932976" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2136703" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -241,7 +247,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Bean Validation" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="9" visible="true" weight="0.3297587" />
+      <window_info active="true" anchor="right" id="Maven Projects" order="9" visible="true" weight="0.2825962" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,10 +266,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/DescribeDataPlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="42" column="75" selection-start-line="42" selection-start-column="75" selection-end-line="42" selection-end-column="75" />
+        <state relative-caret-position="160">
+          <caret line="8" column="42" lean-forward="true" selection-end-line="110" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="e#1308#1341#0" expanded="true" />
           </folding>
         </state>
