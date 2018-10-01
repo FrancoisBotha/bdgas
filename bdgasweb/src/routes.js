@@ -12,6 +12,7 @@ import SelectDataSource from './actions/ingestion/SelectDataSource.vue'
 import FindDuplicates from './actions/core/FindDuplicates.vue'
 import FindGaps from './actions/core/FindGaps.vue'
 import RecalcColumn from './actions/core/RecalcColumn.vue'
+import DescribeData from './actions/core/DescribeData.vue'
 import Sample from './actions/core/Sample.vue'
 import ShowData from './actions/display/ShowData.vue'
 import AuditDataSourcesTab from './pages/AuditDataSourcesTab.vue'
@@ -73,6 +74,11 @@ export const routes = [
         component: SelectDataSource,
         name: 'audit.DI_selectdata',
       },
+      {
+        path: '/audit/param/ct_describedata',
+        component: DescribeData,
+        name: 'audit.CT_describedata',
+      }, 
       {
         path: '/audit/param/ct_findgaps',
         component: FindGaps,

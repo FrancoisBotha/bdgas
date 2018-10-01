@@ -142,10 +142,13 @@ public class WpLineService  {
             job.setSparkJobId(returnJobDto.getSparkJobId());
             job.setResult(returnJobDto.getResult());
 
+            log.debug("WpLine Service: Creating Job record");
             final Job job1 = jobService.create(job);
 
             //Step 5. Save Working Paper Line
             wpLine.setLnResult(job.getResult());
+            log.debug("WpLine Service: Updating wpLine record");
+            log.info(wpLine.toString());
             return wpLineRepository.save(wpLine);
 
         }

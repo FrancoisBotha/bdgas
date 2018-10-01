@@ -219,6 +219,9 @@
 </script>
 
 <style>
+  .form-group {
+      margin-bottom: 0.3rem;
+  }
   .card-header {
       border-bottom: 0px;
   }

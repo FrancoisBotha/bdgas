@@ -76,6 +76,7 @@ public class TaskService {
         task.setAppName(taskDto.getAppName());
         task.setClassPath(taskDto.getClassPath());
         task.setSuccessDesc(taskDto.getSuccessDesc());
+        task.setTemplatePath(taskDto.getTemplatePath());
         task.setTaskHelp(taskDto.getTaskHelp());
 
         return taskRepository.save(task);
