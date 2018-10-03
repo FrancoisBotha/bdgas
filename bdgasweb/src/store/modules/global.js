@@ -43,10 +43,13 @@ const state = {
     tasks: tasksObj,
     helpTexts: helpTextsObj,
     delimiters: delimitersObj,
-    activeHelpText: "",
+    activeHelpText: 
+    "",
     localMode: config.LOCAL_MODE, //Wether or local (devl/testing) data is used
     selectedPrimaryDataSource: "<Please Select Data Source>",
     selectedPrimaryDataAlias: "<None selected>",
+    primarySchema: "",
+    primaryNumericSchema: "",
     activeActionTitle: ""
 }
  
@@ -106,6 +109,12 @@ const getters = {
     activeActionTitle: state => {
         return state.activeActionTitle;
     }, 
+    primarySchema: state => {
+        return state.primarySchema;
+    }, 
+    primaryNumericSchema: state => {
+        return state.primaryNumericSchema;
+    }, 
 }
  
 const mutations = {
@@ -117,6 +126,12 @@ const mutations = {
     },
     'SET_SELECTEDPRIMARYDATAALIAS' (state, Alias) {
         state.selectedPrimaryDataAlias = Alias;
+    },
+    'SET_PRIMARYSCHEMA' (state, schema) {
+        state.primarySchema = schema;
+    },
+    'SET_PRIMARYNUMERICSCHEMA' (state, schema) {
+        state.primaryNumericSchema = schema;
     },
     'SET_ACTIVEHELPTEXT' (state, activeHelpText) {
         state.activeHelpText = activeHelpText;
@@ -146,6 +161,12 @@ const actions = {
     },
     setSelectedPrimaryDataAlias: ({commit}, alias) => {
         commit('SET_SELECTEDPRIMARYDATAALIAS', alias)     
+    },
+    setPrimarySchema: ({commit}, schema) => {
+        commit('SET_PRIMARYSCHEMA', schema)     
+    },
+    setPrimaryNumericSchema: ({commit}, schema) => {
+        commit('SET_PRIMARYNUMERICSCHEMA', schema)     
     },
     setActiveActionTitle: ({commit}, title) => {
         commit('SET_ACTIVEACTIONTITLE', title)     

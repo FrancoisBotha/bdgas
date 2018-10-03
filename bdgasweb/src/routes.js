@@ -12,6 +12,7 @@ import SelectDataSource from './actions/ingestion/SelectDataSource.vue'
 import FindDuplicates from './actions/core/FindDuplicates.vue'
 import FindGaps from './actions/core/FindGaps.vue'
 import RecalcColumn from './actions/core/RecalcColumn.vue'
+import Sum from './actions/core/Sum.vue'
 import DescribeData from './actions/core/DescribeData.vue'
 import Sample from './actions/core/Sample.vue'
 import ShowData from './actions/display/ShowData.vue'
@@ -90,9 +91,9 @@ export const routes = [
         name: 'audit.CT_findduplicates',
       }, 
       {
-        path: '/audit/param/ct_recalccolumn',
-        component: RecalcColumn,
-        name: 'audit.CT_recalccolumn',
+        path: '/audit/param/ct_sum',
+        component: Sum,
+        name: 'audit.CT_sum',
       }, 
       {
         path: '/audit/param/ct_sample',

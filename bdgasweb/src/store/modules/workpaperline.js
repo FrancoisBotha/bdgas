@@ -86,7 +86,7 @@ const actions = {
             console.log(err);
         })       
     },
-    addWpLine: ({commit}, wpLine) => {
+    addWpLine: ({commit, dispatch}, wpLine) => {
         return new Promise((resolve, reject) => {
             let data = new FormData();
             commit('SET_LOADINGSTATUS', true)
@@ -106,6 +106,19 @@ const actions = {
                     wpLine.lnState = response.data.lnState
                     commit('ADD_WPLINE', wpLine)
                     commit('SET_LOADINGSTATUS', false)
+
+                    //If this was a data store action, update state
+                    if (wpLine.taskCde === "2001001") {
+                        dispatch('setSelectedPrimaryDataSource', wpLine.taskParams[0])
+                        dispatch('setSelectedPrimaryDataAlias', wpLine.taskParams[2])
+                        let resultData = JSON.parse(wpLine.lnResult)
+
+                        //ToDo: Also include float data types...
+                        let numericFlds = resultData.filter(fld => fld.data_type == "int")
+                        dispatch('setPrimarySchema', resultData)
+                        dispatch('setPrimaryNumericSchema', numericFlds)
+                    }
+
                     resolve(response)
                 })
                 .catch(function (err) {

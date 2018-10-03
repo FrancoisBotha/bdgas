@@ -39,7 +39,7 @@ object SumPlugin extends SparkSessionJob with NamedObjectSupport {
     val fileAlias  = data(1)
     val col        = data(2)
 
-    val a = sparkSession.sql(s"SELECT COUNT($col) FROM $fileAlias")toJSON
+    val a = sparkSession.sql(s"SELECT SUM($col) FROM $fileAlias")toJSON
 
     a.collect()
 

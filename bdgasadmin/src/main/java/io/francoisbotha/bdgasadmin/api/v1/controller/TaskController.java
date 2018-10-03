@@ -72,6 +72,7 @@ public class TaskController {
         task.setSuccessDesc(taskDto.getSuccessDesc());
         task.setAppName(taskDto.getAppName());
         task.setClassPath(taskDto.getClassPath());
+        task.setTemplatePath(taskDto.getTemplatePath());
         task.setTaskHelp(taskDto.getTaskHelp());
 
         return taskService.create(task);
