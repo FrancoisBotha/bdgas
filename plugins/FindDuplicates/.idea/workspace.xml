@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7fd5ead-76f7-44c4-ba32-4d28601e30e8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/api/v1/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/api/v1/controller/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/FindDuplicates.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/FindDuplicates.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/pages/AuditPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/pages/AuditPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Sum/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Sum/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Sum/src/main/scala/org/bdgas/plugins/SumPlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../Sum/src/main/scala/org/bdgas/plugins/SumPlugin.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Sum/target/Sum-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Sum/target/Sum-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Sum/target/classes/org/bdgas/plugins/SumPlugin$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Sum/target/classes/org/bdgas/plugins/SumPlugin$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Sum/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Sum/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Sum/target/original-Sum-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Sum/target/original-Sum-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/.idea/scala_compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/src/main/scala/org/bdgas/plugins/FindGapsPlugin.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,11 +19,11 @@
     <session id="-904208408">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
-          <entry key="project.open.time.0" value="9" />
+          <entry key="project.closed" value="16" />
+          <entry key="project.open.time.0" value="10" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.2" value="3" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -82,10 +70,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
+            <state relative-caret-position="220">
+              <caret line="11" column="51" lean-forward="true" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1308#1341#0" expanded="true" />
               </folding>
             </state>
@@ -140,6 +127,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -182,8 +171,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -191,7 +178,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537705284593" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bdgaswebproxy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Gaps" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -232,16 +219,17 @@
       <workItem from="1538588211517" duration="18000" />
       <workItem from="1538588246462" duration="704000" />
       <workItem from="1538589247231" duration="94000" />
+      <workItem from="1538590427872" duration="17000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13344000" />
+    <option name="totallyTimeSpent" value="13361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1612" height="1384" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19329897" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19587629" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -288,10 +276,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/FindDuplicatesPlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="41" column="59" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
+        <state relative-caret-position="220">
+          <caret line="11" column="51" lean-forward="true" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="e#1308#1341#0" expanded="true" />
           </folding>
         </state>

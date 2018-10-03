@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de0c2684-f196-483c-8c78-ef6d5636d28e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../DisplayRows/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DisplayRows/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/.idea/scala_compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Gaps/src/main/scala/org/bdgas/plugins/FindGapsPlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/FindGaps.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/actions/core/FindGaps.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FindDuplicates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SelectDataSourcePlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SelectDataSourcePlugin.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WordCount/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WordCount/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WordCount/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../WordCount/src/main/scala/org/bdgas/plugins/WordCountPlugin.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -18,14 +26,14 @@
     <session id="4878861">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="18" />
-          <entry key="project.open.time.0" value="4" />
+          <entry key="project.closed" value="20" />
+          <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -72,10 +80,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SelectDataSourcePlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="35" column="21" lean-forward="true" selection-start-line="33" selection-end-line="38" selection-end-column="27" />
+            <state relative-caret-position="140">
+              <caret line="7" column="55" selection-end-line="126" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1308#1341#0" expanded="true" />
               </folding>
             </state>
@@ -138,7 +145,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -187,15 +195,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538321112663" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DisplayRows" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WordCount" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -239,16 +246,18 @@
       <workItem from="1538321820569" duration="15000" />
       <workItem from="1538321885818" duration="13000" />
       <workItem from="1538326332266" duration="903000" />
+      <workItem from="1538595718067" duration="137000" />
+      <workItem from="1538596092843" duration="14000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28278000" />
+    <option name="totallyTimeSpent" value="28429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="2" width="1620" height="1380" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17307693" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1775641" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -295,10 +304,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SelectDataSourcePlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="35" column="21" lean-forward="true" selection-start-line="33" selection-end-line="38" selection-end-column="27" />
+        <state relative-caret-position="140">
+          <caret line="7" column="55" selection-end-line="126" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="e#1308#1341#0" expanded="true" />
           </folding>
         </state>

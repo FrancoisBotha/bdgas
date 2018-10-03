@@ -1,23 +1,114 @@
+/*****************************************************************************
+  * Copyright 2018 Francois Botha                                             *
+  *                                                                           *
+  * Licensed under the Apache License, Version 2.0 (the "License");           *
+  * you may not use this file except in compliance with the License.          *
+  * You may obtain a copy of the License at                                   *
+  *                                                                           *
+  * http://www.apache.org/licenses/LICENSE-2.0                                *
+  *                                                                           *
+  * Unless required by applicable law or agreed to in writing, software       *
+  * distributed under the License is distributed on an "AS IS" BASIS,         *
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  *
+  * See the License for the specific language governing permissions and       *
+  * limitations under the License.                                            *
+  *                                                                           *
+  * ****************************************************************************/
 package org.bdgas.plugins
 
-import com.typesafe.config.{Config, ConfigFactory}
-import org.apache.spark.{SparkConf, SparkContext}
+import com.typesafe.config.Config
+import org.apache.spark.sql.SparkSession
 import org.scalactic._
+import spark.jobserver._
+import spark.jobserver.api._
+import scala.util.{Failure, Success, Try}
 
-import scala.util.Try
-import spark.jobserver.api.{SparkJob => NewSparkJob, _}
 
-object WordCountPlugin extends NewSparkJob {
-  type JobData = Seq[String]
+object WordCountPlugin extends SparkSessionJob with NamedObjectSupport {
+
+  type JobData = Array[String]
   type JobOutput = collection.Map[String, Long]
 
-  def runJob(sc: SparkContext, runtime: JobEnvironment, data: JobData): JobOutput =
-    sc.parallelize(data).countByValue
+  def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
 
-  def validate(sc: SparkContext, runtime: JobEnvironment, config: Config):
-  JobData Or Every[ValidationProblem] = {
-    Try(config.getString("input.string").split(" ").toSeq)
-      .map(words => Good(words))
-      .getOrElse(Bad(One(SingleProblem("No input.string param"))))
+    //**************
+    //* PARAMETERS *
+    //**************/
+    val filePath  = data(0)
+    val dummy1    = data(1)
+    val dummy2    = data(2)
+
+    val sourceDataFile = sparkSession.sparkContext.textFile(filePath)
+    val words = sourceDataFile.flatMap(x => x.split(" "))
+
+    val a = words.countByValue
+
+    val b = a.foreach((word: String, cnt: Long) => {
+      Map("fname" -> word, "lname" -> cnt)
+    })
+
   }
+
+  //**************
+  //* VALIDATION *
+  //**************/
+
+  // Documentation on Scalactic Or
+  // http://doc.scalactic.org/3.0.1/#org.scalactic.Or
+  def validate(sparkSession: SparkSession, runtime: JobEnvironment, config: Config):
+  JobData Or Every[ValidationProblem] = {
+
+    var returnVal:Array[String] = new Array[String](3)
+
+    var validationProblem = false
+
+    var errMsg = ""
+
+    val input0 = "param0"
+    val input1 = "param1"
+    val input2 = "param2"
+
+    def getParam(name: String): Try[String] = {
+      Try(config.getString(name))
+    }
+
+    getParam(input0) match {
+      case Success(value1) => {
+        returnVal(0) = value1
+      }
+      case Failure(f) => {
+        validationProblem = true
+        errMsg = errMsg.concat("Input paramter 1 not supplied | ")
+      }
+    }
+
+    getParam(input1) match {
+      case Success(value2) => {
+        returnVal(1) = value2
+      }
+      case Failure(f) => {
+        validationProblem = true
+        errMsg = errMsg.concat("Input paramter 2 not supplied | ")
+      }
+    }
+
+    getParam(input2) match {
+      case Success(value3) => {
+        returnVal(2) = value3
+      }
+      case Failure(f) => {
+        validationProblem = true
+        errMsg = errMsg.concat("Input paramter 3 not supplied | ")
+      }
+    }
+
+    if (!validationProblem) {
+      Good(returnVal)
+    } else {
+      Bad(One(SingleProblem(errMsg)))
+    }
+
+  }
+
 }
+
