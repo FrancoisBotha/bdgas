@@ -72,9 +72,19 @@ public class TeamUserController {
      * GET FOR USER ID  *
      ********************/
     @RequestMapping(value = "/api/v1/teamuser/user/{id}", method = RequestMethod.GET)
-    public List getCodesForType (@PathVariable("id") String id) throws EntityNotFoundException {
+    public List getTeamsForUser (@PathVariable("id") String id) throws EntityNotFoundException {
 
         return teamUserService.getTeamsForUser(id);
+
+    }
+
+    /********************
+     * GET FOR USER ID  *
+     ********************/
+    @RequestMapping(value = "/api/v1/teamuser/team/{id}", method = RequestMethod.GET)
+    public List getUsersForTeam (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return teamUserService.getUsersForTeam(id);
 
     }
 

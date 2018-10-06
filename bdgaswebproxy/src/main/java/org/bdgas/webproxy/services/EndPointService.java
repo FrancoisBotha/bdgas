@@ -25,6 +25,7 @@ public class EndPointService {
     private static final String TEAM = "team";
     private static final String USER = "user";
     private static final String TEAMUSER = "teamuser";
+    private static final String TEAMUSERUSERS = "teamuser/team";
     private static final String TEAMPROJECTS = "project/team";
     private static final String PROJECT = "project";
     private static final String WORKINGPAPER = "workingpaper";
@@ -75,6 +76,11 @@ public class EndPointService {
     public String getTeamUserEP() {
         return this.merge(this.TEAMUSER);
     }
+
+    public String getTeamUserUsersEP() {
+        return this.merge(this.TEAMUSERUSERS);
+    }
+
 
     public String getProjectEP() {
         return this.merge(this.PROJECT);

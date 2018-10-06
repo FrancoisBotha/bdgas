@@ -82,6 +82,25 @@ public class TeamUserService {
         }
     }
 
+    /***************************
+     * GET CODE USERS FOR TEAM *
+     ***************************/
+    public List getUsersForTeam(String Id) {
+
+        final String uri = endPointService.getTeamUserUsersEP() + "/" + Id;
+
+        ResponseEntity<List<TeamUserDto>> response
+                = restTemplate.exchange(uri,
+                HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<TeamUserDto>>() {
+                });
+
+        List<TeamUserDto> dataSources = response.getBody();
+
+        return dataSources;
+
+    }
+
     /************
      * CREATE   *
      ************/

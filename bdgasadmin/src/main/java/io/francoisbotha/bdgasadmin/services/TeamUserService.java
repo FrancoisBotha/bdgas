@@ -78,6 +78,21 @@ public class TeamUserService {
         return teamUsers;
     }
 
+    public List  getUsersForTeam(String teamId) {
+
+        List teamUsers = new ArrayList();
+
+        Iterable<TeamUser> teamUsersIt = teamUserRepository.findAllByTeamId(teamId);
+
+        Iterator<TeamUser> iter = teamUsersIt.iterator();
+
+        while (iter.hasNext()) {
+            teamUsers.add(iter.next());
+        }
+
+        return teamUsers;
+    }
+
     public TeamUser create(TeamUser teamUser) {
         return teamUserRepository.save(teamUser);
     }

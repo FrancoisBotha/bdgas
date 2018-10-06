@@ -27,4 +27,5 @@ public interface TeamUserRepository extends CrudRepository<TeamUser, String> {
     List<TeamUser> findAll();
     TeamUser findOneById(String id);
     List<TeamUser> findAllByUserId(String userId);
+    List<TeamUser> findAllByTeamId(String teamId);
 }

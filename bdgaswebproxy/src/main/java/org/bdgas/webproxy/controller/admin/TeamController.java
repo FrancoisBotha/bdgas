@@ -53,10 +53,8 @@ public class TeamController {
     private static final String NEW_TEAM_VIEW_NAME = BASE_PATH + "teams_new";
     private static final String MOD_TEAM_VIEW_NAME = BASE_PATH + "teams_mod";
 
-    private static final String TEAMUSERS_VIEW_NAME = BASE_PATH + "codetables";
-    private static final String VIEW_TEAMUSER_VIEW_NAME = BASE_PATH + "codetables_view";
-    private static final String NEW_TEAMUSER_VIEW_NAME = BASE_PATH + "codetables_new";
-    private static final String MOD_TEAMUSER_VIEW_NAME = BASE_PATH + "codetables_mod";
+    private static final String TEAMUSERS_VIEW_NAME = BASE_PATH + "team_users";
+    private static final String NEW_TEAMUSERS_VIEW_NAME = BASE_PATH + "team_users_new";
 
 
     /* Key which identifies helpText payload in Model */
