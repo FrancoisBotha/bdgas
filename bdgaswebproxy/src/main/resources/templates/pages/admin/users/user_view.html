@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <h4 class="display-7 text-left" th:text="'View Users:'">Users</h4>
+        </div>
+    </div>
+
+    <a th:href="@{/admin/user}" class="btn btn-outline-dark btn-sm mt-0" role="button">Back</a>
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="firstName" th:text="#{user.firstName}">FirstNAme</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" th:value="${user.firstName}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="lastName" th:text="#{user.lastName}">LastName</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" th:value="${user.lastName}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="email" th:text="#{user.email}">Email</label>
+                    <input type="text" id="email" name="email" class="form-control" th:value="${user.email}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="authId" th:text="#{user.authId}">Auth ID</label>
+                    <input type="text" id="authId" name="authId" class="form-control" th:value="${user.authId}" readonly/>
+                </div>
+            </div>
+
+            <a th:href="@{|/admin/user/mod/${user.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<tr th:fragment="usertablerow">
+    <td th:text="${user.firstName}">First Name</td>
+    <td th:text="${user.lastName}">Last Name</td>
+    <td><a th:href="@{|/admin/user/${user.id}|}" class="btn btn-outline-dark btn-sm" role="button">View</a></td>
+    <td><a href="#" th:data-record-id="${user.id}"  th:data-record-title="${user.lastName}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+</tr>
+
+</body>
+
+</html>
