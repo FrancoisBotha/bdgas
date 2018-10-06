@@ -21,6 +21,7 @@ import org.bdgas.webproxy.domain.dto.TeamDto;
 import org.bdgas.webproxy.services.CodeTableService;
 import org.bdgas.webproxy.services.TeamService;
 import lombok.extern.slf4j.Slf4j;
+import org.bdgas.webproxy.services.TeamUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,7 @@ public class TeamController {
     private TeamService teamService;
 
     @Autowired
-    private CodeTableService codeTableService;
+    private TeamUserService teamUserService;
 
     private static final String BASE_PATH = "pages/admin/teams/";
     private static final String TEAMS_VIEW_NAME = BASE_PATH + "teams";
@@ -52,18 +53,18 @@ public class TeamController {
     private static final String NEW_TEAM_VIEW_NAME = BASE_PATH + "teams_new";
     private static final String MOD_TEAM_VIEW_NAME = BASE_PATH + "teams_mod";
 
-    private static final String CODETABLES_VIEW_NAME = BASE_PATH + "codetables";
-    private static final String VIEW_CODETABLE_VIEW_NAME = BASE_PATH + "codetables_view";
-    private static final String NEW_CODETABLE_VIEW_NAME = BASE_PATH + "codetables_new";
-    private static final String MOD_CODETABLE_VIEW_NAME = BASE_PATH + "codetables_mod";
+    private static final String TEAMUSERS_VIEW_NAME = BASE_PATH + "codetables";
+    private static final String VIEW_TEAMUSER_VIEW_NAME = BASE_PATH + "codetables_view";
+    private static final String NEW_TEAMUSER_VIEW_NAME = BASE_PATH + "codetables_new";
+    private static final String MOD_TEAMUSER_VIEW_NAME = BASE_PATH + "codetables_mod";
 
 
     /* Key which identifies helpText payload in Model */
     public static final String TEAM_MODEL_KEY = "team";
     private static final String TEAMLIST_MODEL_KEY = "teams";
 
-    public static final String CODETABLE_MODEL_KEY = "codeTable";
-    private static final String CODETABLELIST_MODEL_KEY = "codeTables";
+    public static final String TEAMUSER_MODEL_KEY = "teamUser";
+    private static final String TEAMUSERLIST_MODEL_KEY = "teamUsers";
 
 
     /***********
@@ -206,35 +207,35 @@ public class TeamController {
         }
 
     }
-//
-//    /***************
-//     * CODE TABLES *
-//     ***************/
-//
-//    /***********
-//     * LIST    *
-//     * *********/
-//    @RequestMapping(value = "/admin/team/codetable/{id}", method = RequestMethod.GET)
-//    public String ShowCodeTablePage(Model model,
-//                                    @PathVariable("id") String id) {
-//
-//        try {
-//
-//            TeamDto teamDto = teamService.getOne(id);
-//            model.addAttribute(TEAM_MODEL_KEY, teamDto);
-//
-//            List codeTables = codeTableService.getCodeTablesForType(id);
-//            model.addAttribute(CODETABLELIST_MODEL_KEY, codeTables);
-//
-//        } catch (RestClientException ex) {
-//
-//            model.addAttribute("errMsg", RestServiceErrorMsg);
-//
-//        }
-//
-//        return this.CODETABLES_VIEW_NAME;
-//
-//    }
+
+    /***************
+     * TEAM USERS  *
+     ***************/
+
+    /***********
+     * LIST    *
+     ***********/
+    @RequestMapping(value = "/admin/team/users/{id}", method = RequestMethod.GET)
+    public String ShowCodeTablePage(Model model,
+                                    @PathVariable("id") String id) {
+
+        try {
+
+            TeamDto teamDto = teamService.getOne(id);
+            model.addAttribute(TEAM_MODEL_KEY, teamDto);
+
+            List teamUsers = teamUserService.getUsersForTeam(id);
+            model.addAttribute(TEAMUSERLIST_MODEL_KEY, teamUsers);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+
+        }
+
+        return this.TEAMUSERS_VIEW_NAME;
+
+    }
 //
 //    /***********
 //     * VIEW    *
@@ -244,15 +245,15 @@ public class TeamController {
 //                                @PathVariable("tableId") String tableId) {
 //        try {
 //
-//            CodeTableDto codeTableDto = codeTableService.getOne(tableId);
-//            model.addAttribute(CODETABLE_MODEL_KEY, codeTableDto);
+//            CodeTableDto teamUserDto = teamUserService.getOne(tableId);
+//            model.addAttribute(TEAMUSER_MODEL_KEY, teamUserDto);
 //
 //        } catch (RestClientException ex) {
 //
 //            model.addAttribute("errMsg", RestServiceErrorMsg);
 //        }
 //
-//        return this.VIEW_CODETABLE_VIEW_NAME;
+//        return this.VIEW_TEAMUSER_VIEW_NAME;
 //
 //    }
 //
@@ -268,35 +269,35 @@ public class TeamController {
 //
 //        log.info(teamDto.toString());
 //
-//        CodeTableDto codeTableDto = new CodeTableDto();
-//        codeTableDto.setCdeTypeId(id);
-//        model.addAttribute(this.CODETABLE_MODEL_KEY , codeTableDto);
+//        CodeTableDto teamUserDto = new CodeTableDto();
+//        teamUserDto.setCdeTypeId(id);
+//        model.addAttribute(this.TEAMUSER_MODEL_KEY , teamUserDto);
 //
-//        return this.NEW_CODETABLE_VIEW_NAME;
+//        return this.NEW_TEAMUSER_VIEW_NAME;
 //    }
 //
 //    /***************
 //     * NEW: SAVE   *
 //     * *************/
 //    @RequestMapping(value = "/admin/team/codetable", method = RequestMethod.POST)
-//    public String CodeTablePost(@ModelAttribute(CODETABLE_MODEL_KEY) @Valid CodeTableDto codeTableDto
+//    public String CodeTablePost(@ModelAttribute(TEAMUSER_MODEL_KEY) @Valid CodeTableDto teamUserDto
 //            , BindingResult bindingResult, ModelMap model) {
 //
 //        if (bindingResult.hasErrors()) {
-//            return this.NEW_CODETABLE_VIEW_NAME;
+//            return this.NEW_TEAMUSER_VIEW_NAME;
 //        }
 //
 //        try {
 //
-//            codeTableService.create(codeTableDto);
+//            teamUserService.create(teamUserDto);
 //
 //        } catch (RestClientException ex) {
 //
 //            model.addAttribute("errMsg", RestServiceErrorMsg);
-//            return this.NEW_CODETABLE_VIEW_NAME;
+//            return this.NEW_TEAMUSER_VIEW_NAME;
 //        }
 //
-//        return "redirect:/admin/team/codetable/" + codeTableDto.getCdeTypeId();
+//        return "redirect:/admin/team/codetable/" + teamUserDto.getCdeTypeId();
 //    }
 //
 //    /***************
@@ -307,15 +308,15 @@ public class TeamController {
 //                               @PathVariable("id") String id) {
 //        try {
 //
-//            CodeTableDto codeTableDto = codeTableService.getOne(id);
-//            model.addAttribute(CODETABLE_MODEL_KEY, codeTableDto);
+//            CodeTableDto teamUserDto = teamUserService.getOne(id);
+//            model.addAttribute(TEAMUSER_MODEL_KEY, teamUserDto);
 //
 //        } catch (RestClientException ex) {
 //
 //            model.addAttribute("errMsg", RestServiceErrorMsg);
 //        }
 //
-//        return this.MOD_CODETABLE_VIEW_NAME;
+//        return this.MOD_TEAMUSER_VIEW_NAME;
 //
 //    }
 //
@@ -323,22 +324,22 @@ public class TeamController {
 //     * MOD: SAVE   *
 //     * *************/
 //    @RequestMapping(value = "/admin/codetable/mod/{id}", method = RequestMethod.POST)
-//    public String ModCodeTableSave(@ModelAttribute(CODETABLE_MODEL_KEY) @Valid CodeTableDto codeTableDto
+//    public String ModCodeTableSave(@ModelAttribute(TEAMUSER_MODEL_KEY) @Valid CodeTableDto teamUserDto
 //            , BindingResult bindingResult, ModelMap model,
 //                                   @PathVariable("id") String id) {
 //
 //        if (bindingResult.hasErrors()) {
-//            return this.MOD_CODETABLE_VIEW_NAME;
+//            return this.MOD_TEAMUSER_VIEW_NAME;
 //        }
 //
 //        try {
 //
-//            codeTableService.modify(codeTableDto);
+//            teamUserService.modify(teamUserDto);
 //
 //        } catch (RestClientException ex) {
 //
 //            model.addAttribute("errMsg", RestServiceErrorMsg);
-//            return this.MOD_CODETABLE_VIEW_NAME;
+//            return this.MOD_TEAMUSER_VIEW_NAME;
 //        }
 //
 //        return "redirect:/admin/codetable/" + id;
@@ -354,7 +355,7 @@ public class TeamController {
 //
 //        try {
 //
-//            codeTableService.delete(id);
+//            teamUserService.delete(id);
 //
 //        } catch (RestClientException ex) {
 //

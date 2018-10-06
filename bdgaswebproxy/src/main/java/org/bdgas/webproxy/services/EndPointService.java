@@ -24,6 +24,7 @@ public class EndPointService {
     private static final String LOCALDATASOURCES = "localdatasource";
     private static final String TEAM = "team";
     private static final String USER = "user";
+    private static final String TEAMUSER = "teamuser";
     private static final String TEAMPROJECTS = "project/team";
     private static final String PROJECT = "project";
     private static final String WORKINGPAPER = "workingpaper";
@@ -69,6 +70,10 @@ public class EndPointService {
 
     public String getUserEP() {
         return this.merge(this.USER);
+    }
+
+    public String getTeamUserEP() {
+        return this.merge(this.TEAMUSER);
     }
 
     public String getProjectEP() {

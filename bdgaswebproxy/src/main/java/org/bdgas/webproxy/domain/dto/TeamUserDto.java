@@ -14,7 +14,7 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package io.francoisbotha.bdgasadmin.domain.dto;
+package org.bdgas.webproxy.domain.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -26,11 +26,19 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class TeamDto {
+public class TeamUserDto {
 
     private String id;
 
     @NotBlank
-    private String name;
+    private String teamId;
+
+    @NotBlank
+    private String userId;
+
+    private String teamName;
+    private String userFirstName;
+    private String userLastName;
+    private String userAuthId;
 
 }
