@@ -16,6 +16,7 @@ const f = require('./filters/prettybytes');
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(underscore);
+Vue.use(require('vue-moment'));
 
 Vue.filter("prettyBytes", f.prettyBytes)
 
@@ -29,3 +30,6 @@ var vm = new Vue({
   store,
   render: h => h(App)
 });
+
+
+ 

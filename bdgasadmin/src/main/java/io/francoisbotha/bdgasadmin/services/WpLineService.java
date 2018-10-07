@@ -19,6 +19,7 @@ package io.francoisbotha.bdgasadmin.services;
 import io.francoisbotha.bdgasadmin.domain.dao.JobRepository;
 import io.francoisbotha.bdgasadmin.domain.dao.WpLineRepository;
 import io.francoisbotha.bdgasadmin.domain.dto.JobDto;
+import io.francoisbotha.bdgasadmin.domain.dto.SjsJobDto;
 import io.francoisbotha.bdgasadmin.domain.dto.TaskDto;
 import io.francoisbotha.bdgasadmin.domain.dto.WpLineDto;
 import io.francoisbotha.bdgasadmin.domain.model.Job;
@@ -103,6 +104,10 @@ public class WpLineService  {
 
         try {
 
+            log.debug("WpLine Service: AuthId");
+            log.debug(wpLine.getUserAuthId());
+
+
             //Step 1. Get Task from Working Paper Line
             Task task = taskService.getOne(wpLine.getTaskId());
 
@@ -145,8 +150,16 @@ public class WpLineService  {
             log.debug("WpLine Service: Creating Job record");
             final Job job1 = jobService.create(job);
 
-            //Step 5. Save Working Paper Line
+            //Step 5. Get duration and start date for job
+            SjsJobDto sjsJobDto = new SjsJobDto();
+            sjsJobDto = sjsService.getJob(returnJobDto.getSparkJobId());
+
+            log.debug("Retrieved job record from SJS");
+
+            //Step 6. Save Working Paper Line
             wpLine.setLnResult(job.getResult());
+            wpLine.setDuration(sjsJobDto.getDuration());
+            wpLine.setStartTime(sjsJobDto.getStartTime());
             log.debug("WpLine Service: Updating wpLine record");
             log.info(wpLine.toString());
             return wpLineRepository.save(wpLine);

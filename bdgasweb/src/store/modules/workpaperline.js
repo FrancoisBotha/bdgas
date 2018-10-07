@@ -104,6 +104,9 @@ const actions = {
                     wpLine.taskParams = response.data.taskParams
                     wpLine.lnResult = response.data.lnResult
                     wpLine.lnState = response.data.lnState
+                    wpLine.userAuthId = response.data.userAuthId
+                    wpLine.duration = response.data.duration
+                    wpLine.startTime = response.data.startTime
                     commit('ADD_WPLINE', wpLine)
                     commit('SET_LOADINGSTATUS', false)
 

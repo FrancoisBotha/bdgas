@@ -52,6 +52,10 @@ public class WpLineDto {
 
     private String lnState;
 
+    private String duration;
+    private String startTime;
+    private String userAuthId;
+
 }
 
 

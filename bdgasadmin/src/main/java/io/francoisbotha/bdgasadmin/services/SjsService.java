@@ -60,13 +60,29 @@ public class SjsService {
 
     public SjsJobDto getJob(String jobId) {
 
+        log.debug("JobId");
+        log.debug(jobId);
+
         final String uri = endPointService.getSjsJobsEP()
                             + "/" + jobId;
 
         try {
 
-            SjsJobDto sjsJobDto  = restTemplate
-                    .getForObject(uri , SjsJobDto.class);
+            //Headers
+            HttpHeaders headers = new HttpHeaders();
+            Map<String,String> map = new HashMap<String,String>();
+
+            headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            // Request entity
+            HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);
+
+            ResponseEntity<SjsJobDto> restResult
+                    = restTemplate.exchange(uri, HttpMethod.GET, entity, SjsJobDto.class);
+
+
+            SjsJobDto sjsJobDto = restResult.getBody();
 
             return sjsJobDto;
 
