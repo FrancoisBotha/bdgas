@@ -25,12 +25,17 @@ let tasksObjTemp = []
 let helpTextsObjTemp = []
 let delimitersObjTemp = []
 
+let userNameTemp = ""
+let accessTokenTemp = ""
+
 var teamObj = (typeof teamObjJava != "undefined") ? teamObjJava : teamObjTemp;
 var projectObj = (typeof projectObjJava != "undefined")  ? projectObjJava : projectObjTemp;
 var wpObj = (typeof wpObjJava != "undefined") ? wpObjJava : wpObjTemp;
 var tasksObj = (typeof tasksObjJava != "undefined") ? tasksObjJava : tasksObjTemp;
 var delimitersObj = (typeof delimitersObjJava != "undefined") ? delimitersObjJava : delimitersObjTemp;
 var helpTextsObj = (typeof helpTextsObjJava != "undefined") ? helpTextsObjJava : helpTextsObjTemp;
+var userName = (typeof userNameJava != "undefined") ? userNameJava : userNameTemp;
+var accessToken = (typeof accessTokenJava != "undefined") ? accessTokenJava : accessTokenTemp;
 
 const state = {
     signedS3Url: "",
@@ -50,7 +55,9 @@ const state = {
     selectedPrimaryDataAlias: "<None selected>",
     primarySchema: "",
     primaryNumericSchema: "",
-    activeActionTitle: ""
+    activeActionTitle: "",
+    userName: userName,
+    accessToken: accessToken
 }
  
 const getters = {
@@ -114,6 +121,12 @@ const getters = {
     }, 
     primaryNumericSchema: state => {
         return state.primaryNumericSchema;
+    }, 
+    userName: state => {
+        return state.userName;
+    }, 
+    accessToken: state => {
+        return state.accessToken;
     }, 
 }
  

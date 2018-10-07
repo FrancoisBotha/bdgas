@@ -92,6 +92,8 @@ public class WelcomeController {
 
     private static final String USERNAME_MODEL_KEY = "userName";
 
+    private static final String ACCESSTOKEN_MODEL_KEY = "accessToken";
+
 
     /***********
      * LIST    *
@@ -351,17 +353,12 @@ public class WelcomeController {
         String userName = principal.getName();
         model.addAttribute(USERNAME_MODEL_KEY, userName);
 
+        KeycloakPrincipal<KeycloakSecurityContext> kp = (KeycloakPrincipal<KeycloakSecurityContext>) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
+        String accessToken = kp.getKeycloakSecurityContext().getTokenString();
+        model.addAttribute(ACCESSTOKEN_MODEL_KEY, accessToken);
+
         return this.SPA_VIEW_NAME;
 
-    }
-
-    private String getUserName(Principal principal) {
-
-// Expample of how to retrieve information from keycloak security context
-//  KeycloakPrincipal<KeycloakSecurityContext> kp = (KeycloakPrincipal<KeycloakSecurityContext>) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
-//  String userName = kp.getKeycloakSecurityContext().getIdToken().getPreferredUsername();
-
-        return "";
     }
 
 }

@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
                     <router-link to="/data" tag="li" active-class="active" >
                     <a class="nav-item nav-link">Data</a>
                     </router-link>
@@ -15,8 +15,16 @@
                     <a class="nav-item nav-link">Audit</a>
                     </router-link>
                     <a class="nav-item nav-link" @click="onGoHome" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" @click="onLogOut" href="#">Log Out</a>
-                </div>
+                    <div>&nbsp</div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            {{userName}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" @click="onLogOut" href="#">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>       
     </div>
@@ -31,7 +39,10 @@
     computed: {
       localMode() {
         return this.$store.getters.localMode
-      }
+      },
+      userName() {
+        return this.$store.getters.userName
+      },    
     },
     methods: {
         onGoHome() {

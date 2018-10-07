@@ -4,6 +4,8 @@ import BootstrapVue from "bootstrap-vue"
 import App from './App.vue'
 import VueRouter from 'vue-router';
 import "bootstrap/dist/css/bootstrap.min.css"
+import 'jquery/src/jquery.js'
+import 'bootstrap/dist/js/bootstrap.min.js'
 import "bootstrap-vue/dist/bootstrap-vue.css"
 
 import { routes } from './routes';
