@@ -136,9 +136,6 @@ public class WelcomeController {
             TeamDto team = teamService.getOne(teamId);
             model.addAttribute(TEAM_MODEL_KEY, team);
 
-            List teams = teamService.getAll();
-            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
-
             List projects = projectService.getTeamProjects(teamId);
             model.addAttribute(PROJECTLIST_MODEL_KEY, projects);
 
@@ -147,6 +144,9 @@ public class WelcomeController {
 
             String userName = principal.getName();
             model.addAttribute(USERNAME_MODEL_KEY, userName);
+
+            List teams = teamService.getTeamsForUser(userName);
+            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
 
             ProjectDto projectForm = new ProjectDto();
             projectForm.setTeamId(teamId);
@@ -184,9 +184,6 @@ public class WelcomeController {
             WorkingPaperDto workingPaperDto = new WorkingPaperDto();
             model.addAttribute(WP_MODEL_KEY, workingPaperDto);
 
-            List teams = teamService.getAll();
-            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
-
             List projects = projectService.getTeamProjects(teamId);
             model.addAttribute(PROJECTLIST_MODEL_KEY, projects);
 
@@ -198,6 +195,9 @@ public class WelcomeController {
 
             String userName = principal.getName();
             model.addAttribute(USERNAME_MODEL_KEY, userName);
+
+            List teams = teamService.getTeamsForUser(userName);
+            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
 
             ProjectDto projectForm = new ProjectDto();
             projectForm.setTeamId(teamId);
@@ -238,9 +238,6 @@ public class WelcomeController {
             WorkingPaperDto workingPaperDto = workingPaperService.getOne(wpId);
             model.addAttribute(WP_MODEL_KEY, workingPaperDto);
 
-            List teams = teamService.getAll();
-            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
-
             List projects = projectService.getTeamProjects(teamId);
             model.addAttribute(PROJECTLIST_MODEL_KEY, projects);
 
@@ -259,6 +256,9 @@ public class WelcomeController {
 
             String userName = principal.getName();
             model.addAttribute(USERNAME_MODEL_KEY, userName);
+
+            List teams = teamService.getTeamsForUser(userName);
+            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
 
 
         } catch (RestClientException ex) {
@@ -281,14 +281,19 @@ public class WelcomeController {
     }
 
     @RequestMapping(value = "/ui/welcome/{teamId}", method = RequestMethod.POST)
-    public String UpdateSelectedTeamTwo(Model model, @PathVariable("teamId") String teamId) {
+    public String UpdateSelectedTeamTwo(Principal principal,
+                                        Model model,
+                                        @PathVariable("teamId") String teamId) {
 
         try {
 
             TeamDto team = teamService.getOne(teamId);
             model.addAttribute(TEAM_MODEL_KEY, team);
 
-            List teams = teamService.getAll();
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
+
+            List teams = teamService.getTeamsForUser(userName);
             model.addAttribute(TEAMLIST_MODEL_KEY, teams);
 
         } catch (RestClientException ex) {

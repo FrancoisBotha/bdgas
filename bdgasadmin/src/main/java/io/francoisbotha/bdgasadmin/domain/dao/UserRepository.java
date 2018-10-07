@@ -26,6 +26,7 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, String> {
     List<User> findAll();
     User findOneById(String id);
+    User findOneByAuthId(String id);
     User findOneByEmail(String id);
     List<User> findAllByOrgId(String cdeTypeId);
 }

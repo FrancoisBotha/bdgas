@@ -85,6 +85,13 @@ public class UserService {
         return user;
     }
 
+    public User getOneByAuthId(String id) throws EntityNotFoundException {
+
+
+        User user = userRepository.findOneByAuthId(id);
+
+        return user;
+    }
 
     public User create(User user) {
         return userRepository.save(user);
