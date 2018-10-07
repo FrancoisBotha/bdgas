@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -65,17 +66,23 @@ public class CodeTableController {
     public static final String CODETABLE_MODEL_KEY = "codeTable";
     private static final String CODETABLELIST_MODEL_KEY = "codeTables";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
 
     /***********
      * LIST    *
      * *********/
     @RequestMapping(value = "/admin/codetype", method = RequestMethod.GET)
-    public String ShowCodeTypesPage(Model model) {
+    public String ShowCodeTypesPage(Principal principal,
+                                    Model model) {
 
         try {
 
             List codeTypes = codeTypeService.getAll();
             model.addAttribute(CODETYPELIST_MODEL_KEY, codeTypes);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -90,12 +97,16 @@ public class CodeTableController {
      * VIEW    *
      * *********/
     @RequestMapping(value = "/admin/codetype/{id}", method = RequestMethod.GET)
-    public String ViewVendor(Model model,
+    public String ViewVendor(Principal principal,
+                             Model model,
                              @PathVariable("id") String id) {
         try {
 
             CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
             model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
 
         } catch (RestClientException ex) {
@@ -111,9 +122,13 @@ public class CodeTableController {
      * NEW-FORM    *
      * *************/
     @RequestMapping(value = "/admin/codetype/new", method = RequestMethod.GET)
-    public String ShowCodeTypeNewPage(ModelMap model) {
+    public String ShowCodeTypeNewPage(Principal principal,
+                                      ModelMap model) {
         CodeTypeDto codeTypeDto = new CodeTypeDto();
         model.addAttribute(this.CODETYPE_MODEL_KEY , codeTypeDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         return this.NEW_CODETYPE_VIEW_NAME;
     }
@@ -122,8 +137,9 @@ public class CodeTableController {
      * NEW: SAVE   *
      * *************/
     @RequestMapping(value = "/admin/codetype", method = RequestMethod.POST)
-    public String HelpTextPost(@ModelAttribute(CODETYPELIST_MODEL_KEY) @Valid CodeTypeDto codeTypeDto
-            , BindingResult bindingResult, ModelMap model) {
+    public String HelpTextPost(Principal principal,
+                               @ModelAttribute(CODETYPELIST_MODEL_KEY) @Valid CodeTypeDto codeTypeDto
+                               , BindingResult bindingResult, ModelMap model) {
 
         if (bindingResult.hasErrors()) {
             return this.NEW_CODETYPE_VIEW_NAME;
@@ -146,10 +162,14 @@ public class CodeTableController {
      * MOD-FORM    *
      * *************/
     @RequestMapping(value = "/admin/codetype/mod/{id}", method = RequestMethod.GET)
-    public String modHelpText(Model model,
+    public String modHelpText(Principal principal,
+                              Model model,
                               @PathVariable("id") String id) {
 
         try {
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
             CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
             model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
@@ -215,7 +235,8 @@ public class CodeTableController {
      * LIST    *
      * *********/
     @RequestMapping(value = "/admin/codetype/codetable/{id}", method = RequestMethod.GET)
-    public String ShowCodeTablePage(Model model,
+    public String ShowCodeTablePage(Principal principal,
+                                    Model model,
                                     @PathVariable("id") String id) {
 
         try {
@@ -225,6 +246,9 @@ public class CodeTableController {
 
             List codeTables = codeTableService.getCodeTablesForType(id);
             model.addAttribute(CODETABLELIST_MODEL_KEY, codeTables);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -240,12 +264,16 @@ public class CodeTableController {
      * VIEW    *
      * *********/
     @RequestMapping(value = "/admin/codetable/{tableId}", method = RequestMethod.GET)
-    public String ViewCodeTable(Model model,
+    public String ViewCodeTable(Principal principal,
+                                Model model,
                              @PathVariable("tableId") String tableId) {
         try {
 
             CodeTableDto codeTableDto = codeTableService.getOne(tableId);
             model.addAttribute(CODETABLE_MODEL_KEY, codeTableDto);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -260,11 +288,15 @@ public class CodeTableController {
      * NEW-FORM    *
      * *************/
     @RequestMapping(value = "/admin/codetype/codetable/{id}/new", method = RequestMethod.GET)
-    public String ShowCodeTableNewPage(ModelMap model,
+    public String ShowCodeTableNewPage(Principal principal,
+                                       ModelMap model,
                                        @PathVariable("id") String id) {
 
         CodeTypeDto codeTypeDto = codeTypeService.getOne(id);
         model.addAttribute(CODETYPE_MODEL_KEY, codeTypeDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         log.info(codeTypeDto.toString());
 
@@ -303,12 +335,16 @@ public class CodeTableController {
      * MOD-FORM    *
      * *************/
     @RequestMapping(value = "/admin/codetable/mod/{id}", method = RequestMethod.GET)
-    public String modCodeTable(Model model,
+    public String modCodeTable(Principal principal,
+                               Model model,
                               @PathVariable("id") String id) {
         try {
 
             CodeTableDto codeTableDto = codeTableService.getOne(id);
             model.addAttribute(CODETABLE_MODEL_KEY, codeTableDto);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 

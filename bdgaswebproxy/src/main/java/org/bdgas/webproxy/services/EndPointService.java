@@ -23,6 +23,7 @@ public class EndPointService {
     private static final String TASK = "task";
     private static final String LOCALDATASOURCES = "localdatasource";
     private static final String TEAM = "team";
+    private static final String TEAMTEAMS = "team/user";
     private static final String USER = "user";
     private static final String TEAMUSER = "teamuser";
     private static final String TEAMUSERUSERS = "teamuser/team";
@@ -77,10 +78,13 @@ public class EndPointService {
         return this.merge(this.TEAMUSER);
     }
 
+    public String getUserTeamsEP() {
+        return this.merge(this.TEAMTEAMS);
+    }
+
     public String getTeamUserUsersEP() {
         return this.merge(this.TEAMUSERUSERS);
     }
-
 
     public String getProjectEP() {
         return this.merge(this.PROJECT);

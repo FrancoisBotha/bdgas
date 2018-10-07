@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestClientException;
 
+import java.security.Principal;
+
 @Slf4j
 @Controller
 public class AdminController {
@@ -42,13 +44,19 @@ public class AdminController {
 
     private static final String HELPTEXT_MODEL_KEY = "helpText";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
     @RequestMapping(value = "/admin/help", method = RequestMethod.GET)
-    public String ShowAdminPage(Model model) {
+    public String ShowAdminPage(Principal principal,
+                                Model model) {
 
         try {
 
             HelpTextDto helpTextDto = helpTextService.getOneByName("SystemAdmin");
             model.addAttribute(HELPTEXT_MODEL_KEY, helpTextDto);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
 
         } catch (RestClientException ex) {

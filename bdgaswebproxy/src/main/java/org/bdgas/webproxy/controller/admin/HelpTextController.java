@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -51,16 +52,22 @@ public class HelpTextController {
     public static final String HELPTEXT_MODEL_KEY = "helpText";
     private static final String HELPTEXTLIST_MODEL_KEY = "helpTexts";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
     /***********
      * LIST    *
      * *********/
     @RequestMapping(value = "/admin/helptext", method = RequestMethod.GET)
-    public String ShowHelpTextPage(Model model) {
+    public String ShowHelpTextPage(Principal principal,
+                                   Model model) {
 
         try {
 
             List helpTexts = helpTextService.getAll();
             model.addAttribute(HELPTEXTLIST_MODEL_KEY, helpTexts);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -75,13 +82,17 @@ public class HelpTextController {
      * VIEW    *
      * *********/
     @RequestMapping(value = "/admin/helptext/{id}", method = RequestMethod.GET)
-    public String ViewVendor(Model model,
+    public String ViewVendor(Principal principal,
+                             Model model,
                              @PathVariable("id") String id) {
 
         try {
 
             HelpTextDto helpText = helpTextService.getOne(id);
             model.addAttribute(HELPTEXT_MODEL_KEY, helpText);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -96,9 +107,13 @@ public class HelpTextController {
      * NEW-FORM    *
      * *************/
     @RequestMapping(value = "/admin/helptext/new", method = RequestMethod.GET)
-    public String ShowHelpTextNEwPage(ModelMap model) {
+    public String ShowHelpTextNEwPage(Principal principal,
+                                      ModelMap model) {
         HelpTextDto helptTextDto = new HelpTextDto();
         model.addAttribute(this.HELPTEXT_MODEL_KEY , helptTextDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         return this.NEW_HELPTEXT_VIEW_NAME;
     }
@@ -107,7 +122,8 @@ public class HelpTextController {
      * NEW: SAVE   *
      * *************/
     @RequestMapping(value = "/admin/helptext", method = RequestMethod.POST)
-    public String HelpTextPost(@ModelAttribute(HELPTEXT_MODEL_KEY) @Valid HelpTextDto helpTextDto
+    public String HelpTextPost(Principal principal,
+                               @ModelAttribute(HELPTEXT_MODEL_KEY) @Valid HelpTextDto helpTextDto
             , BindingResult bindingResult, ModelMap model) {
 
         if (bindingResult.hasErrors()) {
@@ -131,13 +147,17 @@ public class HelpTextController {
      * MOD-FORM    *
      * *************/
     @RequestMapping(value = "/admin/helptext/mod/{id}", method = RequestMethod.GET)
-    public String modHelpText(Model model,
+    public String modHelpText(Principal principal,
+                              Model model,
                             @PathVariable("id") String id) {
 
         try {
 
             HelpTextDto helpText = helpTextService.getOne(id);
             model.addAttribute(HELPTEXT_MODEL_KEY, helpText);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 

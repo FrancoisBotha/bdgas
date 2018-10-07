@@ -17,6 +17,7 @@
 package io.francoisbotha.bdgasadmin.services;
 
 import io.francoisbotha.bdgasadmin.domain.dao.TeamRepository;
+import io.francoisbotha.bdgasadmin.domain.model.TeamUser;
 import io.francoisbotha.bdgasadmin.error.EntityNotFoundException;
 import io.francoisbotha.bdgasadmin.domain.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class TeamService {
 
     @Autowired
     private TeamRepository teamRepository;
+
+    @Autowired
+    TeamUserService teamUserService;
 
     public Team getTeam(String id) throws EntityNotFoundException {
         Team team = teamRepository.findOneById(id);
@@ -82,6 +86,30 @@ public class TeamService {
 
         return team;
     }
+
+    public List getTeamsForUser(String id) throws EntityNotFoundException  {
+
+        List teams = new ArrayList();
+
+        //First, get all teams user is linked to:
+        Iterable<TeamUser> teamUsersIt =  teamUserService.getTeamsForUser(id);
+
+        Iterator<TeamUser> iterTeamUsers = teamUsersIt.iterator();
+
+        while (iterTeamUsers.hasNext()) {
+            TeamUser teamUser = iterTeamUsers.next();
+            Team team = teamRepository.findOneById(teamUser.getTeamId());
+            teams.add(team);
+        }
+
+        if(teams.isEmpty()
+                || teams.get(0) == null){
+            throw new EntityNotFoundException(Team.class, "id", id.toString());
+        }
+
+        return teams;
+    }
+
 
 
     public Team create(Team team) {

@@ -14,7 +14,7 @@
  * limitations under the License.                                            *
  *                                                                           *
  *****************************************************************************/
-package org.bdgas.webproxy.controller.ui;
+package org.bdgas.webproxy.controller.admin;
 
 import org.bdgas.webproxy.domain.dto.TaskDto;
 import org.bdgas.webproxy.services.TaskService;
@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -59,17 +60,23 @@ public class TaskController {
 
     private static final String CODETABLE_TASKTYPES = "01";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
 
     /***********
      * LIST    *
      ***********/
     @RequestMapping(value = "/admin/task", method = RequestMethod.GET)
-    public String ShowTaskPage(Model model) {
+    public String ShowTaskPage(Principal principal,
+                               Model model) {
 
         try {
 
             List tasks = taskService.getAll();
             model.addAttribute(TASKLIST_MODEL_KEY, tasks);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -84,7 +91,8 @@ public class TaskController {
      * VIEW    *
      ***********/
     @RequestMapping(value = "/admin/task/{id}", method = RequestMethod.GET)
-    public String ViewVendor(Model model,
+    public String ViewVendor(Principal principal,
+                             Model model,
                              @PathVariable("id") String id) {
 
         try {
@@ -94,6 +102,9 @@ public class TaskController {
 
             List taskTypes = codeTableService.getCodeTablesForNr(CODETABLE_TASKTYPES);
             model.addAttribute(TASKTYPES_MODEL_KEY, taskTypes);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -108,12 +119,16 @@ public class TaskController {
      * NEW-FORM    *
      ***************/
     @RequestMapping(value = "/admin/task/new", method = RequestMethod.GET)
-    public String ShowTaskNEwPage(ModelMap model) {
+    public String ShowTaskNEwPage(Principal principal,
+                                  ModelMap model) {
         TaskDto taskDto = new TaskDto();
         model.addAttribute(this.TASK_MODEL_KEY , taskDto);
 
         List taskTypes = codeTableService.getCodeTablesForNr(CODETABLE_TASKTYPES);
         model.addAttribute(TASKTYPES_MODEL_KEY, taskTypes);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         return this.NEW_TASK_VIEW_NAME;
     }
@@ -146,7 +161,8 @@ public class TaskController {
      * MOD-FORM    *
      ***************/
     @RequestMapping(value = "/admin/task/mod/{id}", method = RequestMethod.GET)
-    public String modTask(Model model,
+    public String modTask(Principal principal,
+                          Model model,
                               @PathVariable("id") String id) {
 
         try {
@@ -156,6 +172,9 @@ public class TaskController {
 
             TaskDto helpText = taskService.getOne(id);
             model.addAttribute(TASK_MODEL_KEY, helpText);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 

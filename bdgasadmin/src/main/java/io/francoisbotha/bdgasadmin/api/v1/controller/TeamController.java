@@ -58,6 +58,16 @@ public class TeamController {
 
     }
 
+    /********************
+     * GET FOR USER     *
+     ********************/
+    @RequestMapping(value = "/api/v1/team/user/{id}", method = RequestMethod.GET)
+    public List getCodesForType (@PathVariable("id") String id) throws EntityNotFoundException {
+
+        return teamService.getTeamsForUser(id);
+
+    }
+
     /************
      * ADD      *
      ************/

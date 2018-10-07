@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -71,17 +72,23 @@ public class TeamController {
 
     private static final String USERS_MODEL_KEY = "Users";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
 
     /***********
      * LIST    *
      * *********/
     @RequestMapping(value = "/admin/team", method = RequestMethod.GET)
-    public String ShowTeamsPage(Model model) {
+    public String ShowTeamsPage(Principal principal,
+                                Model model) {
 
         try {
 
             List teams = teamService.getAll();
             model.addAttribute(TEAMLIST_MODEL_KEY, teams);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -96,12 +103,16 @@ public class TeamController {
      * VIEW    *
      * *********/
     @RequestMapping(value = "/admin/team/{id}", method = RequestMethod.GET)
-    public String ViewVendor(Model model,
+    public String ViewVendor(Principal principal,
+                             Model model,
                              @PathVariable("id") String id) {
         try {
 
             TeamDto teamDto = teamService.getOne(id);
             model.addAttribute(TEAM_MODEL_KEY, teamDto);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
 
         } catch (RestClientException ex) {
@@ -117,9 +128,13 @@ public class TeamController {
      * NEW-FORM    *
      * *************/
     @RequestMapping(value = "/admin/team/new", method = RequestMethod.GET)
-    public String ShowTeamNewPage(ModelMap model) {
+    public String ShowTeamNewPage(Principal principal,
+                                  ModelMap model) {
         TeamDto teamDto = new TeamDto();
         model.addAttribute(this.TEAM_MODEL_KEY , teamDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         return this.NEW_TEAM_VIEW_NAME;
     }
@@ -152,13 +167,17 @@ public class TeamController {
      * MOD-FORM    *
      * *************/
     @RequestMapping(value = "/admin/team/mod/{id}", method = RequestMethod.GET)
-    public String modHelpText(Model model,
+    public String modHelpText(Principal principal,
+                              Model model,
                               @PathVariable("id") String id) {
 
         try {
 
             TeamDto teamDto = teamService.getOne(id);
             model.addAttribute(TEAM_MODEL_KEY, teamDto);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -221,7 +240,8 @@ public class TeamController {
      * LIST    *
      ***********/
     @RequestMapping(value = "/admin/team/user/{id}", method = RequestMethod.GET)
-    public String ShowCodeTablePage(Model model,
+    public String ShowCodeTablePage(Principal principal,
+                                    Model model,
                                     @PathVariable("id") String id) {
 
         try {
@@ -231,6 +251,9 @@ public class TeamController {
 
             List teamUsers = teamUserService.getUsersForTeam(id);
             model.addAttribute(TEAMUSERLIST_MODEL_KEY, teamUsers);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -246,7 +269,8 @@ public class TeamController {
      * NEW-FORM    *
      * *************/
     @RequestMapping(value = "/admin/team/user/{id}/new", method = RequestMethod.GET)
-    public String ShowCodeTableNewPage(ModelMap model,
+    public String ShowCodeTableNewPage(Principal principal,
+                                       ModelMap model,
                                        @PathVariable("id") String id) {
 
         TeamDto teamDto = teamService.getOne(id);
@@ -258,6 +282,9 @@ public class TeamController {
         TeamUserDto teamUserDto = new TeamUserDto();
         teamUserDto.setTeamId(id);
         model.addAttribute(this.TEAMUSER_MODEL_KEY , teamUserDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         return this.NEW_TEAMUSERS_VIEW_NAME;
     }

@@ -90,6 +90,8 @@ public class WelcomeController {
     private static final String CODETABLE_DELIMETERS = "02";
     private static final String DELIMTERS_MODEL_KEY = "delimitersObj";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
 
     /***********
      * LIST    *
@@ -103,15 +105,14 @@ public class WelcomeController {
             HelpTextDto helpTextDto = helpTextService.getOneByName("BdgasAbout");
             model.addAttribute(HELPTEXT_MODEL_KEY, helpTextDto);
 
-            List teams = teamService.getAll();
-            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
-
             TeamDto teamForm = new TeamDto();
             model.addAttribute(TEAM_FORMMODEL_KEY, teamForm );
 
-            KeycloakPrincipal<KeycloakSecurityContext> kp = (KeycloakPrincipal<KeycloakSecurityContext>) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
-            String userName = kp.getKeycloakSecurityContext().getIdToken().getPreferredUsername();
+            List teams = teamService.getTeamsForUser(userName);
+            model.addAttribute(TEAMLIST_MODEL_KEY, teams);
 
         } catch (RestClientException ex) {
 
@@ -144,6 +145,9 @@ public class WelcomeController {
             TeamDto teamForm = new TeamDto();
             model.addAttribute(TEAM_FORMMODEL_KEY, teamForm );
 
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
+
             ProjectDto projectForm = new ProjectDto();
             projectForm.setTeamId(teamId);
             model.addAttribute(PROJECT_FORMMODEL_KEY, projectForm );
@@ -160,7 +164,8 @@ public class WelcomeController {
     }
 
     @RequestMapping(value = "/ui/welcome/{teamId}/{projectId}", method = RequestMethod.GET)
-    public String ShowWelcomePageTeam(Model model,
+    public String ShowWelcomePageTeam(Principal principal,
+                                      Model model,
                                       @PathVariable("teamId") String teamId,
                                       @PathVariable("projectId") String projectId) {
 
@@ -191,6 +196,9 @@ public class WelcomeController {
             TeamDto teamForm = new TeamDto();
             model.addAttribute(TEAM_FORMMODEL_KEY, teamForm );
 
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
+
             ProjectDto projectForm = new ProjectDto();
             projectForm.setTeamId(teamId);
             model.addAttribute(PROJECT_FORMMODEL_KEY, projectForm );
@@ -208,7 +216,8 @@ public class WelcomeController {
     }
 
     @RequestMapping(value = "/ui/welcome/{teamId}/{projectId}/{wpId}", method = RequestMethod.GET)
-    public String ShowWelcomePageTeam(Model model,
+    public String ShowWelcomePageTeam(Principal principal,
+                                      Model model,
                                       @PathVariable("teamId") String teamId,
                                       @PathVariable("projectId") String projectId,
                                       @PathVariable("wpId") String wpId
@@ -247,6 +256,9 @@ public class WelcomeController {
 
             WorkingPaperDto workingPaperForm = new WorkingPaperDto();
             model.addAttribute(WP_FORMMODEL_KEY, workingPaperForm);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
 
         } catch (RestClientException ex) {
@@ -306,11 +318,12 @@ public class WelcomeController {
 //  #### ##   ##### ##  ##  ######  ##### ####       ##### ####    ##  ##
 //
     @RequestMapping(value = "/ui/welcome/{teamId}/{projectId}/{wpId}", method = RequestMethod.POST)
-    public String SelectWp(Model model,
-                                        @ModelAttribute(WP_FORMMODEL_KEY) WorkingPaperDto workingPaperDto,
-                                        @PathVariable("teamId") String teamId,
-                                        @PathVariable("projectId") String projectId,
-                                        @PathVariable("wpId") String wpId) {
+    public String SelectWp(Principal principal,
+                           Model model,
+                           @ModelAttribute(WP_FORMMODEL_KEY) WorkingPaperDto workingPaperDto,
+                           @PathVariable("teamId") String teamId,
+                           @PathVariable("projectId") String projectId,
+                           @PathVariable("wpId") String wpId) {
 
         TeamDto team = teamService.getOne(teamId);
         model.addAttribute(TEAM_OBJMODEL_KEY, team);
@@ -330,8 +343,20 @@ public class WelcomeController {
         List delimiters = codeTableService.getCodeTablesForNr(CODETABLE_DELIMETERS);
         model.addAttribute(DELIMTERS_MODEL_KEY, delimiters);
 
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
+
         return this.SPA_VIEW_NAME;
 
+    }
+
+    private String getUserName(Principal principal) {
+
+// Expample of how to retrieve information from keycloak security context
+//  KeycloakPrincipal<KeycloakSecurityContext> kp = (KeycloakPrincipal<KeycloakSecurityContext>) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ;
+//  String userName = kp.getKeycloakSecurityContext().getIdToken().getPreferredUsername();
+
+        return "";
     }
 
 }

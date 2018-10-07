@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -51,16 +52,22 @@ public class UserController {
     public static final String USER_MODEL_KEY = "user";
     private static final String USERLIST_MODEL_KEY = "users";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
     /***********
      * LIST    *
      * *********/
     @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
-    public String ShowUserPage(Model model) {
+    public String ShowUserPage(Principal principal,
+                               Model model) {
 
         try {
 
             List users = userService.getAll();
             model.addAttribute(USERLIST_MODEL_KEY, users);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -75,13 +82,17 @@ public class UserController {
      * VIEW    *
      * *********/
     @RequestMapping(value = "/admin/user/{id}", method = RequestMethod.GET)
-    public String ViewVendor(Model model,
+    public String ViewVendor(Principal principal,
+                             Model model,
                              @PathVariable("id") String id) {
 
         try {
 
             UserDto user = userService.getOne(id);
             model.addAttribute(USER_MODEL_KEY, user);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -96,9 +107,13 @@ public class UserController {
      * NEW-FORM    *
      * *************/
     @RequestMapping(value = "/admin/user/new", method = RequestMethod.GET)
-    public String ShowUserNEwPage(ModelMap model) {
+    public String ShowUserNEwPage(Principal principal,
+                                  ModelMap model) {
         UserDto helptTextDto = new UserDto();
         model.addAttribute(this.USER_MODEL_KEY , helptTextDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         return this.NEW_USER_VIEW_NAME;
     }
@@ -131,13 +146,17 @@ public class UserController {
      * MOD-FORM    *
      * *************/
     @RequestMapping(value = "/admin/user/mod/{id}", method = RequestMethod.GET)
-    public String modUser(Model model,
+    public String modUser(Principal principal,
+                          Model model,
                               @PathVariable("id") String id) {
 
         try {
 
             UserDto user = userService.getOne(id);
             model.addAttribute(USER_MODEL_KEY, user);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 

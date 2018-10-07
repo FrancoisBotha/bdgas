@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -49,16 +50,22 @@ public class LocalDataSourcesController {
     public static final String LOCALDATASOURCE_MODEL_KEY = "localdatasource";
     private static final String LOCALDATASOURCELIST_MODEL_KEY = "localdatasources";
 
+    private static final String USERNAME_MODEL_KEY = "userName";
+
     /***********
      * LIST    *
      ***********/
     @RequestMapping(value = "/admin/localdatasource", method = RequestMethod.GET)
-    public String ShowTaskPage(Model model) {
+    public String ShowTaskPage(Principal principal,
+                               Model model) {
 
         try {
 
             List localdatasources = localDataSourceService.getAll();
             model.addAttribute(LOCALDATASOURCELIST_MODEL_KEY, localdatasources);
+
+            String userName = principal.getName();
+            model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
 
@@ -74,9 +81,13 @@ public class LocalDataSourcesController {
      * NEW-FORM    *
      ***************/
     @RequestMapping(value = "/admin/localdatasource/new", method = RequestMethod.GET)
-    public String ShowTaskNEwPage(ModelMap model) {
+    public String ShowTaskNEwPage(Principal principal,
+                                  ModelMap model) {
         LocalDataSourceDto localdatasourceDto = new LocalDataSourceDto();
         model.addAttribute(this.LOCALDATASOURCE_MODEL_KEY , localdatasourceDto);
+
+        String userName = principal.getName();
+        model.addAttribute(USERNAME_MODEL_KEY, userName);
 
 
         return this.NEW_LOCALDATASOURCE_VIEW_NAME;

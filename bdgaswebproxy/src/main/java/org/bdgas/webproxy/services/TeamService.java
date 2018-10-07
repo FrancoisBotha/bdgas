@@ -82,6 +82,34 @@ public class TeamService {
         }
     }
 
+    /***************************
+     * GET TEAMS FOR USER      *
+     ***************************/
+    public List getTeamsForUser(String Id) {
+
+        try {
+
+            final String uri = endPointService.getUserTeamsEP() + "/" + Id;
+
+            ResponseEntity<List<TeamDto>> response
+                    = restTemplate.exchange(uri,
+                    HttpMethod.GET, null,
+                    new ParameterizedTypeReference<List<TeamDto>>() {
+                    });
+
+            List<TeamDto> teams = response.getBody();
+
+            return teams;
+
+        } catch (RestClientException ex) {
+
+            String message = "Failed to get data from service: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
+        }
+        
+    }
+
     /************
      * CREATE   *
      ************/
