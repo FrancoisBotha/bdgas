@@ -69,10 +69,11 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     {
         super.configure(http);
         http
-                .authorizeRequests()
-                .antMatchers("/admin/*").hasRole("admin")
-                .antMatchers("/ui/*").hasRole("appuser")
-                .anyRequest().permitAll();
+            .authorizeRequests()
+            .antMatchers("/admin/*").hasRole("admin")
+            .antMatchers("/ui/*").hasRole("appuser")
+            .antMatchers("/api/v1/*").hasRole("appuser")
+            .anyRequest().permitAll();
 
         //TODO: Enable CSRF protection
         //See: https://www.codesandnotes.be/2015/02/05/spring-securitys-csrf-protection-for-rest-services-the-client-side-and-the-server-side/
