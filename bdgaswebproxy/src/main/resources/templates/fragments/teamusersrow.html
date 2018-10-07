@@ -4,9 +4,9 @@
 <body>
 
 <tr th:fragment="teamusersrow">
-    <td th:text="${teamUser.firstName}">First Name</td>
-    <td th:text="${teamUser.lastName}">Last Name</td>
-    <td><a href="#" th:data-record-id="${teamUser.id}" th:data-record-tp="${teamUser.id}" th:data-record-title="${teamUser.lastName}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+    <td th:text="${teamUser.userFirstName}">First Name</td>
+    <td th:text="${teamUser.userLastName}">Last Name</td>
+    <td><a href="#" th:data-record-id="${teamUser.id}" th:data-record-tp="${teamUser.teamId}" th:data-record-title="${teamUser.userLastName}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
 </tr>
 
 </body>

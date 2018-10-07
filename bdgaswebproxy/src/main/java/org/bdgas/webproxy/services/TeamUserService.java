@@ -106,7 +106,7 @@ public class TeamUserService {
      ************/
     public void create(TeamUserDto teamUserDto) throws RestClientException {
 
-        final String uri = endPointService.getTeamEP();
+        final String uri = endPointService.getTeamUserEP();
 
         try {
 
@@ -114,8 +114,6 @@ public class TeamUserService {
 
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
-            log.debug(teamUserDto.toString());
 
             HttpEntity<TeamUserDto> entity = new HttpEntity<TeamUserDto>(teamUserDto, headers);
 
@@ -135,7 +133,7 @@ public class TeamUserService {
      ************/
     public void delete(String id) throws RestClientException {
 
-        final String uri = endPointService.getTeamEP()
+        final String uri = endPointService.getTeamUserEP()
                 + "/" + id;
 
         try {

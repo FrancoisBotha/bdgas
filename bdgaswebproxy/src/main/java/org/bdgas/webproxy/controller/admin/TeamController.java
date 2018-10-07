@@ -18,10 +18,12 @@ package org.bdgas.webproxy.controller.admin;
 
 import org.bdgas.webproxy.domain.dto.CodeTableDto;
 import org.bdgas.webproxy.domain.dto.TeamDto;
+import org.bdgas.webproxy.domain.dto.TeamUserDto;
 import org.bdgas.webproxy.services.CodeTableService;
 import org.bdgas.webproxy.services.TeamService;
 import lombok.extern.slf4j.Slf4j;
 import org.bdgas.webproxy.services.TeamUserService;
+import org.bdgas.webproxy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -47,6 +49,9 @@ public class TeamController {
     @Autowired
     private TeamUserService teamUserService;
 
+    @Autowired
+    private UserService userService;
+
     private static final String BASE_PATH = "pages/admin/teams/";
     private static final String TEAMS_VIEW_NAME = BASE_PATH + "teams";
     private static final String VIEW_TEAM_VIEW_NAME = BASE_PATH + "teams_view";
@@ -63,6 +68,8 @@ public class TeamController {
 
     public static final String TEAMUSER_MODEL_KEY = "teamUser";
     private static final String TEAMUSERLIST_MODEL_KEY = "teamUsers";
+
+    private static final String USERS_MODEL_KEY = "Users";
 
 
     /***********
@@ -213,7 +220,7 @@ public class TeamController {
     /***********
      * LIST    *
      ***********/
-    @RequestMapping(value = "/admin/team/users/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/team/user/{id}", method = RequestMethod.GET)
     public String ShowCodeTablePage(Model model,
                                     @PathVariable("id") String id) {
 
@@ -234,133 +241,69 @@ public class TeamController {
         return this.TEAMUSERS_VIEW_NAME;
 
     }
-//
-//    /***********
-//     * VIEW    *
-//     * *********/
-//    @RequestMapping(value = "/admin/codetable/{tableId}", method = RequestMethod.GET)
-//    public String ViewCodeTable(Model model,
-//                                @PathVariable("tableId") String tableId) {
-//        try {
-//
-//            CodeTableDto teamUserDto = teamUserService.getOne(tableId);
-//            model.addAttribute(TEAMUSER_MODEL_KEY, teamUserDto);
-//
-//        } catch (RestClientException ex) {
-//
-//            model.addAttribute("errMsg", RestServiceErrorMsg);
-//        }
-//
-//        return this.VIEW_TEAMUSER_VIEW_NAME;
-//
-//    }
-//
-//    /***************
-//     * NEW-FORM    *
-//     * *************/
-//    @RequestMapping(value = "/admin/team/codetable/{id}/new", method = RequestMethod.GET)
-//    public String ShowCodeTableNewPage(ModelMap model,
-//                                       @PathVariable("id") String id) {
-//
-//        TeamDto teamDto = teamService.getOne(id);
-//        model.addAttribute(TEAM_MODEL_KEY, teamDto);
-//
-//        log.info(teamDto.toString());
-//
-//        CodeTableDto teamUserDto = new CodeTableDto();
-//        teamUserDto.setCdeTypeId(id);
-//        model.addAttribute(this.TEAMUSER_MODEL_KEY , teamUserDto);
-//
-//        return this.NEW_TEAMUSER_VIEW_NAME;
-//    }
-//
-//    /***************
-//     * NEW: SAVE   *
-//     * *************/
-//    @RequestMapping(value = "/admin/team/codetable", method = RequestMethod.POST)
-//    public String CodeTablePost(@ModelAttribute(TEAMUSER_MODEL_KEY) @Valid CodeTableDto teamUserDto
-//            , BindingResult bindingResult, ModelMap model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return this.NEW_TEAMUSER_VIEW_NAME;
-//        }
-//
-//        try {
-//
-//            teamUserService.create(teamUserDto);
-//
-//        } catch (RestClientException ex) {
-//
-//            model.addAttribute("errMsg", RestServiceErrorMsg);
-//            return this.NEW_TEAMUSER_VIEW_NAME;
-//        }
-//
-//        return "redirect:/admin/team/codetable/" + teamUserDto.getCdeTypeId();
-//    }
-//
-//    /***************
-//     * MOD-FORM    *
-//     * *************/
-//    @RequestMapping(value = "/admin/codetable/mod/{id}", method = RequestMethod.GET)
-//    public String modCodeTable(Model model,
-//                               @PathVariable("id") String id) {
-//        try {
-//
-//            CodeTableDto teamUserDto = teamUserService.getOne(id);
-//            model.addAttribute(TEAMUSER_MODEL_KEY, teamUserDto);
-//
-//        } catch (RestClientException ex) {
-//
-//            model.addAttribute("errMsg", RestServiceErrorMsg);
-//        }
-//
-//        return this.MOD_TEAMUSER_VIEW_NAME;
-//
-//    }
-//
-//    /***************
-//     * MOD: SAVE   *
-//     * *************/
-//    @RequestMapping(value = "/admin/codetable/mod/{id}", method = RequestMethod.POST)
-//    public String ModCodeTableSave(@ModelAttribute(TEAMUSER_MODEL_KEY) @Valid CodeTableDto teamUserDto
-//            , BindingResult bindingResult, ModelMap model,
-//                                   @PathVariable("id") String id) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return this.MOD_TEAMUSER_VIEW_NAME;
-//        }
-//
-//        try {
-//
-//            teamUserService.modify(teamUserDto);
-//
-//        } catch (RestClientException ex) {
-//
-//            model.addAttribute("errMsg", RestServiceErrorMsg);
-//            return this.MOD_TEAMUSER_VIEW_NAME;
-//        }
-//
-//        return "redirect:/admin/codetable/" + id;
-//    }
-//
-//    /***************
-//     * DELETE      *
-//     * *************/
-//    //Used response body because ajax used to delete
-//    @RequestMapping(value = "/admin/codetable/{id}", method = RequestMethod.DELETE)
-//    public @ResponseBody void DeleteCodeTable(Model model,
-//                                              @PathVariable("id") String id) {
-//
-//        try {
-//
-//            teamUserService.delete(id);
-//
-//        } catch (RestClientException ex) {
-//
-//            //TODO: some error handling here...
-//            model.addAttribute("errMsg", RestServiceErrorMsg);
-//        }
-//
-//    }
+
+    /***************
+     * NEW-FORM    *
+     * *************/
+    @RequestMapping(value = "/admin/team/user/{id}/new", method = RequestMethod.GET)
+    public String ShowCodeTableNewPage(ModelMap model,
+                                       @PathVariable("id") String id) {
+
+        TeamDto teamDto = teamService.getOne(id);
+        model.addAttribute(TEAM_MODEL_KEY, teamDto);
+
+        List users = userService.getAll();
+        model.addAttribute(USERS_MODEL_KEY, users);
+
+        TeamUserDto teamUserDto = new TeamUserDto();
+        teamUserDto.setTeamId(id);
+        model.addAttribute(this.TEAMUSER_MODEL_KEY , teamUserDto);
+
+        return this.NEW_TEAMUSERS_VIEW_NAME;
+    }
+
+    /***************
+     * NEW: SAVE   *
+     * *************/
+    @RequestMapping(value = "/admin/team/user", method = RequestMethod.POST)
+    public String CodeTablePost(@ModelAttribute(TEAMUSER_MODEL_KEY) @Valid TeamUserDto teamUserDto
+            , BindingResult bindingResult, ModelMap model) {
+
+        if (bindingResult.hasErrors()) {
+            return this.NEW_TEAMUSERS_VIEW_NAME;
+        }
+
+        try {
+
+            teamUserService.create(teamUserDto);
+
+        } catch (RestClientException ex) {
+
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+            return this.NEW_TEAMUSERS_VIEW_NAME;
+        }
+
+        return "redirect:/admin/team/user/" + teamUserDto.getTeamId();
+    }
+
+    /***************
+     * DELETE      *
+     ***************/
+    //Used response body because ajax used to delete
+    @RequestMapping(value = "/admin/team/user/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody void DeleteCodeTable(Model model,
+                                              @PathVariable("id") String id) {
+
+        try {
+
+            teamUserService.delete(id);
+
+        } catch (RestClientException ex) {
+
+            //TODO: some error handling here...
+            model.addAttribute("errMsg", RestServiceErrorMsg);
+        }
+
+    }
 
 }
