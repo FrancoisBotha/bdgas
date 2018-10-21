@@ -133,8 +133,8 @@ public class SjsService {
             HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(map, headers);
 
 
-            log.info("++++++++++++++++++++++++++++++BEFORE CALL...");
-            log.info(taskParams.toString());
+            log.debug("++++++++++++++++++++++++++++++BEFORE CALL...");
+            log.debug(taskParams.toString());
 
             ResponseEntity<SjsJobResultDto> restResult
                     = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, SjsJobResultDto.class);
@@ -165,10 +165,6 @@ public class SjsService {
 
             returnJobDto.setResult(sjsJobResultDto.getResult().toString());
 
-//            returnJobDto.setSparkStatus(sparkJobDto.getStatus());
-//            returnJobDto.setJobStart(sparkJobDto.getStartTime());
-//            returnJobDto.setDuration(sparkJobDto.getDuration());
-
             return returnJobDto;
 
         }
@@ -192,5 +188,3 @@ public class SjsService {
     }
 
 }
-
-//curl -d "input.string = a b c a b see" "<master node>:8090/jobs?appName=wordcount&classPath=io.francoisbotha.sjs.WordCountExampleNewApi&context=testContext&sync=true&timeout=120"

@@ -39,7 +39,7 @@ public class BdgasadminApplication {
     }
 
     private ClientHttpRequestFactory getClientHttpRequestFactory() {
-        int timeout = 200000;
+        int timeout = 21474835;
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(timeout)
                 .setSocketTimeout(timeout)

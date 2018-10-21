@@ -215,6 +215,22 @@
 </script>
 
 <style>
+  #cbxdi__BV_toggle_ {
+    width: 150px
+  }
+
+  #cbxct__BV_toggle_ {
+    width: 150px
+  }
+
+  #cbxpt__BV_toggle_ {
+    width: 150px
+  }
+
+  #cbxdd__BV_toggle_ {
+    width: 150px
+  }
+
   .form-group {
       margin-bottom: 0.3rem;
   }
