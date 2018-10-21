@@ -29,7 +29,8 @@ object SelectDataSourcePlugin extends SparkSessionJob with NamedObjectSupport {
   type JobData = Array[String]
   type JobOutput = Array[String]
 
-  def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
+  def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData):
+  JobOutput = {
 
     //**************
     //* PARAMETERS *

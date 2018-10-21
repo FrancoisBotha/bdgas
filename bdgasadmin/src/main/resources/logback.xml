@@ -31,7 +31,7 @@
         </encoder>
     </appender>
 
-    <logger name="io.francoisbotha.bdgasadmin" level="debug" />
+    <logger name="org.bdgas.adminservice" level="debug" />
     <logger name="org.springframework" level="info" />
     <logger name="org.hibernate" level="warn" />
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="warn" />

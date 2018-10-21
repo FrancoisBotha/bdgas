@@ -21,13 +21,16 @@ import org.apache.spark.sql.SparkSession
 import org.scalactic._
 import spark.jobserver._
 import spark.jobserver.api._
+
+import scala.collection.immutable.ListMap
 import scala.util.{Failure, Success, Try}
 
 
 object WordCountPlugin extends SparkSessionJob with NamedObjectSupport {
 
   type JobData = Array[String]
-  type JobOutput = collection.Map[String, Long]
+  type JobOutput = Seq[String]
+  //type JobOutput = collection.Map[String, Long]
 
   def runJob(sparkSession: SparkSession, runtime: JobEnvironment, data: JobData): JobOutput = {
 
@@ -39,13 +42,19 @@ object WordCountPlugin extends SparkSessionJob with NamedObjectSupport {
     val dummy2    = data(2)
 
     val sourceDataFile = sparkSession.sparkContext.textFile(filePath)
-    val words = sourceDataFile.flatMap(x => x.split(" "))
+    val words = sourceDataFile.flatMap(a => a.split("\\W+"))
 
-    val a = words.countByValue
+    //def countByValue()(implicit ord: Ordering[T] = null): Map[T, Long]
+    val counted = words.countByValue
+    val sorted = ListMap(counted.toSeq.sortWith(_._2 > _._2):_*)
 
-    val b = a.foreach((word: String, cnt: Long) => {
-      Map("fname" -> word, "lname" -> cnt)
-    })
+    var returnVal = Seq[String]()
+
+    for ((key,value) <- sorted) {
+      returnVal :+= scala.util.parsing.json.JSONObject(Map("Word" -> key, "Count" -> value)).toString()
+    }
+
+    returnVal
 
   }
 
