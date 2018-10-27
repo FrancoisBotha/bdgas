@@ -37,7 +37,7 @@ export default {
       // chunking: true,
       // retryChunks: true,
       timeout: 3600000,
-      maxFilesize: 2000,
+      maxFilesize: 30000,
       // Hijack the xhr.send since Dropzone always upload file by using formData
       // ref: https://github.com/danialfarid/ng-file-upload/issues/743
       sending (file, xhr) {

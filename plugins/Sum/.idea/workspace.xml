@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bdbe318-aa98-4315-83c0-b2407f608110" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/api/v1/controller/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasadmin/src/main/java/io/francoisbotha/bdgasadmin/api/v1/controller/TaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/pages/AuditPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/pages/AuditPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgasweb/src/store/modules/workpaperline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../bdgaswebproxy/src/main/resources/static/js/build.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FindDuplicates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FindDuplicates/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SumPlugin.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SumPlugin.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Sum-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Sum-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/SumPlugin$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/bdgas/plugins/SumPlugin$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/original-Sum-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-Sum-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,12 +16,13 @@
     <session id="-431728450">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -79,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SumPlugin.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="83" column="7" lean-forward="true" selection-end-line="109" />
+            <state relative-caret-position="420">
+              <caret line="75" selection-start-line="74" selection-end-line="75" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1308#1341#0" expanded="true" />
@@ -127,10 +115,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-12" />
-    <option name="y" value="3" />
-    <option name="width" value="2567" />
-    <option name="height" value="2082" />
+    <option name="x" value="-14" />
+    <option name="y" value="1" />
+    <option name="width" value="2298" />
+    <option name="height" value="2091" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -189,15 +177,15 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538508703645" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FindDuplicates" />
+    <property name="last_opened_file_path" value="C:/dev/ideaprojects/AccounitngDataGenerator" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -228,16 +216,17 @@
       <workItem from="1538508803147" duration="273000" />
       <workItem from="1538587796860" duration="106000" />
       <workItem from="1538588231185" duration="14000" />
+      <workItem from="1540151333867" duration="1248000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1906000" />
+    <option name="totallyTimeSpent" value="3154000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="2" width="1711" height="1388" extended-state="0" />
+    <frame x="-9" y="1" width="1532" height="1394" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20593579" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19836956" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -264,7 +253,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.14354937" />
+      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.16100544" />
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
   </component>
@@ -284,8 +273,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/org/bdgas/plugins/SumPlugin.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="83" column="7" lean-forward="true" selection-end-line="109" />
+        <state relative-caret-position="420">
+          <caret line="75" selection-start-line="74" selection-end-line="75" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#1308#1341#0" expanded="true" />
