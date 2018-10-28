@@ -21,28 +21,41 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class S3Config {
 //Production
-//    @Value("${aws.access_key_id}")
-//    private String awsId;
-//
-//    @Value("${aws.secret_access_key}")
-//    private String awsKey;
-//
-//    @Value("${aws.s3.profile}")
-//    private String awsProfileName;
+    @Value("${aws.access_key_id}")
+    private String awsId;
+
+    @Value("${aws.secret_access_key}")
+    private String awsKey;
+
+    @Value("${aws.s3.profile}")
+    private String awsProfileName;
 
     @Value("${aws.s3.region}")
     private String region;
 
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
+
     @Bean
     public AmazonS3 s3client() {
 
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-        // Production
-        //       .withCredentials(new ProfileCredentialsProvider(awsProfileName))
-        .withRegion(Regions.fromName(region))
-        .build();
 
-        return s3Client;
+
+        // DEVL / PROD Profile...
+        if (activeProfile.equals("prod")) {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                     .withRegion(Regions.fromName(region))
+                    .build();
+            return s3Client;
+        } else {
+            AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                    .withCredentials(new ProfileCredentialsProvider(awsProfileName))
+                    .withRegion(Regions.fromName(region))
+                    .build();
+            return s3Client;
+        }
+
+
     }
 }
 

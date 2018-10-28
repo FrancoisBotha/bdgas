@@ -17,11 +17,15 @@ import org.springframework.context.annotation.Configuration;
 public class DynamoDBConfig {
 
     //Comment out both lines when going live
-//    @Value("${amazon.dynamodb.endpoint}")
-//    private String amazonDynamoDBEndpoint;
+    @Value("${amazon.dynamodb.endpoint}")
+    private String amazonDynamoDBEndpoint;
 
-//    @Value("${aws.s3.profile}")
-//    private String awsProfileName;
+    @Value("${aws.s3.profile}")
+    private String awsProfileName;
+
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
+
 
     @Value("${aws.s3.region}")
     private String region;
@@ -35,14 +39,20 @@ public class DynamoDBConfig {
 //                  new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint, region))
 //                .build();
 
-        // Production profile
-        AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard()
-                //Production
-               // .withCredentials(new ProfileCredentialsProvider(awsProfileName))
-                .build();
-
-        return dynamoDB;
-
+        // DEVL / PROD Profile...
+        if (activeProfile.equals("prod")) {
+            AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard()
+                     .build();
+            return dynamoDB;
+        } else {
+            AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard()
+//                    .withCredentials(new ProfileCredentialsProvider(awsProfileName))
+                    .withEndpointConfiguration(
+                             new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint,
+                                                                        region))
+                    .build();
+            return dynamoDB;
+        }
     }
 
 }

@@ -1,7 +1,8 @@
 const localMode = false;  //Wether or local (devl/testing) data is used
-const env       = "prod"
+const env       = "devl"
 
 const bucketName = "bdgassandbox";
+const awsRegion = 'eu-west-1';
 
 const basePortNoProd = '443';
 const protocolProd = 'https';
@@ -48,5 +49,6 @@ export default {
     LOCALDATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/localdatasource',
     WPLINE_ENDPOINT: getBaseUrl() + '/api/v1/wpline',
     BUCKETNAME: bucketName,
+    AWSREGION: awsRegion,
     GENERAL_SERVER_ERR_MSG: "An error occurred while processing your request on the server"
   }
