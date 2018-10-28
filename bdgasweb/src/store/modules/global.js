@@ -127,7 +127,7 @@ const getters = {
     }, 
     accessToken: state => {
         return state.accessToken;
-    }, 
+    }
 }
  
 const mutations = {

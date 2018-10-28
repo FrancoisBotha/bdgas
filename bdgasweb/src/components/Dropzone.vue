@@ -16,6 +16,11 @@
 </template>
 
 <script>
+// Large file multi-part upload logic courtesy of:
+// https://datalanguage.com/news/s3-managed-uploads
+
+import S3 from 'aws-sdk/clients/s3';
+import AWS from 'aws-sdk/global';
 
 import Dropzone from 'dropzone'
 import '../../node_modules/dropzone/dist/dropzone.css'
@@ -23,10 +28,52 @@ import '../../node_modules/dropzone/dist/dropzone.css'
 import awsservice from '../services/awsservice'
 import datasourceservice from '../services/datasourceservice';
 
+import config from '../config'
+
+function acceptCallback(file, done) {
+  // options for the managed upload for this accepted file
+  // define the bucket, and the S3 key the file will be stored as
+  var params = {Bucket: config.BUCKETNAME, Key: file.name, Body: file};
+  // add an S3 managed upload instance to the file
+  file.s3upload = new S3.ManagedUpload({params: params});
+  done();
+}
+
+// override the uploadFiles function to send via AWS SDK instead of xhr
+Dropzone.prototype.uploadFiles = function (files) {
+  for (var j = 0; j < files.length; j++) {
+    var file = files[j];
+    sendFile(file);
+  }
+};
+
+function sendFile(file) {
+  file.s3upload.send(function(err, data) {
+    if (err) {
+      dropzone.emit("error", file, err.message);
+    } else {
+      dropzone.emit("complete", file);
+    }
+  });
+
+  // listen to the AWS httpUploadProgress event, and emit an equivalent Dropzone event
+  file.s3upload.on('httpUploadProgress', function(progress) {
+    if (progress.total) {
+      var percent = ((progress.loaded * 100) / progress.total);
+      dropzone.emit('uploadprogress', file, percent, progress.loaded);
+    }
+  });
+}
+
+function abortUpload(file) {
+  if (file.s3upload) file.s3upload.abort();
+}
+
 Dropzone.autoDiscover = false
 export default {
   name: 'dropzone', 
   mounted () {
+
     const vm = this
     let options = {
       // The URL will be changed for each new file being processing
@@ -56,41 +103,37 @@ export default {
       dictDefaultMessage: document.querySelector('#dropzone-message').innerHTML,
       // We're going to process each file manually (see `accept` below)
       autoProcessQueue: false,
-      // Here we request a signed upload URL when a file being accepted
-      accept (file, done) {
-
-        /* F. Botha: Modified to use Spring Service instead of Lamda*/
-        awsservice.getSignedURL(file)
-          .then((url) => {
-            file.uploadURL = url
-            done()
-            // Manually process each file
-            setTimeout(() => vm.dropzone.processFile(file))
-          })
-          .catch((err) => {
-            done('Failed to get an S3 signed upload URL', err)
-          })
-      },
+      accept: acceptCallback,
+      canceled : abortUpload,
       init: function() {
         this.on("success", function(file) { 
           console.dir(file);
           console.log('Adding DataSource...')
           datasourceservice.addDataSource(file);
         });
+        this.on('removedfile', function (file) {
+          abortUpload(file)
+        })
       }
     }
+
+    var idToken =  this.$store.getters.accessToken; // get from local storage/session
+    AWS.config.credentials = new AWS.WebIdentityCredentials({
+        RoleArn: 'arn:aws:iam::969323882038:role/OpenIdS3Role',
+        WebIdentityToken: idToken    
+    });
+
     // Instantiate Dropzone
     this.dropzone = new Dropzone(this.$el, options)
-    // Set signed upload URL for each file
-    vm.dropzone.on('processing', (file) => {
-      vm.dropzone.options.url = file.uploadURL
-      vm.dropzone.options.headers = {"Access-Control-Allow-Origin": "*",
-                                      "Cache-Control": "",
-                                      "Access-Control-Allow-Methods": "POST, PUT, GET",
-                                      "Access-Control-Allow-Headers": "*",
-                                      "Content-Type": file.type}
-                                      console.log(vm.dropzone.options.headers)
-    })
+
+      // Set signed upload URL for each file
+      vm.dropzone.on('processing', (file) => {
+        vm.dropzone.options.headers = {"Access-Control-Allow-Origin": "*",
+                                        "Cache-Control": "",
+                                        "Access-Control-Allow-Methods": "POST, PUT, GET",
+                                        "Access-Control-Allow-Headers": "*",
+                                        "Content-Type": file.type}
+      })
   }
 }
 </script>

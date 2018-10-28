@@ -1,6 +1,8 @@
 const localMode = false;  //Wether or local (devl/testing) data is used
 const env       = "prod"
 
+const bucketName = "bdgassandbox";
+
 const basePortNoProd = '443';
 const protocolProd = 'https';
 const domainProd = 'auditanalytics.cloud';
@@ -9,16 +11,20 @@ const basePortNoDevl = '7001';
 const protocolDevl = 'http';
 const domainDevl = 'localhost';
 
+var basePortNo = ""
+var protocol = ""
+var domain = ""
+
 function getBaseUrl() {
   
   if (env == "prod") {
-    let basePortNo = basePortNoProd
-    let protocol = protocolProd
-    let domain = domainProd
+    basePortNo = basePortNoProd
+    protocol = protocolProd
+    domain = domainProd
   } else {
-    let basePortNo = basePortNoDevl
-    let protocol = protocolDevl
-    let domain = domainDevl
+    basePortNo = basePortNoDevl
+    protocol = protocolDevl
+    domain = domainDevl
   }
 
   if (basePortNo == 80
@@ -41,6 +47,6 @@ export default {
     DATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/datasource',
     LOCALDATASOURCE_ENDPOINT: getBaseUrl() + '/api/v1/localdatasource',
     WPLINE_ENDPOINT: getBaseUrl() + '/api/v1/wpline',
-
+    BUCKETNAME: bucketName,
     GENERAL_SERVER_ERR_MSG: "An error occurred while processing your request on the server"
   }
