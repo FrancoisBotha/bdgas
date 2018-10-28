@@ -52,7 +52,7 @@
                                  + store.getters.wpId ;
         },
         onLogOut() {
-            window.location.href = config.BASE_URL + "/logout";
+            window.location.href = config.LOGOUT_URL;
         }
     }   
   }

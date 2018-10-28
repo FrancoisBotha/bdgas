@@ -2,40 +2,51 @@ package org.bdgas.webproxy.services;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class EndPointService {
 
-    private static final String PROTOCOL = "http://";
-    private static final String DOMAIN = "localhost";
-    private static final String PORT = "19000";
-    private static final String BASE_PATH = "api";
-    private static final String VERSION = "v1";
+    @Value("${endpoint.adminserver.protocol}")
+    private String protocol;
 
-    private static final String HELPTEXT = "helptext";
-    private static final String HELPTEXTFORNAME = "helptext/name";
-    private static final String CODETYPE = "codetype";
-    private static final String CODETABLE = "codetable";
-    private static final String CODETABLESNR = "codetable/codetypenr";
-    private static final String CODETYPETABLES = "codetable/codetype";
-    private static final String TASK = "task";
-    private static final String LOCALDATASOURCES = "localdatasource";
-    private static final String TEAM = "team";
-    private static final String TEAMTEAMS = "team/user";
-    private static final String USER = "user";
-    private static final String TEAMUSER = "teamuser";
-    private static final String TEAMUSERUSERS = "teamuser/team";
-    private static final String TEAMPROJECTS = "project/team";
-    private static final String PROJECT = "project";
-    private static final String WORKINGPAPER = "workingpaper";
-    private static final String WPLINE = "wpline";
-    private static final String WORKINGPAPERLINES = "wpline/workingpaper";
-    private static final String PROJECTWORKINGPAPERS = "workingpaper/project";
-    private static final String SIGNEDURL = "s3/signedurl";
-    private static final String DATASOURCE = "datasource";
-    private static final String TEAMDATASOURCE = "datasource/team";
+    @Value("${endpoint.adminserver.domain}")
+    private String domain;
+
+    @Value("${endpoint.adminserver.port}")
+    private String port;
+
+    @Value("${endpoint.adminserver.basepath}")
+    private String basepath;
+
+    @Value("${endpoint.adminserver.version}")
+    private String version;
+
+
+    private final String HELPTEXT = "helptext";
+    private final String HELPTEXTFORNAME = "helptext/name";
+    private final String CODETYPE = "codetype";
+    private final String CODETABLE = "codetable";
+    private final String CODETABLESNR = "codetable/codetypenr";
+    private final String CODETYPETABLES = "codetable/codetype";
+    private final String TASK = "task";
+    private final String LOCALDATASOURCES = "localdatasource";
+    private final String TEAM = "team";
+    private final String TEAMTEAMS = "team/user";
+    private final String USER = "user";
+    private final String TEAMUSER = "teamuser";
+    private final String TEAMUSERUSERS = "teamuser/team";
+    private final String TEAMPROJECTS = "project/team";
+    private final String PROJECT = "project";
+    private final String WORKINGPAPER = "workingpaper";
+    private final String WPLINE = "wpline";
+    private final String WORKINGPAPERLINES = "wpline/workingpaper";
+    private final String PROJECTWORKINGPAPERS = "workingpaper/project";
+    private final String SIGNEDURL = "s3/signedurl";
+    private final String DATASOURCE = "datasource";
+    private final String TEAMDATASOURCE = "datasource/team";
 
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
@@ -121,12 +132,14 @@ public class EndPointService {
     }
 
     private String merge(String endpoint) {
-        return this.PROTOCOL
-                + this.DOMAIN + ":"
-                + this.PORT + "/"
-                + this.BASE_PATH + "/"
-                + this.VERSION + "/"
+        String  merged = protocol
+                + domain + ":"
+                + port + "/"
+                + basepath + "/"
+                + version + "/"
                 + endpoint;
+
+        return merged;
     }
 
 }

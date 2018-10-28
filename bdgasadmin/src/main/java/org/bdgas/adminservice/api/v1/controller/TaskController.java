@@ -42,6 +42,7 @@ public class TaskController {
     @RequestMapping(value = "/api/v1/task", method = RequestMethod.GET)
     public List getTasks () throws EntityNotFoundException {
 
+        log.info("IN CodeTableController");
         return taskService.getAll();
 
     }

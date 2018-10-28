@@ -72,14 +72,14 @@ public class TaskController {
 
         try {
 
-            List tasks = taskService.getAll();
-            model.addAttribute(TASKLIST_MODEL_KEY, tasks);
-
             String userName = principal.getName();
             model.addAttribute(USERNAME_MODEL_KEY, userName);
 
-        } catch (RestClientException ex) {
+            List tasks = taskService.getAll();
+            model.addAttribute(TASKLIST_MODEL_KEY, tasks);
 
+        } catch (RestClientException ex) {
+            log.debug("Error in TaskController: List: " + ex);
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }
 
@@ -107,7 +107,7 @@ public class TaskController {
             model.addAttribute(USERNAME_MODEL_KEY, userName);
 
         } catch (RestClientException ex) {
-
+            log.debug("Error in TaskController: View: " + ex);
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }
 
@@ -149,7 +149,7 @@ public class TaskController {
             taskService.create(taskDto);
 
         } catch (RestClientException ex) {
-
+            log.debug("Error in TaskController: New Save: " + ex);
             model.addAttribute("errMsg", RestServiceErrorMsg);
             return TaskController.NEW_TASK_VIEW_NAME;
         }
@@ -202,7 +202,7 @@ public class TaskController {
             taskService.modify(helpTextDto);
 
         } catch (RestClientException ex) {
-
+            log.debug("Error in TaskController: ModSave: " + ex);
             model.addAttribute("errMsg", RestServiceErrorMsg);
             return TaskController.MOD_TASK_VIEW_NAME;
         }
@@ -223,7 +223,7 @@ public class TaskController {
             taskService.delete(id);
 
         } catch (RestClientException ex) {
-
+            log.debug("Error in TaskController: Delete: " + ex);
             //TODO: some error handling here...
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }

@@ -42,6 +42,7 @@ public class CodeTableController {
     @RequestMapping(value = "/api/v1/codetable", method = RequestMethod.GET)
     public List getCodeTables () throws EntityNotFoundException {
 
+        log.info("IN CodeTableController");
         return codeTableService.getAll();
 
     }

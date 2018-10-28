@@ -60,7 +60,7 @@ public class AdminController {
 
 
         } catch (RestClientException ex) {
-
+            log.debug("Error in AminController: " + ex);
             model.addAttribute("errMsg", RestServiceErrorMsg);
         }
 
