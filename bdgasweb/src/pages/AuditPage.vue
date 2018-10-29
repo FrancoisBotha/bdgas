@@ -135,7 +135,6 @@
             lnState: "new",
             userAuthId: this.$store.getters.userName
         }
- console.log(this.$store.getters.enteredParameters)
         this.$store.dispatch('addWpLine', wpLine).then(response => {
           this.onCancel()
         }, error => {

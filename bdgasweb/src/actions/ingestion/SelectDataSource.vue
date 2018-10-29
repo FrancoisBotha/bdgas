@@ -47,6 +47,7 @@
 </template>
 <script>
 import {_} from 'vue-underscore';
+import config from '../config'
 
 export default {
   data () {
@@ -75,9 +76,15 @@ export default {
   },  
   methods: {
     selectOption0() {
+      var file = "";
+      if (this.$store.getters.localMode) {
+        file = this.parameter0;
+      } else {
+        file = "s3a://" + config.BUCKETNAME + "/" + this.parameter0;
+      }
       let payload = {
         i: 0,
-        parameter: this.parameter0
+        parameter: file
       }
       this.$store.dispatch('setParameter', payload)
     },
