@@ -6,21 +6,34 @@
 */
 
 <template>
-  <form class="dropzone">
-    <!-- Not displayed, just for Dropzone's `dictDefaultMessage` option -->
-    <div id="dropzone-message" style="display: none">
-      <span class="dropzone-title">Drop files here or click to select</span>
-      <span class="dropzone-info"></span>
-    </div>
-  </form>
+      <form class="dropzone">
+        <!-- Not displayed, just for Dropzone's `dictDefaultMessage` option -->
+        <div id="dropzone-message" style="display: none">
+          <span class="dropzone-title">Drop files here or click to select</span>
+          <span class="dropzone-info"></span>
+        </div>
+          <!-- Modal Component -->
+          <b-modal v-model="displayAlert"
+                  id="alertModal" 
+                  title="Done"
+                  header-bg-variant='dark'
+                  header-text-variant='light'
+                  body-bg-variant='light'
+                  ok-title='OK'
+                  ok-variant='success'
+                  ok-only=true
+                  :no-close-on-backdrop='true'
+                  ><p class="my-4">The upload is complete.</p>
+        </b-modal>
+      </form>
 </template>
 
 <script>
 // Large file multi-part upload logic courtesy of:
 // https://datalanguage.com/news/s3-managed-uploads
 
-import AWS from 'aws-sdk/global';
-import S3 from 'aws-sdk/clients/s3';
+import AWS from '../../node_modules/aws-sdk/global';
+import S3 from '../../node_modules/aws-sdk/clients/s3';
 
 import Dropzone from 'dropzone'
 import '../../node_modules/dropzone/dist/dropzone.css'
@@ -33,9 +46,20 @@ import config from '../config'
 Dropzone.autoDiscover = false
 export default {
   name: 'dropzone', 
+  methods: {
+      showAlert () {
+        this.displayAlert = true
+      },   
+  },  
+  data () {
+      return {
+        displayAlert: false,
+      }
+  },   
   mounted () {
 
     const vm = this
+    var cancelled = false;
     var idToken =  this.$store.getters.accessToken; // get from local storage/session
 
     AWS.config.credentials = new AWS.WebIdentityCredentials({
@@ -84,20 +108,25 @@ export default {
 
     function abortUpload(file) {
       if (file.s3upload) file.s3upload.abort();
+      cancelled = true;
     }    
 
     let options = {
       timeout: 9999999999999,
       maxFilesize: 300000,
-      parallelUploads: 1,
-      uploadMultiple: false,      
       url: '/',
+      addRemoveLinks: true,      
       accept: acceptCallback,
       canceled : abortUpload,
       init: function() {
         this.on("complete", function(file) { 
-          console.log('Adding DataSource...')
-          datasourceservice.addDataSource(file);
+          if (cancelled == false) {
+            console.log('Adding DataSource...')
+            datasourceservice.addDataSource(file);
+            vm.dropzone.removeFile(file);
+            vm.showAlert()    
+            cancelled = false;
+          }      
         });
         this.on('removedfile', function (file) {
           abortUpload(file)
@@ -110,12 +139,7 @@ export default {
 
     // Set signed upload URL for each file
     vm.dropzone.on('processing', (file) => {
-      console.log("Setting headers...")
-      vm.dropzone.options.headers = {"Access-Control-Allow-Origin": "*",
-                                      "Cache-Control": "",
-                                      "Access-Control-Allow-Methods": "POST, PUT, GET",
-                                      "Access-Control-Allow-Headers": "*",
-                                      "Content-Type": file.type}
+      console.log("processing...")
     })
   }
 }
