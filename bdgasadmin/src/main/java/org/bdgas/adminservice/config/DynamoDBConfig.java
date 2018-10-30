@@ -33,12 +33,6 @@ public class DynamoDBConfig {
     @Bean
     public AmazonDynamoDB amazonDynamoDB() {
 
-        // DEVL Profile
-//        AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard()
-//                .withEndpointConfiguration(
-//                  new AwsClientBuilder.EndpointConfiguration(amazonDynamoDBEndpoint, region))
-//                .build();
-
         // DEVL / PROD Profile...
         if (activeProfile.equals("prod")) {
             AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard()
