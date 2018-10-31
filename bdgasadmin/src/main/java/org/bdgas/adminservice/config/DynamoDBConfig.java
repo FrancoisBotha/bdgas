@@ -23,7 +23,7 @@ public class DynamoDBConfig {
     @Value("${aws.s3.profile}")
     private String awsProfileName;
 
-    @Value("${spring.profiles.active}")
+    @Value("${active.profile}")
     private String activeProfile;
 
 

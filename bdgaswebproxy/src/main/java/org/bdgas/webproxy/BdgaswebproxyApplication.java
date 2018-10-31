@@ -3,9 +3,12 @@ package org.bdgas.webproxy;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.AbstractEnvironment;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,6 +22,8 @@ import java.util.List;
 public class BdgaswebproxyApplication {
 
     public static void main(String[] args) {
+
+        System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "local");
         SpringApplication.run(BdgaswebproxyApplication.class, args);
     }
 
@@ -31,6 +36,8 @@ public class BdgaswebproxyApplication {
 
         return restTemplate;
     }
+
+
 
     private ClientHttpRequestFactory getClientHttpRequestFactory() {
         int timeout = 21474835;

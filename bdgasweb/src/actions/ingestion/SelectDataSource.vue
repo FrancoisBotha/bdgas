@@ -47,7 +47,7 @@
 </template>
 <script>
 import {_} from 'vue-underscore';
-import config from '../config'
+import config from '../../config'
 
 export default {
   data () {

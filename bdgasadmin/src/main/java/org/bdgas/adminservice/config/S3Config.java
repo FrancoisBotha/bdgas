@@ -24,7 +24,7 @@ public class S3Config {
     @Value("${aws.s3.region}")
     private String region;
 
-    @Value("${spring.profiles.active}")
+    @Value("${active.profile}")
     private String activeProfile;
 
     @Bean

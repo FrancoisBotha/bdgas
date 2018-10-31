@@ -1,5 +1,5 @@
 const localMode = false;  //Wether or local (devl/testing) data is used
-const env       = "devl"
+const env       = "prod"
 
 const bucketName = "bdgassandbox";
 const awsRegion = 'eu-west-1';
