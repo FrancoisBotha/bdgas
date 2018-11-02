@@ -28,6 +28,7 @@ import org.bdgas.adminservice.error.SjsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
@@ -163,6 +164,11 @@ public class WpLineService  {
             log.info(wpLine.toString());
             return wpLineRepository.save(wpLine);
 
+        }
+        catch (HttpClientErrorException ex) {
+            String message = "Create WP Line: HTTP Client Exception: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
         }
         catch (HttpStatusCodeException ex) {
             throw ex;

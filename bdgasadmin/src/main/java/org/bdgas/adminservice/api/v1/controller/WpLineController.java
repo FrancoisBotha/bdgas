@@ -17,6 +17,7 @@
 package org.bdgas.adminservice.api.v1.controller;
 
 import org.bdgas.adminservice.domain.dto.WpLineDto;
+import org.bdgas.adminservice.domain.model.WorkingPaper;
 import org.bdgas.adminservice.domain.model.WpLine;
 import org.bdgas.adminservice.error.EntityNotFoundException;
 import org.bdgas.adminservice.error.SjsException;
@@ -26,7 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestClientException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -80,20 +83,60 @@ public class  WpLineController  {
     public WpLine AddWpLine(@RequestBody @Valid WpLineDto wpLineDto )
             throws HttpStatusCodeException, EntityNotFoundException, SjsException {
 
-        WpLine wpLine = new WpLine();
+        Integer lnCount;
 
-        wpLine.setWpId(wpLineDto.getWpId());
-        wpLine.setTaskId(wpLineDto.getTaskId());
-        wpLine.setTaskCde(wpLineDto.getTaskCde());
-        wpLine.setTaskParams(wpLineDto.getTaskParams());
-        wpLine.setTaskDesc(wpLineDto.getTaskDesc());
-        wpLine.setLnState(wpLineDto.getLnState());
-        wpLine.setUserAuthId(wpLineDto.getUserAuthId());
-        wpLine.setLnNo(workingPaperService.incrLineCount(wpLineDto.getWpId()));
+        try {
 
-        WpLine returnWpLine = wpLineService.create(wpLine);
+            WorkingPaper workingPaper = workingPaperService.getOne(wpLineDto.getWpId());
+            lnCount = workingPaper.getLineCount() + 1;
 
-        return returnWpLine;
+            WpLine wpLine = new WpLine();
+
+            wpLine.setWpId(wpLineDto.getWpId());
+            wpLine.setTaskId(wpLineDto.getTaskId());
+            wpLine.setTaskCde(wpLineDto.getTaskCde());
+            wpLine.setTaskParams(wpLineDto.getTaskParams());
+            wpLine.setTaskDesc(wpLineDto.getTaskDesc());
+            wpLine.setLnState(wpLineDto.getLnState());
+            wpLine.setUserAuthId(wpLineDto.getUserAuthId());
+            wpLine.setLnNo(lnCount);
+
+            WpLine returnWpLine = wpLineService.create(wpLine);
+
+            workingPaperService.incrLineCount(wpLineDto.getWpId());
+
+            return returnWpLine;
+
+        }
+        catch (HttpClientErrorException ex) {
+            String message = "Create WP Line: HTTP Client Exception: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
+        }
+        catch (HttpStatusCodeException ex) {
+            throw ex;
+        }
+        catch (RestClientException ex) {
+
+            String message = "Failed to get service: " + ex.getMessage();
+            log.error(message, ex);
+            throw ex;
+        }
+        catch (EntityNotFoundException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+        catch (SjsException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+        catch (Exception ex) {
+            String message = "General Exception while trying to run SJS Service: " + ex.getMessage();
+            log.error(message, ex);
+        }
+
+        return null;
+
     }
 
     /************

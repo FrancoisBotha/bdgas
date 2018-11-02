@@ -1,5 +1,5 @@
-const localMode = false;  //Wether or local (devl/testing) data is used
-const env       = "prod"
+const localMode = true;  //Wether or local (devl/testing) data is used
+const env       = "devl"  //devl / prod
 
 const bucketName = "bdgassandbox";
 const awsRegion = 'eu-west-1';
@@ -8,8 +8,8 @@ const basePortNoProd = '443';
 const protocolProd = 'https';
 const domainProd = 'auditanalytics.cloud';
 
-const basePortNoDevl = '7001';
-const protocolDevl = 'http';
+const basePortNoDevl = '8443';
+const protocolDevl = 'https';
 const domainDevl = 'localhost';
 
 var basePortNo = ""

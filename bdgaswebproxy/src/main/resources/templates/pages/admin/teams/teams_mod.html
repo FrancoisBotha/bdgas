@@ -28,8 +28,8 @@
             <div class="well">
                 <div class="text-left">
                     <form id="updateteamform"
-                          th:action="@{|/admin/team/mod/${codeType.id}|}"
-                          th:object="${codeType}"
+                          th:action="@{|/admin/team/mod/${team.id}|}"
+                          th:object="${team}"
                           method="POST"
                           enctype="multipart/form-data">
 
@@ -57,7 +57,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Save</button>
-                            <a type="button" class="btn btn-primary" href="/admin/team">Cancel</a>
+                            <a class="btn btn-info" href="/admin/team" role="button">Cancel</a>
                         </div>
 
                     </form>

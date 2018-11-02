@@ -123,27 +123,36 @@
         this.$store.dispatch('clearParameters') 
       },
       onGo: function() {
-        let wpLine = {
-            id: "",
-            wpId: this.wpId,
-            lnNo: 0,
-            taskId: this.selectedAction.id,
-            taskCde: this.selectedAction.taskCde,
-            taskDesc: this.selectedAction.taskDesc,
-            taskParams: this.$store.getters.enteredParameters,
-            lnResult: "",
-            lnState: "new",
-            userAuthId: this.$store.getters.userName
-        }
-        this.$store.dispatch('addWpLine', wpLine).then(response => {
-          this.onCancel()
-        }, error => {
-          // this.alertText = JSON.stringify(error, null, 4)
-          // this.alertText = config.GENERAL_SERVER_ERR_MSG
-          console.dir(error)
-          this.alertText = error.response.data.apierror.message
+        if ( typeof(this.$store.getters.enteredParameters[0]) == null
+            || typeof(this.$store.getters.enteredParameters[0]) == "undefined") {
+          this.alertText = "Invalid parameters supplied."
           this.showAlert()
-        })   
+        } else {
+          let wpLine = {
+              id: "",
+              wpId: this.wpId,
+              lnNo: 0,
+              taskId: this.selectedAction.id,
+              taskCde: this.selectedAction.taskCde,
+              taskDesc: this.selectedAction.taskDesc,
+              taskParams: this.$store.getters.enteredParameters,
+              lnResult: "",
+              lnState: "new",
+              userAuthId: this.$store.getters.userName
+          }
+          this.$store.dispatch('addWpLine', wpLine).then(response => {
+            this.onCancel()
+          }, error => {
+            this.alertText = JSON.stringify(error, null, 4)
+            console.dir(error)
+            if (error.response.status == "500") {
+              this.alertText = config.GENERAL_SERVER_ERR_MSG
+            } else {
+              this.alertText = error.response.data.apierror.message
+            }
+            this.showAlert()
+          })  
+        } 
       },
       onCancel: function() {
         let route = "audit.param"

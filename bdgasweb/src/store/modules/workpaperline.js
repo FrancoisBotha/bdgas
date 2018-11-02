@@ -126,7 +126,6 @@ const actions = {
                 })
                 .catch(function (err) {
                     commit('SET_LOADINGSTATUS', false)
-                    commit('DELETE_WPLINE', wpLine)
                     reject(err)
             });
         })      
