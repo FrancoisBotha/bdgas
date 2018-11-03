@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <h4 class="display-7 text-left" th:text="'View Job Server: ' + ${jobServer.jobServerURL}">Job Server</h4>
+        </div>
+    </div>
+
+    <a th:href="@{/admin/jobserver}" class="btn btn-outline-dark btn-sm mt-0" role="button">Back</a>
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="jobServerURL" th:text="#{jobServer.jobServerURL}">JobServerURL</label>
+                    <input type="text" id="jobServerURL" name="jobServerURL" class="form-control" th:value="${jobServer.jobServerURL}" readonly/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mt-2">
+                    <label for="description" th:text="#{jobServer.description}">HelpText Text</label>
+                    <textarea class="form-control" id="description" name="description" rows="5" th:text="${jobServer.description}" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 mt-2">
+                    <label for="active" th:text="#{jobServer.active}">HelpText Text</label>
+                    <input type="text" id="active" name="active" class="form-control" th:value="${jobServer.active}" readonly/>
+                </div>
+            </div>
+
+            <a th:href="@{|/admin/jobserver/mod/${jobServer.id}|}" class="btn btn-outline-dark btn-sm mt-3" role="button">Modify</a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

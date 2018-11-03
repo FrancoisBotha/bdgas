@@ -93,6 +93,7 @@ const actions = {
             axios({
                 method: 'post',
                 url: baseURL,
+                timeout: 36000000,
                 data: wpLine,
                 config: { headers: {'Content-Type': 'application/json' }}
                 })

@@ -103,10 +103,6 @@ public class WpLineService  {
 
         try {
 
-            log.debug("WpLine Service: AuthId");
-            log.debug(wpLine.getUserAuthId());
-
-
             //Step 1. Get Task from Working Paper Line
             Task task = taskService.getOne(wpLine.getTaskId());
 

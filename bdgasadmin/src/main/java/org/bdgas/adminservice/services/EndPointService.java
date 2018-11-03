@@ -1,6 +1,8 @@
 package org.bdgas.adminservice.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.bdgas.adminservice.domain.model.JobServer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -8,21 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class EndPointService {
 
-    @Value("${sjs.domain}")
-    private String sjsDomain;
-
-    @Value("${sjs.protocol}")
-    private String sjsProtocol;
-
-    @Value("${sjs.port}")
-    private String sjsPort;
-
+    @Autowired
+    JobServerService jobServerService;
 
     //Spark Job Server
     private static final String SJS_BINARIES = "binaries";
     private static final String SJS_CONTEXTS = "contexts";
     private static final String SJS_JOBS = "jobs";
-
 
     public String getSjsBinariesEP() {
         return this.SjsMerge(this.SJS_BINARIES);
@@ -37,9 +31,11 @@ public class EndPointService {
     }
 
     private String SjsMerge(String endpoint) {
-        return this.sjsProtocol
-                + this.sjsDomain + ":"
-                + this.sjsPort + "/"
+
+        JobServer jobServer = jobServerService.getJobServerActive();
+
+        return jobServer.getJobServerURL()
+                + "/"
                 + endpoint;
     }
 

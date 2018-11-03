@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/adminheader :: adminheader"></head>
+
+<body>
+
+<div class="container">
+
+    <div th:include="fragments/adminnavbar:: adminnavbar"></div>
+
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div>
+                <h4 class="display-7 text-left" th:text="'Job Server: ' + ${jobServer.jobServerURL}">Job Server: </h4>
+            </div>
+            <div>
+                <h5 class="display-8">Modify</h5>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-md-7">
+            <div class="well">
+                <div class="text-left">
+                    <form id="updatejobserverform"
+                          th:action="@{|/admin/jobserver/mod/${jobServer.id}|}"
+                          th:object="${jobServer}"
+                          method="POST"
+                          enctype="multipart/form-data">
+
+                        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            <p th:text="#{form.newjobserver.hasErrors}">Error Message</p>
+                        </div>
+
+                        <div th:if="${errMsg}" class="alert alert-danger">
+                            <p th:text="${errMsg}">Error Message</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group" th:class="${#fields.hasErrors('jobServerURL')} ? 'form-group has-error' : 'form-group'">
+                                    <label for="jobServerURL" th:text="#{jobServer.jobServerURL}">HelpTextName</label>
+                                    <input type="text" id="jobServerURL" name="jobServerURL" class="form-control" th:field="*{jobServerURL}" th:errorclass="is-invalid"/>
+                                    <div class="invalid-feedback"  th:if="${#fields.hasErrors('jobServerURL')}">
+                                        <ul>
+                                            <li  th:each="err : ${#fields.errors('jobServerURL')}" th:text="${err}" />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group" th:class="${#fields.hasErrors('description')} ? 'form-group has-error' : 'form-group'">
+                                    <label for="description" th:text="#{jobServer.description}">HelpText Text</label>
+                                    <textarea class="form-control" id="description" name="description" rows="5" th:field="*{description}" th:errorclass="is-invalid"></textarea>
+                                    <div class="invalid-feedback"  th:if="${#fields.hasErrors('description')}">
+                                        <ul>
+                                            <li  th:each="err : ${#fields.errors('description')}" th:text="${err}" />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group" th:class="${#fields.hasErrors('active')} ? 'form-group has-error' : 'form-group'">
+                                    <label for="active" th:text="#{jobServer.active}">HelpText Text</label>
+                                    <input type="text" id="active" name="active" class="form-control" th:field="*{active}" th:errorclass="is-invalid"/>
+                                    <div class="invalid-feedback"  th:if="${#fields.hasErrors('active')}">
+                                        <ul>
+                                            <li  th:each="err : ${#fields.errors('active')}" th:text="${err}" />
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a class="btn btn-info" href="/admin/jobserver" role="button">Cancel</a>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/adminfooter:: adminfooter"></div>
+
+</body>
+</html>

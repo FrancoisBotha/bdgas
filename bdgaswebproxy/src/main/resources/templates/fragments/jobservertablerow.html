@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<tr th:fragment="jobservertablerow">
+    <td th:text="${jobServer.jobServerURL}">Job Server URL</td>
+    <td th:text="${jobServer.active}">Active</td>
+    <td><a th:href="@{|/admin/jobserver/${jobServer.id}|}" class="btn btn-outline-dark btn-sm" role="button">View</a></td>
+    <td><a href="#" th:data-record-id="${jobServer.id}" th:data-record-title="${jobServer.jobServerURL}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirm-delete" role="button">Delete</a></td>
+</tr>
+
+
+</body>
+
+</html>

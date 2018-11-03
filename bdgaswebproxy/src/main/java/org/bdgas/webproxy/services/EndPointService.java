@@ -47,6 +47,7 @@ public class EndPointService {
     private final String SIGNEDURL = "s3/signedurl";
     private final String DATASOURCE = "datasource";
     private final String TEAMDATASOURCE = "datasource/team";
+    private final String JOBSERVER = "jobserver";
 
     public String getHelpTextEP() {
         return this.merge(this.HELPTEXT);
@@ -129,6 +130,10 @@ public class EndPointService {
 
     public String getTeamDataSourcesEP() {
         return this.merge(this.TEAMDATASOURCE);
+    }
+
+    public String getJobServerEP() {
+        return this.merge(this.JOBSERVER);
     }
 
     private String merge(String endpoint) {
