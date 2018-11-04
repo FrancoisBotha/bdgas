@@ -18,6 +18,7 @@ package org.bdgas.plugins
 
 import com.typesafe.config.Config
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
 import org.scalactic._
 import spark.jobserver._
 import spark.jobserver.api._
@@ -41,20 +42,18 @@ object WordCountPlugin extends SparkSessionJob with NamedObjectSupport {
     val dummy1    = data(1)
     val dummy2    = data(2)
 
-    val sourceDataFile = sparkSession.sparkContext.textFile(filePath)
-    val words = sourceDataFile.flatMap(a => a.split("\\W+"))
+    //Word count example, courtesy:
+    //http://wpcertification.blogspot.com/2016/07/wordcount-program-using-spark-dataframe.html
 
-    //def countByValue()(implicit ord: Ordering[T] = null): Map[T, Long]
-    val counted = words.countByValue
-    val sorted = ListMap(counted.toSeq.sortWith(_._2 > _._2):_*)
+    val sourceDataFile = sparkSession.read.text(filePath)
 
-    var returnVal = Seq[String]()
+    val wordsDF = sourceDataFile.select(split(sourceDataFile("value")," ").alias("words"))
+    val wordDF = wordsDF.select(explode(wordsDF("words")).alias("word"))
+    val wordCountDF = wordDF.groupBy("word").count
+    val sorted = wordCountDF.orderBy(desc("count"))
+    val trimmed = sorted.limit(5000).toJSON
 
-    for ((key,value) <- sorted) {
-      returnVal :+= scala.util.parsing.json.JSONObject(Map("Word" -> key, "Count" -> value)).toString()
-    }
-
-    returnVal
+    trimmed.collect()
 
   }
 

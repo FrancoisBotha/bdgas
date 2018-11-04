@@ -24,6 +24,7 @@
 </template>
 <script>
 import {_} from 'vue-underscore';
+import config from '../../config'
 
 export default {
   data () {
@@ -45,22 +46,28 @@ export default {
   },  
   methods: {
     selectOption0() {
+      var file = "";
+      if (this.$store.getters.localMode) {
+        file = this.parameter0;
+      } else {
+        file = "s3a://" + config.BUCKETNAME + "/" + this.parameter0;
+      }
       let payload = {
         i: 0,
-        parameter: this.parameter0
+        parameter: file
       }
       this.$store.dispatch('setParameter', payload)
     }     
   },
   created: function () {
     let payload1 = {
-    i: 1,
-    parameter: "none"
+      i: 1,
+      parameter: "none"
     }
     this.$store.dispatch('setParameter', payload1)
     let payload2 = {
-    i: 2,
-    parameter: "none"
+      i: 2,
+      parameter: "none"
     }
     this.$store.dispatch('setParameter', payload2)
 
